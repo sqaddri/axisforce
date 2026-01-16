@@ -1,0 +1,122 @@
+/* ===============================
+   GLOBAL VARIABLES
+================================ */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --soft-bg: #f4f8ff;
+  --text-dark: #0f172a;
+  --text-muted: #475569;
+  --border-light: #e5e7eb;
+  --radius: 16px;
+}
+
+/* ===============================
+   BASE
+================================ */
+body {
+  font-family: "Inter", Arial, sans-serif;
+  background: var(--soft-bg);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}
+
+/* ===============================
+   NAVBAR (GLOBAL & LOCKED)
+================================ */
+.navbar {
+  background: #ffffff;
+  padding: 18px 0;
+  box-shadow: none;
+}
+
+/* Logo responsiveness */
+.navbar-logo {
+  height: 85px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .navbar-logo {
+    height: 58px;
+  }
+}
+
+
+/* Nav links */
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: #334155;
+  padding: 8px 14px;
+  transition: color 0.2s ease;
+}
+
+/* Hover */
+.navbar-nav .nav-link:hover {
+  color: var(--primary);
+}
+
+/* Active page */
+.navbar-nav .nav-link.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* CTA button spacing */
+.navbar-nav .btn {
+  margin-left: 12px;
+}
+
+/* ===============================
+   HERO (STANDARD SYSTEM)
+================================ */
+.page-hero,
+.hero {
+  background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+}
+
+/* ===============================
+   BUTTONS (GLOBAL)
+================================ */
+.btn-primary {
+  background: var(--primary);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 12px 26px;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+/* ===============================
+   FOOTER (GLOBAL)
+================================ */
+.site-footer {
+  background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+  color: #e5e7eb;
+  padding: 70px 0 30px;
+  text-align: center;
+}
+
+.site-footer a {
+  color: #c7d2fe;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 14px;
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.15);
+  margin-top: 30px;
+  padding-top: 20px;
+  font-size: 13px;
+}
