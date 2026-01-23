@@ -31,20 +31,13 @@ body {
   box-shadow: none;
 }
 
-/* Logo responsiveness */
+/* Logo */
 .navbar-logo {
   height: 85px;
   width: auto;
   display: block;
   object-fit: contain;
 }
-
-@media (max-width: 768px) {
-  .navbar-logo {
-    height: 58px;
-  }
-}
-
 
 /* Nav links */
 .navbar-nav .nav-link {
@@ -54,7 +47,6 @@ body {
   transition: color 0.2s ease;
 }
 
-/* Hover */
 .navbar-nav .nav-link:hover {
   color: var(--primary);
 }
@@ -65,13 +57,20 @@ body {
   font-weight: 700;
 }
 
-/* CTA button spacing */
+/* CTA spacing */
 .navbar-nav .btn {
   margin-left: 12px;
 }
 
 /* ===============================
-   HERO (STANDARD SYSTEM)
+   GLOBAL SECTION SPACING
+================================ */
+section {
+  padding: 90px 0;
+}
+
+/* ===============================
+   HERO (DESKTOP DEFAULT)
 ================================ */
 .page-hero,
 .hero {
@@ -79,7 +78,7 @@ body {
 }
 
 /* ===============================
-   BUTTONS (GLOBAL)
+   BUTTONS
 ================================ */
 .btn-primary {
   background: var(--primary);
@@ -119,4 +118,35 @@ body {
   margin-top: 30px;
   padding-top: 20px;
   font-size: 13px;
+}
+
+/* ===============================
+   MOBILE FIXES (ONLY WHAT YOU NEED)
+================================ */
+@media (max-width: 768px) {
+
+  /* Reduce navbar height on mobile */
+  .navbar {
+    padding: 10px 0;
+  }
+
+  .navbar-logo {
+    height: 48px;
+  }
+
+  /* Fix hero top spacing issue */
+  .hero {
+    padding-top: 30px !important;
+    padding-bottom: 60px !important;
+  }
+
+  /* Tighten hero text */
+  .hero h1 {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    margin-bottom: 12px;
+  }
 }
