@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AxisForce — IT &amp; Marketing Solutions | Houston, TX</title>
-<link rel="icon" type="image/png" href="assets/images/branding/axisforce-logo.png">
+<link rel="icon" type="image/png" href="assets/images/branding/axisforce-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; background: #060a14; color: #eef2fa; font-family: 'Barlow', sans-serif; }
+  body { margin: 0; background: #060a14; color: #eef2fa; font-family: 'Barlow', sans-serif; overflow-x: clip; }
   a { color: #4d8dff; text-decoration: none; }
   a:hover { color: #7caeff; }
   ::selection { background: rgba(47,123,255,0.35); }
@@ -62,6 +62,22 @@
     .hero-cards { position: static !important; margin-top: 14px; grid-template-columns: 1fr 1fr !important; }
     .svc-row { grid-template-columns: 1fr !important; }
     .table-scroll { overflow-x: auto; }
+  }
+  .hdr-burger { display: none; background: transparent; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 9px 11px; cursor: pointer; margin-left: auto; align-items: center; }
+  .mob-menu { display: none; background: #0a101e; border-top: 1px solid rgba(255,255,255,0.08); }
+  .mob-menu.open { display: block; }
+  .mob-link { padding: 14px 24px; font-size: 16.5px; font-weight: 600; color: #cfd8ea; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .mob-link.active { color: #4d8dff; }
+  @media (max-width: 880px) {
+    .hdr-nav { display: none !important; }
+    .hdr-burger { display: inline-flex; }
+  }
+  @media (max-width: 720px) {
+    main h1 { font-size: clamp(30px, 8.5vw, 42px) !important; }
+    main h2 { font-size: clamp(24px, 6.5vw, 32px) !important; }
+    section, main, header > div, footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+    .table-scroll > div { min-width: 620px; }
+    .hero-media { height: 300px !important; }
   }
 </style>
 </head>
@@ -439,8 +455,26 @@ function btnPrimary(label, go, pad, fs, shadow) {
     (shadow === false ? " box-shadow: none;" : "") + '" onclick="nav(\'' + go + '\')">' + label + "</button>";
 }
 
+function toggleMenu() {
+  const m = document.getElementById("mob-menu");
+  if (m) m.classList.toggle("open");
+}
+
+function mobileMenu() {
+  const pages = [["home", "Home"], ["about", "About Us"], ["services", "Services"], ["industries", "Industries"], ["pricing", "Pricing"], ["contact", "Contact Us"]];
+  return '<div id="mob-menu" class="mob-menu">' +
+    pages.map(([k, label]) =>
+      '<div class="mob-link' + (state.page === k ? " active" : "") + '" onclick="nav(\'' + k + '\')">' + label + "</div>").join("") +
+    '<div style="display: flex; gap: 12px; padding: 16px 24px; align-items: center; flex-wrap: wrap;">' +
+      '<button class="btn btn-primary" style="padding: 12px 18px; font-size: 15px;" onclick="nav(\'contact\')">Free Consultation</button>' +
+      '<button class="btn btn-ghost-dark" style="color: #cfd8ea; padding: 12px 18px; font-size: 14.5px;" onclick="nav(\'portal\')">Client Login</button>' +
+    '</div>' +
+    '<div style="padding: 0 24px 16px; color: #8b95ab; font-weight: 700; font-size: 15px;">' + PHONE + '</div>' +
+  '</div>';
+}
+
 function header() {
-  const pages = [["home", "Home"], ["services", "Services"], ["industries", "Industries"], ["pricing", "Pricing"], ["about", "About Us"], ["contact", "Contact"]];
+  const pages = [["home", "Home"], ["about", "About Us"], ["services", "Services"], ["industries", "Industries"], ["pricing", "Pricing"], ["contact", "Contact Us"]];
   const links = pages.map(([k, label]) =>
     '<div class="navlink" style="font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap; color: ' +
     (state.page === k ? "#4d8dff" : "#cfd8ea") + '; padding-bottom: 3px; border-bottom: 2px solid ' +
@@ -449,7 +483,7 @@ function header() {
   '<header style="position: sticky; top: 0; z-index: 30; background: rgba(6,10,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07);">' +
     '<div style="max-width: 1280px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 20px;">' +
       '<div style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="nav(\'home\')">' +
-        '<img src="assets/images/branding/axisforce-logo.png" alt="AxisForce logo" style="width: 34px; height: 34px; object-fit: contain;">' +
+        '<img src="assets/images/branding/axisforce-mark.png" alt="AxisForce logo" style="width: 34px; height: 34px; object-fit: contain;">' +
         '<div>' +
           '<div style="font-weight: 800; font-size: 21px; letter-spacing: 0.01em; line-height: 1;"><span style="color: #fff;">Axis</span><span style="color: #2f7bff;">Force</span></div>' +
           '<div style="font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #8b95ab; margin-top: 2px;">— IT &amp; Marketing Solutions —</div>' +
@@ -464,7 +498,11 @@ function header() {
         '<button class="hdr-login btn" style="background: transparent; color: #cfd8ea; border: 1px solid rgba(255,255,255,0.25); padding: 10px 16px; font-size: 14.5px; white-space: nowrap;" onmouseover="this.style.borderColor=\'#7caeff\';this.style.color=\'#7caeff\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,0.25)\';this.style.color=\'#cfd8ea\'" onclick="nav(\'portal\')">Client Login</button>' +
         '<button class="hdr-cta btn btn-primary" style="padding: 11px 20px; font-size: 15px; white-space: nowrap; box-shadow: 0 4px 18px rgba(47,123,255,0.35);" onclick="nav(\'contact\')">Free Consultation</button>' +
       '</nav>' +
+      '<button class="hdr-burger" aria-label="Open menu" onclick="toggleMenu()">' +
+        '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#cfd8ea" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>' +
+      '</button>' +
     '</div>' +
+    mobileMenu() +
   '</header>';
 }
 
@@ -517,7 +555,7 @@ function footer() {
     '<div class="grid-4" style="max-width: 1280px; margin: 0 auto; padding: 52px 32px 32px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px;">' +
       '<div>' +
         '<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">' +
-          '<img src="assets/images/branding/axisforce-logo.png" alt="AxisForce logo" style="width: 28px; height: 28px; object-fit: contain;">' +
+          '<img src="assets/images/branding/axisforce-mark.png" alt="AxisForce logo" style="width: 28px; height: 28px; object-fit: contain;">' +
           '<span style="font-weight: 800; font-size: 19px;"><span style="color: #fff;">Axis</span><span style="color: #2f7bff;">Force</span></span>' +
         '</div>' +
         '<div style="font-size: 14.5px; line-height: 1.6; color: #8b95ab; max-width: 34ch;">Managed IT, security, billing systems and digital growth for Houston businesses.</div>' +
