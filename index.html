@@ -241,21 +241,21 @@ const S = {
 const partners = ["Microsoft 365", "Google Workspace", "UBIQUITI", "Verkada", "Dell Technologies", "Availity"];
 
 const trustChips = [
-  { label: "24/7 IT Support", icon: I.headset },
-  { label: "Trusted by Businesses", icon: I.shield },
+  { label: "No Long-Term Contracts", icon: I.shield },
+  { label: "Trusted by Businesses", icon: I.users },
   { label: "On-site & Remote", icon: I.pin }
 ];
 
 const heroCards = [
   { name: "Managed IT", body: "Proactive IT support and maintenance for your business.", icon: I.headset },
   { name: "Security Solutions", body: "Protect your property with advanced camera systems.", icon: I.camera },
-  { name: "Network Solutions", body: "Reliable, secure and fast networks built for performance.", icon: I.wifi },
+  { name: "AI & Automation", body: "Smart AI tools and workflow automation. Coming soon.", icon: I.bot },
   { name: "Business Growth", body: "Digital marketing and web solutions that drive results.", icon: I.growth }
 ];
 
 const homeServices = [
   { name: "Managed IT Support", body: "Reduce downtime, secure your systems, and give your team reliable technology — without hiring internally.", icon: I.headset, no: "01" },
-  { name: "AI & Business Automation", body: "AI agents, voice AI and workflow automation that remove hours of repetitive admin every week.", icon: I.bot, no: "02" },
+  { name: "AI & Business Automation", body: "AI agents, voice AI and workflow automation that remove hours of repetitive admin every week.", icon: I.bot, no: "02", status: "Coming Soon" },
   { name: "Medical Billing Platform", body: "Billing done for you at 3% of collections, or our cloud billing software for your own team.", icon: I.billing, no: "04" },
   { name: "Security Camera Systems", body: "Commercial-grade cameras installed, integrated and reviewable from your phone.", icon: I.camera, no: "05" },
   { name: "Network & Wi-Fi Solutions", body: "Structured cabling, firewalls and segmented Wi-Fi that carry payments and phones without drama.", icon: I.wifi, no: "06" },
@@ -263,33 +263,24 @@ const homeServices = [
 ];
 
 const stats = [
-  { value: "24/7", label: "IT Support & Monitoring", icon: I.headset },
-  { value: "Same-Day", label: "Response Time", icon: I.clock },
-  { value: "Local", label: "Houston-Based Team", icon: I.pin },
-  { value: "99.9%", label: "Uptime Target", icon: I.shield }
+  { label: "Houston Based", icon: I.pin },
+  { label: "On-Site & Remote", icon: I.headset },
+  { label: "No Long-Term Contracts", icon: I.shield },
+  { label: "Business-Focused Support", icon: I.users }
 ];
 
 const industryRow = [
-  { name: "Medical & Dental", icon: I.cross },
-  { name: "Law Firms", icon: I.scale, badge: "Featured" },
-  { name: "Gas Stations", icon: I.fuel },
-  { name: "Retail", icon: I.bag },
+  { name: "Healthcare", icon: I.cross },
+  { name: "Professional Services", icon: I.briefcase },
+  { name: "Retail & Gas Stations", icon: I.fuel },
   { name: "Restaurants", icon: I.utensils },
-  { name: "Construction", icon: I.hardhat },
-  { name: "Professional Services", icon: I.briefcase }
-];
-
-const portalFeatures = [
-  { no: "01", name: "Invoices & autopay", detail: "Every invoice, statement and payment method in one ledger." },
-  { no: "02", name: "Claims from Availity", detail: "Status, aging and denials refreshed nightly by payer." },
-  { no: "03", name: "Tickets", detail: "Open a request, watch it move, see who is working it." },
-  { no: "04", name: "Documents", detail: "BAA, risk analysis, network diagrams, warranty records." }
+  { name: "Construction", icon: I.hardhat }
 ];
 
 const steps = [
-  { no: "01", when: "Day 0", name: "Systems review", body: "Ninety minutes on site. We inventory what you run, what is unsupported, and what would hurt most if it failed tomorrow." },
-  { no: "02", when: "Week 1", name: "Written plan", body: "A short document: what we would fix first, what it costs, and what you can safely defer. Yours to keep either way." },
-  { no: "03", when: "Week 2+", name: "Stabilize, then improve", body: "We fix the failure risks first, then move to the growth work — billing visibility, marketing, automation." }
+  { no: "01", when: "Systems Review", name: "Discovery", body: "We review what you run today, what's unsupported, and what would hurt most if it failed tomorrow — whether that's IT, cameras, networking, billing or marketing." },
+  { no: "02", when: "Clear Recommendations", name: "Plan", body: "A short, written plan: what we'd fix first, what it costs, and what can safely wait. Yours to keep either way." },
+  { no: "03", when: "Stabilize & Improve", name: "Execute", body: "We handle the highest-risk items first, then move on to the improvements that help your business grow." }
 ];
 
 const priceCards = [
@@ -303,25 +294,17 @@ const priceCards = [
 ];
 
 const cases = [
-  { tag: "Medical practice", name: "Bashir Neurology & Headache PLLC", challenge: "A growing Houston neurology practice invisible in local search.", solution: "Local SEO, conversion-focused ads, site performance and monthly reporting.", result: "Add real metrics: impressions delta, new patient calls, cost per booking.", tech: ["Local SEO", "Google & Meta Ads", "Analytics"] },
-  { tag: "Product build", name: "Medical Billing Platform", challenge: "Independent practices overpaying for legacy billing systems built for hospital groups.", solution: "Cloud-hosted billing platform: patients, insurance, claims, documents, role-based access.", result: "In production — add practice count and claims volume when ready.", tech: ["Cloud", "HIPAA-ready", "AI-ready"] },
-  { tag: "Gas station ops", name: "Fuel Reconciliation Platform", challenge: "Manual fuel and sales reconciliation across locations, hours lost weekly.", solution: "Automated reconciliation portal tying pump, POS and delivery data together.", result: "In development — launching 2026.", tech: ["Custom portal", "Automation", "Reporting"] },
-  { tag: "Field work", name: "Security & Networking Installs", challenge: "Sites with dead zones, unrecorded incidents and undocumented networks.", solution: "Camera systems, structured cabling and segmented networks — documented and maintained.", result: "Add install count and a before/after photo.", tech: ["Cameras & NVR", "Cabling", "Firewalls"] }
-];
-
-const testimonials = [
-  { quote: "Placeholder — add a real client quote: what broke, how fast AxisForce fixed it, why you'd recommend them.", who: "Client name", role: "Practice / business, Houston" },
-  { quote: "Placeholder — a second quote works best about a different service (cameras, billing, or the website).", who: "Client name", role: "Business type, Houston" },
-  { quote: "Placeholder — a third quote about responsiveness or trust closes the pattern.", who: "Client name", role: "Business type, Houston" }
+  { tag: "Medical practice", name: "Bashir Neurology & Headache PLLC", challenge: "A growing Houston neurology practice invisible in local search.", solution: "Local SEO, conversion-focused Google &amp; Meta ads, site performance and monthly reporting.", result: "Ongoing engagement — reviewed monthly.", tech: ["Local SEO", "Google & Meta Ads", "Website Optimization"] },
+  { tag: "Product build", name: "AxisForce Medical Billing Platform", challenge: "Independent practices overpaying for legacy billing systems built for hospital groups.", solution: "Custom cloud-hosted billing platform: patients, insurance, claims, documents, role-based access.", result: "In production for AxisForce medical billing clients.", tech: ["Cloud", "HIPAA-ready", "AI-ready"] },
+  { tag: "Coming Soon", name: "AI Receptionist & Business Automation", challenge: "Practices and small businesses lose hours a week to intake, scheduling and follow-up.", solution: "An AI receptionist and workflow automation platform — call handling, appointment workflows, lead follow-up and custom agents.", result: "In development — not yet available to clients.", tech: ["AI Agents", "Voice AI", "Automation"] },
+  { tag: "Field work", name: "IT, Security & Networking", challenge: "Sites with dead zones, unrecorded incidents and undocumented networks.", solution: "Camera systems, structured cabling and segmented Wi-Fi — installed, documented and maintained.", result: "Ongoing installs and managed support across Houston-area sites.", tech: ["Cameras & NVR", "Cabling", "Firewalls"] }
 ];
 
 const faqs = [
-  { q: "Do you require contracts?", a: "No. Everything is month to month — cancel anytime. If you prepay and cancel mid-period, the unused portion is refunded pro-rata." },
-  { q: "How fast do you respond?", a: "Same business day for normal requests; when you're down, our target is one hour." },
-  { q: "Are you HIPAA compliant?", a: "We sign a BAA, run documented risk analyses, and build on HIPAA-ready architecture for medical clients." },
-  { q: "On-site or remote?", a: "Both. We're Houston-based and cover Greater Houston on-site, with remote support for everything that doesn't need a truck." },
-  { q: "How does pricing work?", a: "Published starting points, because every scope differs. The firm number comes with a written plan after your free systems review." },
-  { q: "Can you take over from our current IT provider?", a: "Yes — we handle the transition, document everything, and you keep every credential and diagram we produce." }
+  { q: "Do you require long-term contracts?", a: "No. Everything is month to month — cancel anytime. If you prepay and cancel mid-period, the unused portion is refunded pro-rata." },
+  { q: "Do you provide both remote and on-site support?", a: "Yes. We're Houston-based and cover Greater Houston on-site, with remote support for everything that doesn't need a truck." },
+  { q: "What types of businesses do you work with?", a: "Primarily independent medical practices, with restaurants, law firms, retail and gas stations also on board. If your business depends on its technology to operate, we're a fit." },
+  { q: "Where can I see your pricing?", a: "Our pricing depends on the service. Visit our <span class=\"go-link\" style=\"color:#1e5fe0;font-weight:700;\" onclick=\"nav(\'pricing\')\">Pricing page</span> for current starting prices and service options." }
 ];
 
 const industries = [
@@ -376,8 +359,8 @@ const principles = [
 ];
 
 const contactRows = [
-  { k: "Phone", v: PHONE },
-  { k: "Email", v: "info@axisforce.net" },
+  { k: "Phone", v: '<a href="tel:+13462181253" style="color: inherit; text-decoration: none;">' + PHONE + '</a>' },
+  { k: "Email", v: '<a href="mailto:info@axisforce.net" style="color: inherit; text-decoration: none;">info@axisforce.net</a>' },
   { k: "Service area", v: "Greater Houston — Harris, Fort Bend, Montgomery" },
   { k: "Hours", v: "Mon–Fri 8a–6p CT · emergency line for managed clients" },
   { k: "Existing client?", v: "Use the client portal for tickets" }
@@ -469,7 +452,7 @@ function mobileMenu() {
       '<button class="btn btn-primary" style="padding: 12px 18px; font-size: 15px;" onclick="nav(\'contact\')">Free Consultation</button>' +
       '<button class="btn btn-ghost-dark" style="color: #cfd8ea; padding: 12px 18px; font-size: 14.5px;" onclick="nav(\'portal\')">Client Login</button>' +
     '</div>' +
-    '<div style="padding: 0 24px 16px; color: #8b95ab; font-weight: 700; font-size: 15px;">' + PHONE + '</div>' +
+    '<a href="tel:+13462181253" style="display: block; padding: 0 24px 16px; color: #8b95ab; font-weight: 700; font-size: 15px; text-decoration: none;">' + PHONE + '</a>' +
   '</div>';
 }
 
@@ -491,10 +474,10 @@ function header() {
       '</div>' +
       '<nav class="hdr-nav" style="margin-left: auto; display: flex; align-items: center; gap: clamp(12px, 1.8vw, 26px); min-width: 0;">' +
         links +
-        '<div class="hdr-phone" style="display: flex; align-items: center; gap: 8px; color: #cfd8ea; font-weight: 700; font-size: 15px; white-space: nowrap;">' +
+        '<a href="tel:+13462181253" class="hdr-phone" style="display: flex; align-items: center; gap: 8px; color: #cfd8ea; font-weight: 700; font-size: 15px; white-space: nowrap; text-decoration: none;">' +
           icon("M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z", 17, "#2f7bff") +
           PHONE +
-        '</div>' +
+        '</a>' +
         '<button class="hdr-login btn" style="background: transparent; color: #cfd8ea; border: 1px solid rgba(255,255,255,0.25); padding: 10px 16px; font-size: 14.5px; white-space: nowrap;" onmouseover="this.style.borderColor=\'#7caeff\';this.style.color=\'#7caeff\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,0.25)\';this.style.color=\'#cfd8ea\'" onclick="nav(\'portal\')">Client Login</button>' +
         '<button class="hdr-cta btn btn-primary" style="padding: 11px 20px; font-size: 15px; white-space: nowrap; box-shadow: 0 4px 18px rgba(47,123,255,0.35);" onclick="nav(\'contact\')">Free Consultation</button>' +
       '</nav>' +
@@ -538,7 +521,7 @@ function ctaSection() {
       '<div>' +
         '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Get a free consultation and see how AxisForce can help your business grow with the right technology.</p>' +
         btnPrimary("Book Free Consultation &nbsp;→", "contact", "15px 26px", "16px") +
-        '<div style="font-size: 15px; font-weight: 600; color: #8b95ab; margin-top: 16px;">Or call us directly: <span style="color: #eef2fa;">' + PHONE + '</span></div>' +
+        '<div style="font-size: 15px; font-weight: 600; color: #8b95ab; margin-top: 16px;">Or call us directly: <a href="tel:+13462181253" style="color: #eef2fa; text-decoration: none;">' + PHONE + '</a></div>' +
       '</div>' +
     '</div>' +
   '</section>';
@@ -566,12 +549,12 @@ function footer() {
     '<div style="max-width: 1280px; margin: 0 auto; padding: 20px 32px 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 14px; color: #5c6579;">' +
       '<span>© 2026 AxisForce LLC · Houston, Texas</span>' +
       '<div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">' +
-        '<span class="hoverlink" style="cursor: pointer; color: #8b95ab;">Google Reviews</span>' +
-        '<span class="hoverlink" style="cursor: pointer; color: #8b95ab;">LinkedIn</span>' +
-        '<span class="hoverlink" style="cursor: pointer; color: #8b95ab;">Privacy Policy</span>' +
-        '<span class="hoverlink" style="cursor: pointer; color: #8b95ab;">Terms</span>' +
+        '<span style="color: #8b95ab;">Google Reviews</span>' +
+        '<span style="color: #8b95ab;">LinkedIn</span>' +
+        '<span style="color: #8b95ab;">Privacy Policy</span>' +
+        '<span style="color: #8b95ab;">Terms</span>' +
       '</div>' +
-      '<span>' + PHONE + ' · info@axisforce.net</span>' +
+      '<span><a href="tel:+13462181253" style="color: #5c6579; text-decoration: none;">' + PHONE + '</a> · <a href="mailto:info@axisforce.net" style="color: #5c6579; text-decoration: none;">info@axisforce.net</a></span>' +
     '</div>' +
   '</footer>';
 }
@@ -596,7 +579,8 @@ function homePage() {
       '</div></section>' : "";
 
   const svcCards = homeServices.map(s =>
-    '<div class="card-hover" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 28px 24px; cursor: pointer; box-shadow: 0 2px 10px rgba(19,26,40,0.05);" onclick="nav(\'svc:' + s.no + '\')">' +
+    '<div class="card-hover" style="position: relative; background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 28px 24px; cursor: pointer; box-shadow: 0 2px 10px rgba(19,26,40,0.05);" onclick="nav(\'svc:' + s.no + '\')">' +
+      (s.status ? '<span style="position: absolute; top: 20px; right: 20px; padding: 4px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; background: rgba(30,95,224,0.09); color: #1e5fe0; border: 1px solid rgba(30,95,224,0.25);">' + s.status + '</span>' : "") +
       '<div style="width: 52px; height: 52px; border-radius: 12px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 18px;">' +
         icon(s.icon, 26, "#1e5fe0") + '</div>' +
       '<div style="font-size: 19px; font-weight: 700; margin-bottom: 8px; color: #0c1220;">' + s.name + '</div>' +
@@ -605,10 +589,9 @@ function homePage() {
     '</div>').join("");
 
   const statCells = stats.map((st, i) =>
-    '<div style="display: flex; align-items: center; gap: 16px; padding: 30px 28px; border-left: 1px solid ' + div(i) + ';">' +
-      icon(st.icon, 34, "#2f7bff") +
-      '<div><div style="font-size: 30px; font-weight: 800; line-height: 1;">' + st.value + '</div>' +
-      '<div style="font-size: 14px; color: #8b95ab; margin-top: 5px;">' + st.label + '</div></div>' +
+    '<div style="display: flex; align-items: center; gap: 14px; padding: 30px 28px; border-left: 1px solid ' + div(i) + '; min-width: 0;">' +
+      icon(st.icon, 28, "#2f7bff") +
+      '<div style="font-size: 17px; font-weight: 700; min-width: 0; text-wrap: balance;">' + st.label + '</div>' +
     '</div>').join("");
 
   const indCells = industryRow.map((ind, i) =>
@@ -616,13 +599,6 @@ function homePage() {
       icon(ind.icon, 40, "#1e5fe0") +
       '<div style="font-size: 16px; font-weight: ' + (ind.badge ? "800" : "700") + '; line-height: 1.3; color: ' + (ind.badge ? "#1e5fe0" : "#131a28") + ';">' + ind.name + '</div>' +
       '<div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1e5fe0;">' + (ind.badge || "") + '</div>' +
-    '</div>').join("");
-
-  const pFeatures = portalFeatures.map(f =>
-    '<div style="display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px dashed rgba(124,174,255,0.25);">' +
-      '<span style="color: #4d8dff; font-weight: 700; font-size: 15px;">' + f.no + '</span>' +
-      '<div><div style="font-size: 17px; font-weight: 700;">' + f.name + '</div>' +
-      '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + f.detail + '</div></div>' +
     '</div>').join("");
 
   const caseCards = cases.map(cs =>
@@ -639,14 +615,6 @@ function homePage() {
       '<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 6px;">' +
         cs.tech.map(tg => '<span style="padding: 4px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 700; background: #e8edf6; color: #34415c;">' + tg + "</span>").join("") +
       '</div>' +
-    '</div>').join("");
-
-  const tmCards = testimonials.map(tm =>
-    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 26px;">' +
-      '<div style="font-size: 30px; font-weight: 800; color: #1e5fe0; line-height: 1; margin-bottom: 10px;">“</div>' +
-      '<div style="font-size: 15px; line-height: 1.6; color: #34415c; margin-bottom: 16px;">' + tm.quote + '</div>' +
-      '<div style="font-size: 14.5px; font-weight: 700; color: #0c1220;">' + tm.who + '</div>' +
-      '<div style="font-size: 13px; color: #62708a;">' + tm.role + '</div>' +
     '</div>').join("");
 
   const faqCards = faqs.map(fq =>
@@ -698,6 +666,9 @@ function homePage() {
         '<p style="font-size: 17px; color: #46536b; max-width: 62ch; margin: 0 auto; line-height: 1.6;">From IT support to security, billing systems and digital marketing — end-to-end solutions to keep your business running smoothly.</p>' +
       '</div>' +
       '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">' + svcCards + '</div>' +
+      '<div style="text-align: center; margin-top: 40px;">' +
+        '<span class="go-link" style="font-size: 15.5px; font-weight: 700; color: #1e5fe0;" onclick="nav(\'services\')">View All Services &nbsp;→</span>' +
+      '</div>' +
     '</div>' +
   '</section>' +
   '<section style="padding: 56px 32px; border-bottom: 1px solid rgba(255,255,255,0.06);">' +
@@ -708,29 +679,18 @@ function homePage() {
       '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Industries We Serve</div>' +
       '<h2 style="font-size: 40px; font-weight: 800; margin: 0 0 48px; letter-spacing: -0.01em; color: #0c1220;">Technology Solutions For Every Industry</h2>' +
       '<div style="display: flex; justify-content: center; align-items: stretch; flex-wrap: wrap; row-gap: 32px;">' + indCells + '</div>' +
-    '</div>' +
-  '</section>' +
-  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
-    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">' +
-      '<div>' +
-        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Client Portal</div>' +
-        '<h2 style="font-size: 38px; font-weight: 800; margin: 0 0 18px; line-height: 1.08;">Your billing, claims and tickets in one login.</h2>' +
-        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 46ch;">Medical clients see claim status and remittances pulled from Availity next to their AxisForce invoices. Every client sees open tickets, device health and scheduled work — no phone tag.</p>' +
-        btnPrimary("Open the Portal &nbsp;→", "portal") +
+      '<div style="margin-top: 40px;">' +
+        '<span class="go-link" style="font-size: 15.5px; font-weight: 700; color: #1e5fe0;" onclick="nav(\'industries\')">Explore Industries &nbsp;→</span>' +
       '</div>' +
-      '<div style="background: rgba(10,16,30,0.8); border: 1px solid rgba(124,174,255,0.22); border-radius: 14px; padding: 28px 30px;">' + pFeatures + '</div>' +
     '</div>' +
   '</section>' +
   '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
     '<div style="max-width: 1280px; margin: 0 auto;">' +
       '<div style="text-align: center; margin-bottom: 44px;">' +
-        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Selected Work</div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Solutions &amp; Selected Work</div>' +
         '<h2 style="font-size: 40px; font-weight: 800; margin: 0; color: #0c1220;">Results, not promises.</h2>' +
       '</div>' +
       '<div class="grid-cases" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">' + caseCards + '</div>' +
-      '<div style="margin-top: 44px; border-top: 1px solid #dbe3f0; padding-top: 44px;">' +
-        '<div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">' + tmCards + '</div>' +
-      '</div>' +
       '<div style="margin-top: 44px; border-top: 1px solid #dbe3f0; padding-top: 44px;">' +
         '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 28px; color: #0c1220;">Frequently asked questions</h2>' +
         '<div class="grid-cases" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">' + faqCards + '</div>' +
