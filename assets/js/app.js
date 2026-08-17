@@ -1006,7 +1006,7 @@ function aiAutomationPage() {
     '<div style="max-width: 1280px; margin: 0 auto;">' +
       '<div style="text-align: center; margin-bottom: 48px;">' +
         '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">What We Automate</div>' +
-        '<h2 style="font-size: 38px; font-weight: 800; margin: 0 0 14px; color: #0c1220;">Real Work, Handled Automatically</h2>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0 0 14px; color: #0c1220;">Your Business. Smarter, Faster, Automated.</h2>' +
         '<p style="font-size: 16.5px; color: #46536b; max-width: 62ch; margin: 0 auto; line-height: 1.6;">From the first customer touchpoint to the reporting at the end of the month, here is where automation can take the repetitive work off your plate.</p>' +
       '</div>' +
       '<div class="grid-handled" style="display: grid; gap: 18px;">' + handledCards + '</div>' +
@@ -1033,7 +1033,7 @@ function aiAutomationPage() {
         '<h2 style="font-size: 36px; font-weight: 800; margin: 0; line-height: 1.1; letter-spacing: -0.01em;">Let’s Find What You Can Automate.</h2>' +
       '</div>' +
       '<div>' +
-        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">AI automation varies by project, so we do not publish fixed packages here. Tell us what is eating your team’s time and we will scope what is realistic to automate first.</p>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">AI automation varies by project, so we do not publish fixed packages here. Tell us what is eating your team’s time and we’ll identify where automation can make the biggest impact first.</p>' +
         btnPrimary("Get Free AI Consultation &nbsp;→", "contact", "15px 26px", "16px") +
       '</div>' +
     '</div>' +
