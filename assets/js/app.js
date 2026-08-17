@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -80,7 +80,8 @@ const I = {
   fuel: "M3 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M2 21h12M6 7h4M13 10h3a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V9.5L18 6.5",
   briefcase: "M3 8h18v12H3zM8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18",
   hardhat: "M2 18h20M4 18v-2a8 8 0 0 1 5-7.4M20 18v-2a8 8 0 0 0-5-7.4M10 5a2 2 0 0 1 4 0v6h-4z",
-  growth: "M3 17l6-6 4 4 8-8M15 7h6v6"
+  growth: "M3 17l6-6 4 4 8-8M15 7h6v6",
+  code: "M8 6L2 12l6 6M16 6l6 6-6 6M14 4l-4 16"
 };
 
 function icon(path, size, color, extra) {
@@ -106,7 +107,8 @@ const svcImgs = {
   "05": ["/assets/images/svc-cameras-hero.png", "", "", CAMERAS_FALLBACK],
   "06": ["https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1400&q=80", "Photo by Thomas Jensen on Unsplash", "https://unsplash.com/@thomasjsn", ""],
   "07": ["https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1400&q=80", "Photo by Ilya Pavlov on Unsplash", "https://unsplash.com/@ilyapavlov", ""],
-  "08": ["https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80", "Photo by Ilya Pavlov on Unsplash", "https://unsplash.com/@ilyapavlov", ""]
+  "08": ["https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80", "Photo by Ilya Pavlov on Unsplash", "https://unsplash.com/@ilyapavlov", ""],
+  "09": ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80", "Photo by Luke Chesser on Unsplash", "https://unsplash.com/@lukechesser", ""]
 };
 
 const services = [
@@ -157,7 +159,13 @@ const services = [
     long: "Custom internal portals, dashboards and integrations built around your actual process — like our fuel reconciliation and medical billing platforms.",
     outcome: "Software shaped to your operation, owned by you.",
     whoFor: "Businesses with a process worth automating properly.",
-    items: ["Internal portals", "Dashboards & reporting", "System integrations", "Process automation", "Cloud hosting", "Ongoing support"] }
+    items: ["Internal portals", "Dashboards & reporting", "System integrations", "Process automation", "Cloud hosting", "Ongoing support"] },
+  { no: "09", name: "Salesforce Solutions", meta: "Request a Quote", group: "Automation & Software",
+    problem: "Off-the-shelf CRM setups rarely match how your team actually sells, services or tracks work.",
+    long: "Salesforce configuration, automation, custom development and integrations built around your business workflows.",
+    outcome: "A CRM that fits your process instead of forcing your team to work around it.",
+    whoFor: "Businesses running or adopting Salesforce that need it configured, automated or connected to other systems.",
+    items: ["Org configuration", "Workflow & process automation", "Custom objects & development", "Third-party integrations", "Data migration & cleanup", "Ongoing admin support"] }
 ];
 services.forEach(s => {
   const [src, credit, creditHref, fallback] = svcImgs[s.no];
@@ -170,7 +178,7 @@ const S = {
   red: { sbg: "rgba(194,69,45,0.1)", sc: "#c2452d" }
 };
 
-const partners = ["Microsoft 365", "Google Workspace", "UBIQUITI", "Verkada", "Dell Technologies", "Availity"];
+const partners = ["Microsoft 365", "Google Workspace", "Salesforce", "Ubiquiti", "Dell Technologies", "Availity"];
 
 const trustChips = [
   { label: "No Long-Term Contracts", icon: I.shield },
@@ -191,11 +199,13 @@ const homeServices = [
   { name: "Medical Billing Platform", body: "Billing done for you at 3% of collections, or our cloud billing software for your own team.", icon: I.billing, no: "04" },
   { name: "Security Camera Systems", body: "Commercial-grade cameras installed, integrated and reviewable from your phone.", icon: I.camera, no: "05" },
   { name: "Network & Wi-Fi Solutions", body: "Structured cabling, firewalls and segmented Wi-Fi that carry payments and phones without drama.", icon: I.wifi, no: "06" },
-  { name: "Websites & Marketing", body: "Get found first on Google — websites, local SEO and lead generation measured against booked work.", icon: I.globe, no: "07" }
+  { name: "Websites & Marketing", body: "Get found first on Google — websites, local SEO and lead generation measured against booked work.", icon: I.globe, no: "07" },
+  { name: "Salesforce Solutions", body: "Salesforce configuration, automation, custom development and integrations built around your business workflows.", icon: I.chart, no: "09" },
+  { name: "Custom Software", body: "Custom web applications, internal portals and business systems designed around your operations.", icon: I.code, no: "08" }
 ];
 
 const stats = [
-  { label: "Houston Based", icon: I.pin },
+  { label: "Houston-Based", icon: I.pin },
   { label: "On-Site & Remote", icon: I.headset },
   { label: "No Long-Term Contracts", icon: I.shield },
   { label: "Business-Focused Support", icon: I.users }
@@ -348,16 +358,17 @@ const docs = [
 
 const footerCols = [
   { title: "Services", links: [
-    { label: "Managed IT support", go: "svc:01" }, { label: "AI & business automation", go: "svc:02" },
-    { label: "Medical billing services", go: "svc:03" }, { label: "Medical billing software", go: "svc:04" },
-    { label: "Security cameras", go: "svc:05" }, { label: "Networks & Wi-Fi", go: "svc:06" },
-    { label: "Websites & SEO", go: "svc:07" }, { label: "Custom software", go: "svc:08" } ] },
-  { title: "Industries", links: [
-    { label: "Medical & dental", go: "industries" }, { label: "Law firms", go: "industries" },
-    { label: "Gas stations & retail", go: "industries" }, { label: "Restaurants", go: "industries" } ] },
+    { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "svc:02" },
+    { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "svc:04" },
+    { label: "Security Cameras", go: "svc:05" }, { label: "Network & Wi-Fi", go: "svc:06" },
+    { label: "Websites & Marketing", go: "svc:07" }, { label: "Salesforce Solutions", go: "svc:09" },
+    { label: "Custom Software", go: "svc:08" } ] },
   { title: "Company", links: [
-    { label: "About", go: "about" }, { label: "Pricing", go: "pricing" },
-    { label: "Contact", go: "contact" }, { label: "Client portal", go: "portal" } ] }
+    { label: "About", go: "about" }, { label: "Industries", go: "industries" }, { label: "Pricing", go: "pricing" },
+    { label: "Contact", go: "contact" }, { label: "Client Login", go: "portal" } ] },
+  { title: "Connect", links: [
+    { label: "Google Reviews", href: "https://g.page/r/CRhtDtmr4_jyEBM/review" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/axisforce-it-marketing-solutions/" } ] }
 ];
 
 /* ---------- shared fragments ---------- */
@@ -463,7 +474,10 @@ function footer() {
   const cols = footerCols.map(col =>
     '<div>' +
       '<div style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #62708a; margin-bottom: 14px;">' + col.title + '</div>' +
-      col.links.map(l => '<div class="hoverlink" style="font-size: 14.5px; line-height: 2; color: #aeb8cd; cursor: pointer;" onclick="nav(\'' + l.go + '\')">' + l.label + "</div>").join("") +
+      col.links.map(l => l.href ?
+        '<a class="hoverlink" href="' + l.href + '" target="_blank" rel="noopener noreferrer" style="display: block; font-size: 14.5px; line-height: 2; color: #aeb8cd;">' + l.label + '</a>' :
+        '<div class="hoverlink" style="font-size: 14.5px; line-height: 2; color: #aeb8cd; cursor: pointer;" onclick="nav(\'' + l.go + '\')">' + l.label + "</div>"
+      ).join("") +
     '</div>').join("");
   return '' +
   '<footer style="border-top: 1px solid rgba(255,255,255,0.07); background: #05080f;">' +
@@ -473,20 +487,19 @@ function footer() {
           '<img src="/assets/images/branding/axisforce-mark.png" alt="AxisForce logo" style="width: 28px; height: 28px; object-fit: contain;">' +
           '<span style="font-weight: 800; font-size: 19px;"><span style="color: #fff;">Axis</span><span style="color: #2f7bff;">Force</span></span>' +
         '</div>' +
-        '<div style="font-size: 14.5px; line-height: 1.6; color: #8b95ab; max-width: 34ch;">Managed IT, security, billing systems and digital growth for Houston businesses.</div>' +
-        '<div style="letter-spacing: 0.25em; text-transform: uppercase; font-size: 12px; font-weight: 700; color: #4d8dff; margin-top: 18px;">Secure · Connect · Grow</div>' +
+        '<div style="font-size: 14.5px; line-height: 1.6; color: #8b95ab; max-width: 34ch;">Managed IT, security, business automation, billing systems and digital growth solutions for businesses.</div>' +
+        '<div style="font-size: 14px; color: #8b95ab; margin-top: 14px;">Houston, Texas</div>' +
+        '<div style="font-size: 14px; margin-top: 6px;"><a href="tel:+13462181253" style="color: #aeb8cd; text-decoration: none;">' + PHONE + '</a></div>' +
+        '<div style="font-size: 14px; margin-top: 2px;"><a href="mailto:info@axisforce.net" style="color: #aeb8cd; text-decoration: none;">info@axisforce.net</a></div>' +
       '</div>' +
       cols +
     '</div>' +
     '<div style="max-width: 1280px; margin: 0 auto; padding: 20px 32px 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 14px; color: #5c6579;">' +
-      '<span>© 2026 AxisForce LLC · Houston, Texas</span>' +
+      '<span>© 2026 AxisForce Inc.</span>' +
       '<div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">' +
-        '<span style="color: #8b95ab;">Google Reviews</span>' +
-        '<span style="color: #8b95ab;">LinkedIn</span>' +
-        '<span style="color: #8b95ab;">Privacy Policy</span>' +
-        '<span style="color: #8b95ab;">Terms</span>' +
+        '<span class="hoverlink" style="color: #8b95ab; cursor: pointer;" onclick="nav(\'privacy\')">Privacy Policy</span>' +
+        '<span class="hoverlink" style="color: #8b95ab; cursor: pointer;" onclick="nav(\'terms\')">Terms of Service</span>' +
       '</div>' +
-      '<span><a href="tel:+13462181253" style="color: #5c6579; text-decoration: none;">' + PHONE + '</a> · <a href="mailto:info@axisforce.net" style="color: #5c6579; text-decoration: none;">info@axisforce.net</a></span>' +
     '</div>' +
   '</footer>';
 }
@@ -506,9 +519,11 @@ function homePage() {
 
   const partnersRow = SHOW_PARTNERS ?
     '<section style="border-bottom: 1px solid rgba(255,255,255,0.06); background: #08101f;">' +
-      '<div style="max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">' +
-      partners.map(pt => '<span style="font-size: 17px; font-weight: 700; letter-spacing: 0.02em; color: #5c6579;">' + pt + "</span>").join("") +
-      '</div></section>' : "";
+      '<div style="max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">' +
+      '<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #4d8dff; white-space: nowrap;">Technologies We Work With</span>' +
+      '<div style="display: flex; flex-wrap: wrap; gap: 24px; flex: 1; justify-content: flex-end;">' +
+      partners.map(pt => '<span style="font-size: 16px; font-weight: 700; letter-spacing: 0.02em; color: #5c6579;">' + pt + "</span>").join("") +
+      '</div></div></section>' : "";
 
   const svcCards = homeServices.map(s =>
     '<div class="card-hover" style="position: relative; background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 28px 24px; cursor: pointer; box-shadow: 0 2px 10px rgba(19,26,40,0.05);" onclick="nav(\'svc:' + s.no + '\')">' +
@@ -597,7 +612,7 @@ function homePage() {
         '<h2 style="font-size: 42px; font-weight: 800; margin: 0 0 14px; letter-spacing: -0.01em; color: #0c1220;">Complete Technology Solutions</h2>' +
         '<p style="font-size: 17px; color: #46536b; max-width: 62ch; margin: 0 auto; line-height: 1.6;">From IT support to security, billing systems and digital marketing — end-to-end solutions to keep your business running smoothly.</p>' +
       '</div>' +
-      '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">' + svcCards + '</div>' +
+      '<div class="grid-services">' + svcCards + '</div>' +
       '<div style="text-align: center; margin-top: 40px;">' +
         '<span class="go-link" style="font-size: 15.5px; font-weight: 700; color: #1e5fe0;" onclick="nav(\'services\')">View All Services &nbsp;→</span>' +
       '</div>' +
@@ -620,7 +635,7 @@ function homePage() {
     '<div style="max-width: 1280px; margin: 0 auto;">' +
       '<div style="text-align: center; margin-bottom: 44px;">' +
         '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Solutions &amp; Selected Work</div>' +
-        '<h2 style="font-size: 40px; font-weight: 800; margin: 0; color: #0c1220;">Results, not promises.</h2>' +
+        '<h2 style="font-size: 40px; font-weight: 800; margin: 0; color: #0c1220;">Solutions Built for Real Business.</h2>' +
       '</div>' +
       '<div class="grid-cases" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">' + caseCards + '</div>' +
       '<div style="margin-top: 44px; border-top: 1px solid #dbe3f0; padding-top: 44px;">' +
@@ -660,7 +675,7 @@ function servicesPage() {
 
   return '<main>' +
   pageHero("Services",
-    "Your entire technology department. Eight service lines.",
+    "Your entire technology department. Nine service lines.",
     "Every service explains the problem it solves, what you get, and an honest starting price. Most clients start with one line and add others as the relationship proves out — no long-term contracts, ever.",
     heroMedia(320, slot("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=80", "Hands-on engineering work", "Photo by ThisisEngineering on Unsplash", "https://unsplash.com/@thisisengineering", ""))) +
   '<section style="background: #f2f5fa; color: #131a28; padding: 40px 32px 72px;">' +
@@ -840,6 +855,91 @@ function contactPage() {
       '</form>' +
     '</div>' +
   '</section>' +
+  '</main>';
+}
+
+function legalHero(title) {
+  return '' +
+  '<section style="border-bottom: 1px solid rgba(255,255,255,0.06); padding: 56px 32px 40px;">' +
+    '<div style="max-width: 800px; margin: 0 auto;">' +
+      '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Legal</div>' +
+      '<h1 style="font-size: 42px; font-weight: 800; line-height: 1.08; margin: 0;">' + title + '</h1>' +
+      '<div style="font-size: 14.5px; color: #8b95ab; margin-top: 14px;">Effective Date: August 17, 2026</div>' +
+    '</div>' +
+  '</section>';
+}
+
+function legalSection(html) {
+  return '' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 48px 32px 80px;">' +
+    '<div style="max-width: 800px; margin: 0 auto; font-size: 16.5px; line-height: 1.7; color: #34415c;">' + html + '</div>' +
+  '</section>';
+}
+
+const legalH2 = t => '<h2 style="font-size: 24px; font-weight: 800; margin: 40px 0 14px; color: #0c1220;">' + t + '</h2>';
+const legalP = t => '<p style="margin: 0 0 16px;">' + t + '</p>';
+const legalUl = items => '<ul style="margin: 0 0 16px; padding-left: 22px;">' + items.map(i => '<li style="margin-bottom: 8px;">' + i + '</li>').join("") + '</ul>';
+
+function privacyPage() {
+  return '<main>' +
+  legalHero("Privacy Policy") +
+  legalSection(
+    legalP('AxisForce Inc. ("AxisForce," "we," "us," or "our") operates the website axisforce.net (the "Site"). This Privacy Policy explains what information we collect through the Site, how we use it, and the choices you have.') +
+    legalH2("Information You Provide to Us") +
+    legalP("When you submit a consultation request, contact form, or similar inquiry through the Site, we may collect:") +
+    legalUl(["Name", "Email address", "Company or business name", "Service you are interested in", "Message or details about your request", "Phone number (optional)"]) +
+    legalP("We only collect information you choose to provide. Phone number is optional and is never required to submit a request.") +
+    legalH2("How We Use Your Information") +
+    legalP("We use the information you submit to:") +
+    legalUl(["Respond to your inquiry and follow up about the services you requested", "Understand your technology needs so we can prepare for a consultation", "Maintain records of business communications"]) +
+    legalP("We do not sell, rent, or trade your personal information to third parties.") +
+    legalH2("Form Processing &amp; Third-Party Service Providers") +
+    legalP('Contact and consultation forms on this Site are processed using Formspree, a third-party form-handling service, which transmits submissions to info@axisforce.net. Formspree may process and briefly store submitted data as part of delivering it to us. We encourage you to review Formspree\'s own privacy practices if you have questions about how they handle data in transit.') +
+    legalP("We do not currently use Google Analytics, Meta Pixel, Google Ads conversion tracking, or other advertising or analytics tracking technologies on this Site. If that changes, we will update this Privacy Policy accordingly.") +
+    legalH2("Data Protection &amp; Security") +
+    legalP("We take reasonable administrative and technical measures to protect information submitted to us. However, no method of transmission over the internet or electronic storage is completely secure, and we cannot guarantee absolute security.") +
+    legalH2("Retention") +
+    legalP("We retain information submitted through the Site for as long as reasonably necessary to respond to your inquiry and maintain appropriate business records, after which it may be deleted or archived.") +
+    legalH2("Disclosure of Information") +
+    legalP("We may disclose information if required to do so by law, subpoena, or other legal process, or if we believe in good faith that disclosure is necessary to protect our rights, your safety, or the safety of others.") +
+    legalH2("External Links") +
+    legalP("The Site may contain links to third-party websites, including social media and review platforms. We are not responsible for the privacy practices or content of external sites and encourage you to review their policies directly.") +
+    legalH2("Children's Privacy") +
+    legalP("This Site is intended for business audiences and is not directed to children under 13. We do not knowingly collect personal information from children.") +
+    legalH2("Changes to This Policy") +
+    legalP("We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Continued use of the Site after changes are posted constitutes acceptance of the updated policy.") +
+    legalH2("Contact Us") +
+    legalP('Questions about this Privacy Policy can be directed to:<br>AxisForce Inc.<br>Houston, Texas<br><a href="mailto:info@axisforce.net" style="color:#1e5fe0;font-weight:700;">info@axisforce.net</a>')
+  ) +
+  '</main>';
+}
+
+function termsPage() {
+  return '<main>' +
+  legalHero("Terms of Service") +
+  legalSection(
+    legalP('These Terms of Service ("Terms") govern your use of the website axisforce.net (the "Site"), operated by AxisForce Inc. ("AxisForce," "we," "us," or "our"). By accessing or using the Site, you agree to these Terms.') +
+    legalP("These Terms apply only to your use of this website. They do not constitute a service agreement, contract, or statement of work for any AxisForce service — including managed IT, medical billing, security camera installation, marketing, Salesforce, or custom software engagements. Those services are governed by separate agreements entered into directly with AxisForce.") +
+    legalH2("Use of the Site") +
+    legalP("The Site is provided for general informational purposes about AxisForce and its services. You may browse the Site and submit inquiries through our contact and consultation forms for legitimate business purposes.") +
+    legalH2("Prohibited Use") +
+    legalP("You agree not to:") +
+    legalUl(["Use the Site for any unlawful purpose", "Attempt to gain unauthorized access to the Site or its underlying systems", "Interfere with or disrupt the Site's operation", "Submit false, misleading, or malicious information through Site forms", "Scrape, harvest, or misuse content from the Site outside of normal browsing"]) +
+    legalH2("Intellectual Property") +
+    legalP("All content on the Site, including text, graphics, logos, and images, is the property of AxisForce Inc. or its licensors and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works from Site content without our prior written permission.") +
+    legalH2("Third-Party Links") +
+    legalP("The Site may link to third-party websites, including social media and review platforms, for your convenience. We do not control and are not responsible for the content, accuracy, or practices of those external sites.") +
+    legalH2("No Warranty / Accuracy of Content") +
+    legalP('We aim to keep the information on this Site current and accurate, but we do not guarantee that all content is complete, up to date, or error-free at all times. Service descriptions, pricing ranges, and other details are provided for general informational purposes and are subject to change.') +
+    legalH2("Limitation of Liability") +
+    legalP('To the fullest extent permitted by law, AxisForce Inc. shall not be liable for any indirect, incidental, or consequential damages arising from your use of, or inability to use, the Site. The Site is provided on an "as is" and "as available" basis without warranties of any kind, express or implied.') +
+    legalH2("Governing Law") +
+    legalP("These Terms are governed by the laws of the State of Texas, United States, without regard to conflict-of-law principles. Any disputes arising from these Terms or use of the Site are subject to the exclusive jurisdiction of the courts located in Harris County, Texas.") +
+    legalH2("Changes to These Terms") +
+    legalP("We may revise these Terms from time to time. Updates will be posted on this page with a new effective date. Continued use of the Site after changes are posted constitutes acceptance of the revised Terms.") +
+    legalH2("Contact Us") +
+    legalP('Questions about these Terms can be directed to:<br>AxisForce Inc.<br>Houston, Texas<br><a href="mailto:info@axisforce.net" style="color:#1e5fe0;font-weight:700;">info@axisforce.net</a>')
+  ) +
   '</main>';
 }
 
@@ -1068,6 +1168,30 @@ function svcPage(svc) {
   '</main>';
 }
 
+/* ---------- SEO metadata ---------- */
+const PAGE_META = {
+  home: { title: "AxisForce — Managed IT, Security & Business Automation | Houston, TX", desc: "AxisForce is a Houston-based technology partner providing managed IT, security camera systems, networking, medical billing technology, Salesforce solutions and digital marketing for growing businesses." },
+  about: { title: "About AxisForce | Houston, TX Technology Partner", desc: "Learn how AxisForce partners with Houston businesses to manage IT, security, networking, billing systems and growth — without the overhead of an internal team." },
+  services: { title: "Services | AxisForce Managed IT, Security & Automation", desc: "Explore AxisForce's technology services: managed IT support, AI & business automation, medical billing, security cameras, networking, Salesforce solutions, custom software and digital marketing." },
+  industries: { title: "Industries We Serve | AxisForce", desc: "AxisForce supports healthcare, professional services, retail & gas stations, restaurants and construction businesses with technology built for environments that can't go down." },
+  pricing: { title: "Pricing | AxisForce Technology Services", desc: "Starting prices for AxisForce's managed IT, security, networking, billing and marketing services — published so you know what to expect before you call." },
+  contact: { title: "Contact AxisForce | Houston, TX", desc: "Get in touch with AxisForce for a free consultation on managed IT, security, networking, billing or marketing services in the Houston area." },
+  privacy: { title: "Privacy Policy | AxisForce", desc: "Read the AxisForce Privacy Policy covering how we collect, use and protect information submitted through axisforce.net." },
+  terms: { title: "Terms of Service | AxisForce", desc: "Terms of Service governing use of the axisforce.net website." }
+};
+
+function updateMeta() {
+  const key = CLEAN_PATHS[state.page] ? state.page : "home";
+  const meta = PAGE_META[key] || PAGE_META.home;
+  document.title = meta.title;
+  let desc = document.querySelector('meta[name="description"]');
+  if (!desc) { desc = document.createElement("meta"); desc.setAttribute("name", "description"); document.head.appendChild(desc); }
+  desc.setAttribute("content", meta.desc);
+  let canon = document.querySelector('link[rel="canonical"]');
+  if (!canon) { canon = document.createElement("link"); canon.setAttribute("rel", "canonical"); document.head.appendChild(canon); }
+  canon.setAttribute("href", "https://axisforce.net" + (CLEAN_PATHS[key] || "/"));
+}
+
 /* ---------- render ---------- */
 function render() {
   const p = state.page;
@@ -1081,15 +1205,17 @@ function render() {
   else if (p === "industries") body = industriesPage();
   else if (p === "about") body = aboutPage();
   else if (p === "contact") body = contactPage();
+  else if (p === "privacy") body = privacyPage();
+  else if (p === "terms") body = termsPage();
   else if (p === "portal") body = state.signedIn ? portalAppPage() : portalLoginPage();
   else { state.page = "home"; body = homePage(); }
 
-  const showCta = state.page !== "portal" && state.page !== "contact";
+  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms";
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
     header() + body + (showCta ? ctaSection() : "") + footer() +
     "</div>";
-  document.title = "AxisForce — IT & Marketing Solutions | Houston, TX";
+  updateMeta();
 }
 
 state.page = pageFromLocation();
