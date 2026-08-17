@@ -860,7 +860,7 @@ function contactPage() {
 
 function legalHero(title) {
   return '' +
-  '<section style="border-bottom: 1px solid rgba(255,255,255,0.06); padding: 56px 32px 40px;">' +
+  '<section style="background: #08101f; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 56px 32px 40px;">' +
     '<div style="max-width: 800px; margin: 0 auto;">' +
       '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Legal</div>' +
       '<h1 style="font-size: 42px; font-weight: 800; line-height: 1.08; margin: 0;">' + title + '</h1>' +
@@ -1170,9 +1170,9 @@ function svcPage(svc) {
 
 /* ---------- SEO metadata ---------- */
 const PAGE_META = {
-  home: { title: "AxisForce — Managed IT, Security & Business Automation | Houston, TX", desc: "AxisForce is a Houston-based technology partner providing managed IT, security camera systems, networking, medical billing technology, Salesforce solutions and digital marketing for growing businesses." },
+  home: { title: "AxisForce — Managed IT, Security & Business Automation | Houston, TX", desc: "AxisForce is a Houston-based technology partner providing managed IT, security camera systems, networking, medical billing technology, CRM & business intelligence and digital marketing for growing businesses." },
   about: { title: "About AxisForce | Houston, TX Technology Partner", desc: "Learn how AxisForce partners with Houston businesses to manage IT, security, networking, billing systems and growth — without the overhead of an internal team." },
-  services: { title: "Services | AxisForce Managed IT, Security & Automation", desc: "Explore AxisForce's technology services: managed IT support, AI & business automation, medical billing, security cameras, networking, Salesforce solutions, custom software and digital marketing." },
+  services: { title: "Services | AxisForce Managed IT, Security & Automation", desc: "Explore AxisForce's technology services: managed IT support, AI & business automation, medical billing, security cameras, networking, CRM & business intelligence, custom software and digital marketing." },
   industries: { title: "Industries We Serve | AxisForce", desc: "AxisForce supports healthcare, professional services, retail & gas stations, restaurants and construction businesses with technology built for environments that can't go down." },
   pricing: { title: "Pricing | AxisForce Technology Services", desc: "Starting prices for AxisForce's managed IT, security, networking, billing and marketing services — published so you know what to expect before you call." },
   contact: { title: "Contact AxisForce | Houston, TX", desc: "Get in touch with AxisForce for a free consultation on managed IT, security, networking, billing or marketing services in the Houston area." },
