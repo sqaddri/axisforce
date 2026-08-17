@@ -148,13 +148,13 @@ const services = [
     outcome: "Fast, secure connectivity that survives rush hour and audits alike.",
     whoFor: "Any site where the network carries payments, phones or patient data.",
     items: ["Site survey & design", "Structured cabling", "Firewall & VLAN segmentation", "Guest / staff separation", "Failover internet", "As-built documentation"] },
-  { no: "07", name: "Websites & SEO", meta: "Starting at $800 / month", group: "Growth",
+  { no: "07", name: "Websites & Marketing", meta: "Starting at $800 / month", group: "Growth",
     problem: "A 9pm Google search should end with your phone ringing — not a competitor's.",
     long: "Professional website, local SEO, Google Business Profile, analytics, lead generation, maintenance and hosting — measured against booked work, not clicks.",
     outcome: "More calls from people already looking for exactly what you sell.",
     whoFor: "Local businesses that win by being found first.",
     items: ["Professional website", "Local SEO", "Google Business Profile", "Analytics & lead tracking", "Maintenance & hosting", "Monthly reporting"] },
-  { no: "08", name: "Custom Software & Portals", meta: "Request a Quote", group: "Automation & Software",
+  { no: "08", name: "Custom Software", meta: "Request a Quote", group: "Automation & Software",
     problem: "Off-the-shelf tools almost fit — so your team lives in spreadsheets and workarounds.",
     long: "Custom internal portals, dashboards and integrations built around your actual process — like our fuel reconciliation and medical billing platforms.",
     outcome: "Software shaped to your operation, owned by you.",
@@ -674,13 +674,13 @@ function servicesPage() {
 
   return '<main>' +
   pageHero("Services",
-    "Your entire technology department. Nine service lines.",
-    "Every service explains the problem it solves, what you get, and an honest starting price. Most clients start with one line and add others as the relationship proves out — no long-term contracts, ever.",
-    heroMedia(320, slot("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=80", "Hands-on engineering work", "Photo by ThisisEngineering on Unsplash", "https://unsplash.com/@thisisengineering", ""))) +
+    "Technology That Runs Your Business.<br>Nine Services. One Partner.",
+    "From managed IT and security to AI automation, medical billing, software and digital growth, AxisForce brings the technology your business depends on under one team.",
+    heroMedia(320, slot("/assets/images/axisforce-services-hero.webp", "AxisForce technology professional monitoring systems on a multi-monitor workstation with AxisForce branding on the wall", "", "", "", "services-hero-img"))) +
   '<section style="background: #f2f5fa; color: #131a28; padding: 40px 32px 72px;">' +
     '<div style="max-width: 1280px; margin: 0 auto;">' + rows +
       '<div style="padding-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;">' +
-        '<div style="font-size: 16.5px; color: #46536b; max-width: 52ch;">Every line above has a published starting range. No discovery call required to find out whether we are in your budget.</div>' +
+        '<div style="font-size: 16.5px; color: #46536b; max-width: 52ch;">Clear starting prices where possible. Custom projects are quoted based on scope.</div>' +
         btnPrimary("See Pricing &nbsp;→", "pricing", "14px 24px", "15.5px", false) +
       '</div>' +
     '</div>' +
