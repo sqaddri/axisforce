@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -124,7 +124,7 @@ const services = [
     outcome: "Hours of repetitive admin removed weekly, with a human in the loop where judgment matters.",
     whoFor: "Operators drowning in repetitive processes: intake, scheduling, documents, reporting.",
     items: ["Custom AI agents", "Voice AI", "Workflow automation", "Document processing", "CRM automation", "Reporting dashboards & portals"] },
-  { no: "03", name: "Medical Billing Services", meta: "3% of collections", group: "Medical Revenue", cta: "Explore Billing Services",
+  { no: "03", name: "Medical Billing Services", meta: "3% of collections", group: "Medical Revenue", cta: "Explore Billing Services", page: "medical-billing",
     problem: "Claims sit unworked, denials pile up, and nobody can tell you what's stuck where.",
     long: "Full revenue cycle management: eligibility verification, charge entry, claim submission, payment posting, denial management, A/R follow-up and reporting.",
     outcome: "Cleaner claims, faster payment, and visibility into every dollar in flight.",
@@ -1050,6 +1050,131 @@ function aiAutomationPage() {
   '</main>';
 }
 
+const medicalBillingHandled = [
+  { name: "Eligibility Verification", body: "Confirming insurance eligibility and benefits before every visit.", icon: I.shield },
+  { name: "Charge Entry", body: "Accurate charge entry using current coding and payer guidelines.", icon: I.billing },
+  { name: "Claim Submission", body: "Clean claims submitted electronically for faster processing.", icon: I.globe },
+  { name: "Payment Posting", body: "Payments posted promptly and patient balances kept current.", icon: I.chart },
+  { name: "Denial Management", body: "Identifying, appealing and resolving denied claims.", icon: I.cross },
+  { name: "A/R Follow-Up", body: "Following up on unpaid claims so nothing sits unworked.", icon: I.clock },
+  { name: "Reporting & Analytics", body: "Regular reporting so you can see where your revenue stands.", icon: I.growth },
+  { name: "Insurance Follow-Up", body: "Staying on top of payers until claims are resolved.", icon: I.headset },
+  { name: "Patient Balance Management", body: "Clear, accurate patient statements and balance tracking.", icon: I.users },
+  { name: "Billing Performance Monitoring", body: "Ongoing monitoring of your billing metrics and trends.", icon: I.wifi }
+];
+
+const medicalBillingProcess = [
+  { no: "01", name: "Eligibility", detail: "Coverage verified before the visit." },
+  { no: "02", name: "Charge Entry", detail: "Accurate coding entered promptly." },
+  { no: "03", name: "Claim Submission", detail: "Clean claims submitted electronically." },
+  { no: "04", name: "Payment Posting", detail: "Payments posted and balances updated." },
+  { no: "05", name: "Denial Management", detail: "Denials identified and resolved." },
+  { no: "06", name: "A/R Follow-Up", detail: "Unpaid claims followed up until resolved." },
+  { no: "07", name: "Reporting", detail: "Regular visibility into your billing performance." }
+];
+
+const medicalBillingWhy = [
+  { name: "End-to-End Billing", body: "From eligibility to final payment, we manage the entire revenue cycle." },
+  { name: "Focused on Collections", body: "Our priority is getting your claims paid, not just submitted." },
+  { name: "Denial Follow-Up", body: "We stay on denied claims until they are resolved." },
+  { name: "Transparent Reporting", body: "Clear visibility into your claims, collections and A/R." },
+  { name: "Technology-Driven Workflow", body: "Modern billing systems built for accuracy and speed." },
+  { name: "Dedicated Support", body: "A team that knows your account, not a rotating call center." }
+];
+
+function medicalBillingPage() {
+  const trust = [
+    { label: "Complete Revenue Cycle Management", icon: I.billing },
+    { label: "Dedicated Billing Support", icon: I.headset },
+    { label: "3% of Collections", icon: I.chart }
+  ].map((c, i) =>
+    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14.5px; font-weight: 600; color: #cfd8ea; padding: 0 18px; border-left: 1px solid ' +
+    (i === 0 ? "transparent" : "rgba(255,255,255,0.12)") + ';">' + icon(c.icon, 18, "#2f7bff") + c.label + "</div>").join("");
+
+  const handledCards = medicalBillingHandled.map(h =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 26px 24px;">' +
+      '<div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 16px;">' +
+        icon(h.icon, 22, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 17px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + h.name + '</div>' +
+      '<div style="font-size: 14px; line-height: 1.5; color: #46536b;">' + h.body + '</div>' +
+    '</div>').join("");
+
+  const processRows = medicalBillingProcess.map(f =>
+    '<div style="display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px dashed rgba(124,174,255,0.25);">' +
+      '<span style="color: #4d8dff; font-weight: 700; font-size: 15px;">' + f.no + '</span>' +
+      '<div><div style="font-size: 17px; font-weight: 700;">' + f.name + '</div>' +
+      '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + f.detail + '</div></div>' +
+    '</div>').join("");
+
+  const whyCards = medicalBillingWhy.map(w =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 26px;">' +
+      '<div style="font-size: 18px; font-weight: 700; color: #0c1220; margin-bottom: 8px;">' + w.name + '</div>' +
+      '<div style="font-size: 14.5px; line-height: 1.55; color: #46536b;">' + w.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 88px; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr); gap: 48px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Medical Billing Services</div>' +
+        '<h1 style="font-size: 46px; font-weight: 800; line-height: 1.08; margin: 0 0 18px;">We Handle the Billing.<br>You Focus on Care.</h1>' +
+        '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 54ch;">AxisForce provides end-to-end revenue cycle management for healthcare practices — improving collections, reducing denials, and freeing providers to focus on patients.</p>' +
+        '<div style="margin-bottom: 30px;">' + btnPrimary("Get Free Billing Consultation &nbsp;→", "contact", "15px 26px", "16px") + '</div>' +
+        '<div style="display: flex; align-items: center; flex-wrap: wrap; row-gap: 12px;">' + trust + '</div>' +
+      '</div>' +
+      heroMedia(360, slot("/assets/images/axisforce-medical-billing-hero.webp", "Revenue cycle dashboard on a monitor next to a stethoscope and an AxisForce-branded mug", "", "", "")) +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">What We Handle</div>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0 0 14px; color: #0c1220;">Your Revenue Cycle, Fully Managed</h2>' +
+      '</div>' +
+      '<div class="grid-handled" style="display: grid; gap: 18px;">' + handledCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">' +
+      '<div style="border-radius: 14px; overflow: hidden; height: 280px; position: relative;">' +
+        slot("/assets/images/axisforce-medical-billing-process.webp", "Revenue cycle overview dashboard showing collections and claim status", "", "", "") +
+      '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Billing Process</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">Our Billing Process</h2>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #aeb8cd; margin: 0 0 8px; max-width: 46ch;">From patient to payment, here is how we manage every claim.</p>' +
+        processRows +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 640px; margin: 0 auto; text-align: center;">' +
+      '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Pricing</div>' +
+      '<h2 style="font-size: 34px; font-weight: 800; margin: 0 0 32px; color: #0c1220;">Simple, Performance-Based Pricing</h2>' +
+      '<div class="card-hover" style="background: #fff; border: 1px solid #1e5fe0; border-radius: 16px; padding: 40px 36px; box-shadow: 0 2px 10px rgba(19,26,40,0.05);">' +
+        '<div style="font-size: 56px; font-weight: 800; line-height: 1; color: #1e5fe0;">3%</div>' +
+        '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #62708a; margin: 8px 0 20px;">of Collections</div>' +
+        '<p style="font-size: 16px; line-height: 1.6; color: #34415c; margin: 0 0 24px;">You pay 3% of the insurance and patient payments we collect on your behalf.</p>' +
+        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; text-align: left; margin-bottom: 28px;">' +
+          ["No long-term contract", "Transparent monthly reporting", "Billing support included", "Pricing aligned with collections"].map(t =>
+            '<div style="font-size: 14.5px; line-height: 1.4; color: #34415c; border-left: 2px solid #9db4dd; padding-left: 10px;">' + t + "</div>").join("") +
+        '</div>' +
+        btnPrimary("Get Free Billing Consultation &nbsp;→", "contact", "14px 24px", "15.5px", false) +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 0 32px 84px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto; border-top: 1px solid #dbe3f0; padding-top: 56px;">' +
+      '<div style="text-align: center; margin-bottom: 44px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Why AxisForce</div>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0; color: #0c1220;">A Billing Partner Focused on Getting You Paid</h2>' +
+      '</div>' +
+      '<div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">' + whyCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
 function contactPage() {
   const rows = contactRows.map(c =>
     '<div style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid #dbe3f0;">' +
@@ -1423,7 +1548,8 @@ const PAGE_META = {
   privacy: { title: "Privacy Policy | AxisForce", desc: "Read the AxisForce Privacy Policy covering how we collect, use and protect information submitted through axisforce.net." },
   terms: { title: "Terms of Service | AxisForce", desc: "Terms of Service governing use of the axisforce.net website." },
   "managed-it": { title: "Managed IT Support in Houston, TX | AxisForce", desc: "AxisForce provides managed IT support for Houston businesses — unlimited remote help, monitoring, backups and device management from one accountable technology partner." },
-  "ai-automation": { title: "AI & Business Automation in Houston, TX | AxisForce", desc: "AxisForce builds custom AI agents and workflow automation for Houston businesses — reducing repetitive work, connecting systems and improving day-to-day operations." }
+  "ai-automation": { title: "AI & Business Automation in Houston, TX | AxisForce", desc: "AxisForce builds custom AI agents and workflow automation for Houston businesses — reducing repetitive work, connecting systems and improving day-to-day operations." },
+  "medical-billing": { title: "Medical Billing Services in Houston, TX | AxisForce", desc: "AxisForce provides end-to-end medical billing and revenue cycle management for Houston healthcare practices — 3% of collections, no long-term contract." }
 };
 
 function updateMeta() {
@@ -1448,6 +1574,7 @@ function render() {
   if (svc) body = svcPage(svc);
   else if (p === "managed-it") body = managedITPage();
   else if (p === "ai-automation") body = aiAutomationPage();
+  else if (p === "medical-billing") body = medicalBillingPage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
