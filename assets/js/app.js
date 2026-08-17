@@ -132,10 +132,10 @@ const services = [
     items: ["Eligibility verification", "Charge entry & claim submission", "Payment posting", "Denial management", "A/R follow-up", "Monthly reporting"] },
   { no: "04", name: "Medical Billing Software", meta: "Starting at $250 / month", group: "Automation & Software", cta: "Explore Billing Software",
     problem: "Legacy billing systems are slow, overpriced and built for hospital groups — not independent practices.",
-    long: "A cloud-hosted platform: patient management, insurance, claims, documents, reporting and role-based access — on an AI-ready, HIPAA-ready architecture.",
+    long: "A cloud-hosted platform: patient management, insurance, claims, documents, reporting and role-based access — on an AI-ready, healthcare-focused architecture.",
     outcome: "One modern system your front desk and biller actually like using.",
     whoFor: "Independent medical practices running their own billing.",
-    items: ["Patient management", "Insurance & claims", "Document management", "Reporting", "Role-based access", "HIPAA-ready architecture"] },
+    items: ["Patient management", "Insurance & claims", "Document management", "Reporting", "Role-based access", "Healthcare-focused architecture"] },
   { no: "05", name: "Security Camera Systems", meta: "Starting at $300", group: "Security", cta: "Explore Security Cameras",
     problem: "When something happens, the first question is always: did the cameras catch it?",
     long: "Commercial-grade design and installation: NVR configuration, network integration, remote viewing and ongoing maintenance — placed to answer the questions you'll actually ask.",
@@ -156,7 +156,7 @@ const services = [
     items: ["Professional website", "Local SEO", "Google Business Profile", "Analytics & lead tracking", "Maintenance & hosting", "Monthly reporting"] },
   { no: "08", name: "Custom Software", meta: "Request a Quote", group: "Automation & Software", cta: "Explore Custom Software",
     problem: "Off-the-shelf tools almost fit — so your team lives in spreadsheets and workarounds.",
-    long: "Custom internal portals, dashboards and integrations built around your actual process — like our fuel reconciliation and medical billing platforms.",
+    long: "Custom internal portals, dashboards, integrations and business applications built around your actual processes.",
     outcome: "Software shaped to your operation, owned by you.",
     whoFor: "Businesses with a process worth automating properly.",
     items: ["Internal portals", "Dashboards & reporting", "System integrations", "Process automation", "Cloud hosting", "Ongoing support"] },
@@ -654,14 +654,13 @@ function homePage() {
 
 function servicesPage() {
   const rows = services.map(s =>
-    '<div class="svc-row" style="display: grid; grid-template-columns: 72px 1fr 1.1fr; gap: 48px; padding: 44px 0; border-bottom: 1px solid #dbe3f0; align-items: start;">' +
-      '<div style="font-size: 32px; font-weight: 800; color: #9db4dd; line-height: 1;">' + s.no + '</div>' +
+    '<div class="svc-row" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; padding: 44px 0; border-bottom: 1px solid #dbe3f0; align-items: start;">' +
       '<div>' +
         '<h2 style="font-size: 28px; font-weight: 800; margin: 0 0 10px; line-height: 1.1; color: #0c1220;">' + s.name + '</h2>' +
         '<p style="font-size: 15.5px; line-height: 1.6; color: #46536b; margin: 0 0 14px;">' + s.long + '</p>' +
         '<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">' +
           '<span style="padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; background: #e8edf6; color: #34415c;">' + s.meta + '</span>' +
-          '<span class="go-link" style="font-size: 14px; font-weight: 700; color: #1e5fe0;" onclick="nav(\'svc:' + s.no + '\')">' + s.cta + ' &nbsp;→</span>' +
+          '<span style="font-size: 14px; font-weight: 700; color: #1e5fe0; cursor: default;">' + s.cta + ' &nbsp;→</span>' +
         '</div>' +
       '</div>' +
       '<div>' +
