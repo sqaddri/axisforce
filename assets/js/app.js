@@ -797,7 +797,7 @@ function aboutPage() {
           factRows +
         '</div>' +
       '</div>' +
-      '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 28px; color: #0c1220;">How we work</h2>' +
+      '<h2 style="font-size: 32px; font-weight: 800; margin: 80px 0 28px; scroll-margin-top: 96px; color: #0c1220;">How we work</h2>' +
       '<div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;">' + prCards + '</div>' +
     '</div>' +
   '</section>' +
