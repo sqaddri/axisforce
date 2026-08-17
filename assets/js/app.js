@@ -813,7 +813,7 @@ const managedItHandled = [
   { name: "Monitoring & Patching", body: "Proactive system monitoring and regular security patching.", icon: I.chart },
   { name: "Backups & Recovery", body: "Backup systems in place so your data is protected and recoverable.", icon: I.clock },
   { name: "Network & Wi-Fi Support", body: "Keeping your connectivity fast, stable and secure.", icon: I.wifi },
-  { name: "Security Assistance", body: "Guidance and support to help keep your systems and data protected.", icon: I.shield },
+  { name: "IT Security Support", body: "Guidance and support to help keep your systems and data protected.", icon: I.shield },
   { name: "Vendor Coordination", body: "We work directly with your software and hardware vendors so you don't have to.", icon: I.briefcase },
   { name: "Employee Onboarding & Offboarding", body: "Accounts, access and devices set up and retired properly, every time.", icon: I.growth }
 ];
