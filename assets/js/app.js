@@ -657,7 +657,7 @@ function servicesPage() {
     '<div class="svc-row" style="display: grid; grid-template-columns: 72px 1fr 1.1fr; gap: 48px; padding: 44px 0; border-bottom: 1px solid #dbe3f0; align-items: start;">' +
       '<div style="font-size: 32px; font-weight: 800; color: #9db4dd; line-height: 1;">' + s.no + '</div>' +
       '<div>' +
-        '<h2 class="svc-title" style="font-size: 28px; font-weight: 800; margin: 0 0 10px; line-height: 1.1; color: #0c1220;" onclick="nav(\'svc:' + s.no + '\')">' + s.name + '</h2>' +
+        '<h2 style="font-size: 28px; font-weight: 800; margin: 0 0 10px; line-height: 1.1; color: #0c1220;">' + s.name + '</h2>' +
         '<p style="font-size: 15.5px; line-height: 1.6; color: #46536b; margin: 0 0 14px;">' + s.long + '</p>' +
         '<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">' +
           '<span style="padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; background: #e8edf6; color: #34415c;">' + s.meta + '</span>' +
