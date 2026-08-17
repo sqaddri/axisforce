@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -112,7 +112,7 @@ const svcImgs = {
 };
 
 const services = [
-  { no: "01", name: "Managed IT Support", meta: "Starting at $399 / month", group: "Technology Operations", cta: "Explore Managed IT",
+  { no: "01", name: "Managed IT Support", meta: "Starting at $399 / month", group: "Technology Operations", cta: "Explore Managed IT", page: "managed-it",
     problem: "Downtime, security gaps and “the computer guy is unreachable” cost real money.",
     long: "We become your IT department: unlimited remote support, monitoring, patching, backups, Microsoft 365, networking and device management — with every vendor coordinated for you.",
     outcome: "Reduce downtime, secure your systems, and give your employees technology that just works.",
@@ -660,7 +660,9 @@ function servicesPage() {
         '<p style="font-size: 15.5px; line-height: 1.6; color: #46536b; margin: 0 0 14px;">' + s.long + '</p>' +
         '<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">' +
           '<span style="padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; background: #e8edf6; color: #34415c;">' + s.meta + '</span>' +
-          '<span style="font-size: 14px; font-weight: 700; color: #1e5fe0; cursor: default;">' + s.cta + ' &nbsp;→</span>' +
+          (s.page ?
+            '<span class="go-link" style="font-size: 14px; font-weight: 700; color: #1e5fe0;" onclick="nav(\'' + s.page + '\')">' + s.cta + ' &nbsp;→</span>' :
+            '<span style="font-size: 14px; font-weight: 700; color: #1e5fe0; cursor: default;">' + s.cta + ' &nbsp;→</span>') +
         '</div>' +
       '</div>' +
       '<div>' +
@@ -798,6 +800,135 @@ function aboutPage() {
       '</div>' +
       '<h2 style="font-size: 32px; font-weight: 800; margin: 80px 0 28px; scroll-margin-top: 96px; color: #0c1220;">How we work</h2>' +
       '<div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;">' + prCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
+const managedItHandled = [
+  { name: "Unlimited Remote IT Support", body: "Ongoing help desk support for your team, whenever something isn't working.", icon: I.headset },
+  { name: "Computer & Software Troubleshooting", body: "Fast diagnosis and fixes for day-to-day technology issues.", icon: I.code },
+  { name: "Microsoft 365 Support", body: "Setup, management and troubleshooting across your Microsoft 365 environment.", icon: I.globe },
+  { name: "User & Device Management", body: "Provisioning, permissions and device oversight for your whole team.", icon: I.users },
+  { name: "Monitoring & Patching", body: "Proactive system monitoring and regular security patching.", icon: I.chart },
+  { name: "Backups & Recovery", body: "Backup systems in place so your data is protected and recoverable.", icon: I.clock },
+  { name: "Network & Wi-Fi Support", body: "Keeping your connectivity fast, stable and secure.", icon: I.wifi },
+  { name: "Security Assistance", body: "Guidance and support to help keep your systems and data protected.", icon: I.shield },
+  { name: "Vendor Coordination", body: "We work directly with your software and hardware vendors so you don't have to.", icon: I.briefcase },
+  { name: "Employee Onboarding & Offboarding", body: "Accounts, access and devices set up and retired properly, every time.", icon: I.growth }
+];
+
+const managedItPlanning = [
+  { no: "01", name: "Proactive Monitoring", detail: "We watch for issues before they turn into downtime, not after." },
+  { no: "02", name: "Infrastructure Management", detail: "Networks, servers and cloud systems kept current, documented and reliable." },
+  { no: "03", name: "Security & Data Protection", detail: "Practical safeguards to help protect your systems and business data." },
+  { no: "04", name: "Long-Term IT Planning", detail: "A technology roadmap that grows with your business, not just a break-fix relationship." }
+];
+
+const managedItPricing = [
+  { name: "Essential", price: "$399", unit: "per month", body: "Up to 3 users. Unlimited remote help, monitoring and patching for small teams getting started with managed IT.", featured: false },
+  { name: "Professional", price: "$750", unit: "per month", body: "Up to 10 users. Unlimited remote help plus proactive monitoring, backups and vendor coordination as your team grows.", featured: true },
+  { name: "Advanced", price: "$1,500", unit: "per month", body: "Up to 25 users. Full managed IT coverage — unlimited remote help, monitoring, backups, network support and device management.", featured: false },
+  { name: "Enterprise", price: "Starting at $2,500", unit: "per month", body: "25+ users or custom scope. Designed for larger organizations, multi-location businesses, clinics and healthcare organizations.", featured: false }
+];
+
+const managedItWhy = [
+  { name: "One Technology Partner", body: "IT, networking, software and vendors — coordinated by one accountable team instead of juggled across several." },
+  { name: "Responsive Support", body: "Real people who know your systems, ready to help when something isn't working." },
+  { name: "Predictable Pricing", body: "Flat monthly plans with no surprise invoices." },
+  { name: "Documentation", body: "Clear records of your systems and configurations, so nothing lives only in someone's head." },
+  { name: "Security-Minded Practices", body: "Sensible safeguards built into how we manage your systems day to day." },
+  { name: "Scalable Support", body: "Plans that grow with your team, from a handful of users to a full organization." }
+];
+
+function managedITPage() {
+  const trust = ['Unlimited Remote Help', 'Houston-Based', 'No Long-Term Contracts'].map((label, i) =>
+    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14.5px; font-weight: 600; color: #cfd8ea; padding: 0 18px; border-left: 1px solid ' +
+    (i === 0 ? "transparent" : "rgba(255,255,255,0.12)") + ';">' + icon([I.headset, I.pin, I.shield][i], 18, "#2f7bff") + label + "</div>").join("");
+
+  const handledCards = managedItHandled.map(h =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 26px 24px;">' +
+      '<div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 16px;">' +
+        icon(h.icon, 22, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 17px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + h.name + '</div>' +
+      '<div style="font-size: 14px; line-height: 1.5; color: #46536b;">' + h.body + '</div>' +
+    '</div>').join("");
+
+  const planningRows = managedItPlanning.map(f =>
+    '<div style="display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px dashed rgba(124,174,255,0.25);">' +
+      '<span style="color: #4d8dff; font-weight: 700; font-size: 15px;">' + f.no + '</span>' +
+      '<div><div style="font-size: 17px; font-weight: 700;">' + f.name + '</div>' +
+      '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + f.detail + '</div></div>' +
+    '</div>').join("");
+
+  const pricingCards = managedItPricing.map(t =>
+    '<div class="card-hover" style="background: #fff; border: 1px solid ' + (t.featured ? "#1e5fe0" : "#dbe3f0") + '; border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; box-shadow: 0 2px 10px rgba(19,26,40,0.05); position: relative;">' +
+      (t.featured ? '<div style="position: absolute; top: -12px; left: 26px; background: linear-gradient(180deg, #3f87ff, #1e5fe0); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px;">Most Common</div>' : "") +
+      '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #1e5fe0;">' + t.name + '</div>' +
+      '<div style="font-size: 28px; font-weight: 800; line-height: 1.1; margin: 12px 0 4px; color: #0c1220;">' + t.price + '</div>' +
+      '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #62708a; margin-bottom: 14px;">' + t.unit + '</div>' +
+      '<div style="font-size: 14.5px; line-height: 1.55; color: #46536b; margin-bottom: 18px;">' + t.body + '</div>' +
+      '<div style="margin-top: auto;">' + btnPrimary("Get Free Consultation", "contact", "12px 18px", "14.5px", false) + '</div>' +
+    '</div>').join("");
+
+  const whyCards = managedItWhy.map(w =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 26px;">' +
+      '<div style="font-size: 18px; font-weight: 700; color: #0c1220; margin-bottom: 8px;">' + w.name + '</div>' +
+      '<div style="font-size: 14.5px; line-height: 1.55; color: #46536b;">' + w.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 88px; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr); gap: 48px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Managed IT Support</div>' +
+        '<h1 style="font-size: 48px; font-weight: 800; line-height: 1.06; margin: 0 0 18px;">Your IT Department.<br>Without the Overhead.</h1>' +
+        '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 54ch;">AxisForce becomes the technology team behind your business — proactive support, monitoring and <strong style="color: #eef2fa;">unlimited remote help</strong> so your team can stop worrying about IT and focus on the work that matters.</p>' +
+        '<div style="margin-bottom: 30px;">' + btnPrimary("Get Free Consultation &nbsp;→", "contact", "15px 26px", "16px") + '</div>' +
+        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + trust + '</div>' +
+      '</div>' +
+      heroMedia(360, slot("/assets/images/axisforce-managed-it-hero.webp", "AxisForce managed IT dashboard on a laptop with the AxisForce logo displayed on an office monitor in the background", "", "", "")) +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">What We Handle</div>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0 0 14px; color: #0c1220;">Everyday IT, Fully Covered</h2>' +
+        '<p style="font-size: 16.5px; color: #46536b; max-width: 62ch; margin: 0 auto; line-height: 1.6;">From the help desk to the network closet, here is everything included when AxisForce becomes your IT department.</p>' +
+      '</div>' +
+      '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px;">' + handledCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">' +
+      '<div style="border-radius: 14px; overflow: hidden; height: 420px; position: relative;">' +
+        slot("/assets/images/axisforce-managed-it-team.webp", "AxisForce technician monitoring client systems across multiple screens", "", "", "") +
+      '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Technology Partner</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">More Than a Help Desk.</h2>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #aeb8cd; margin: 0 0 8px; max-width: 46ch;">Managed IT with AxisForce goes beyond fixing what breaks — it is a long-term technology partnership built around your business.</p>' +
+        planningRows +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 44px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Pricing</div>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0; color: #0c1220;">Simple, Transparent Plans</h2>' +
+      '</div>' +
+      '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px;">' + pricingCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 0 32px 84px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto; border-top: 1px solid #dbe3f0; padding-top: 56px;">' +
+      '<div style="text-align: center; margin-bottom: 44px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Why AxisForce</div>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0; color: #0c1220;">A Technology Partner You Can Count On</h2>' +
+      '</div>' +
+      '<div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">' + whyCards + '</div>' +
     '</div>' +
   '</section>' +
   '</main>';
@@ -1174,7 +1305,8 @@ const PAGE_META = {
   pricing: { title: "Pricing | AxisForce Technology Services", desc: "Starting prices for AxisForce's managed IT, security, networking, billing and marketing services — published so you know what to expect before you call." },
   contact: { title: "Contact AxisForce | Houston, TX", desc: "Get in touch with AxisForce for a free consultation on managed IT, security, networking, billing or marketing services in the Houston area." },
   privacy: { title: "Privacy Policy | AxisForce", desc: "Read the AxisForce Privacy Policy covering how we collect, use and protect information submitted through axisforce.net." },
-  terms: { title: "Terms of Service | AxisForce", desc: "Terms of Service governing use of the axisforce.net website." }
+  terms: { title: "Terms of Service | AxisForce", desc: "Terms of Service governing use of the axisforce.net website." },
+  "managed-it": { title: "Managed IT Support in Houston, TX | AxisForce", desc: "AxisForce provides managed IT support for Houston businesses — unlimited remote help, monitoring, backups and device management from one accountable technology partner." }
 };
 
 function updateMeta() {
@@ -1197,6 +1329,7 @@ function render() {
 
   let body;
   if (svc) body = svcPage(svc);
+  else if (p === "managed-it") body = managedITPage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
