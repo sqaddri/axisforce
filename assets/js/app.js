@@ -160,12 +160,12 @@ const services = [
     outcome: "Software shaped to your operation, owned by you.",
     whoFor: "Businesses with a process worth automating properly.",
     items: ["Internal portals", "Dashboards & reporting", "System integrations", "Process automation", "Cloud hosting", "Ongoing support"] },
-  { no: "09", name: "Salesforce Solutions", meta: "Request a Quote", group: "Automation & Software",
-    problem: "Off-the-shelf CRM setups rarely match how your team actually sells, services or tracks work.",
-    long: "Salesforce configuration, automation, custom development and integrations built around your business workflows.",
-    outcome: "A CRM that fits your process instead of forcing your team to work around it.",
-    whoFor: "Businesses running or adopting Salesforce that need it configured, automated or connected to other systems.",
-    items: ["Org configuration", "Workflow & process automation", "Custom objects & development", "Third-party integrations", "Data migration & cleanup", "Ongoing admin support"] }
+  { no: "09", name: "CRM & Business Intelligence", meta: "Request a Quote", group: "Automation & Software",
+    problem: "Customer data lives in spreadsheets and inboxes instead of a system your team can actually use to sell, service and report.",
+    long: "CRM implementation, automation, integrations, dashboards and reporting solutions built around your business.",
+    outcome: "A CRM and reporting setup that fits how your team actually works — with real visibility into what's happening.",
+    whoFor: "Businesses running or adopting a CRM — Salesforce, Dynamics 365, HubSpot or a practice-management platform — that need it configured, connected or turned into usable reporting.",
+    items: ["Salesforce & Dynamics 365", "HubSpot & other CRM platforms", "Healthcare/practice-management CRM", "CRM customization & integrations", "Data migration", "Power BI, dashboards & reporting"] }
 ];
 services.forEach(s => {
   const [src, credit, creditHref, fallback] = svcImgs[s.no];
@@ -200,7 +200,7 @@ const homeServices = [
   { name: "Security Camera Systems", body: "Commercial-grade cameras installed, integrated and reviewable from your phone.", icon: I.camera, no: "05" },
   { name: "Network & Wi-Fi Solutions", body: "Structured cabling, firewalls and segmented Wi-Fi that carry payments and phones without drama.", icon: I.wifi, no: "06" },
   { name: "Websites & Marketing", body: "Get found first on Google — websites, local SEO and lead generation measured against booked work.", icon: I.globe, no: "07" },
-  { name: "Salesforce Solutions", body: "Salesforce configuration, automation, custom development and integrations built around your business workflows.", icon: I.chart, no: "09" },
+  { name: "CRM & Business Intelligence", body: "CRM implementation, automation, integrations, dashboards and reporting solutions built around your business.", icon: I.chart, no: "09" },
   { name: "Custom Software", body: "Custom web applications, internal portals and business systems designed around your operations.", icon: I.code, no: "08" }
 ];
 
@@ -361,7 +361,7 @@ const footerCols = [
     { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "svc:02" },
     { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "svc:04" },
     { label: "Security Cameras", go: "svc:05" }, { label: "Network & Wi-Fi", go: "svc:06" },
-    { label: "Websites & Marketing", go: "svc:07" }, { label: "Salesforce Solutions", go: "svc:09" },
+    { label: "Websites & Marketing", go: "svc:07" }, { label: "CRM & Business Intelligence", go: "svc:09" },
     { label: "Custom Software", go: "svc:08" } ] },
   { title: "Company", links: [
     { label: "About", go: "about" }, { label: "Industries", go: "industries" }, { label: "Pricing", go: "pricing" },
