@@ -829,7 +829,7 @@ const managedItPricing = [
   { name: "Essential", price: "$399", unit: "per month", body: "Up to 3 users. Unlimited remote help, monitoring and patching for small teams getting started with managed IT.", featured: false },
   { name: "Professional", price: "$750", unit: "per month", body: "Up to 10 users. Unlimited remote help plus proactive monitoring, backups and vendor coordination as your team grows.", featured: true },
   { name: "Advanced", price: "$1,500", unit: "per month", body: "Up to 25 users. Full managed IT coverage — unlimited remote help, monitoring, backups, network support and device management.", featured: false },
-  { name: "Enterprise", price: "Starting at $2,500", unit: "per month", body: "25+ users or custom scope. Designed for larger organizations, multi-location businesses, clinics and healthcare organizations.", featured: false }
+  { name: "Enterprise", price: "Starting at $2,500", unit: "per month", body: "25+ users or custom scope. Unlimited remote help, scaled for larger organizations, multi-location businesses, clinics and healthcare organizations.", featured: false }
 ];
 
 const managedItWhy = [
@@ -897,7 +897,7 @@ function managedITPage() {
         '<h2 style="font-size: 38px; font-weight: 800; margin: 0 0 14px; color: #0c1220;">Everyday IT, Fully Covered</h2>' +
         '<p style="font-size: 16.5px; color: #46536b; max-width: 62ch; margin: 0 auto; line-height: 1.6;">From the help desk to the network closet, here is everything included when AxisForce becomes your IT department.</p>' +
       '</div>' +
-      '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px;">' + handledCards + '</div>' +
+      '<div class="grid-handled" style="display: grid; gap: 18px;">' + handledCards + '</div>' +
     '</div>' +
   '</section>' +
   '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
