@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -118,7 +118,7 @@ const services = [
     outcome: "Reduce downtime, secure your systems, and give your employees technology that just works.",
     whoFor: "Businesses of 5–50 staff that need accountable IT without hiring internally.",
     items: ["Unlimited remote support", "Monitoring & patching", "Backups & recovery", "Microsoft 365 management", "Networking & device management", "Vendor coordination"] },
-  { no: "02", name: "AI & Business Automation", meta: "Request a Quote", group: "Automation & Software", cta: "Explore AI Automation",
+  { no: "02", name: "AI & Business Automation", meta: "Request a Quote", group: "Automation & Software", cta: "Explore AI Automation", page: "ai-automation",
     problem: "Your team spends hours every week on intake, follow-up and reporting a machine could do.",
     long: "Custom AI agents, voice AI, workflow automation, document processing, CRM automation and reporting dashboards — scoped small, proven on one process, then extended.",
     outcome: "Hours of repetitive admin removed weekly, with a human in the loop where judgment matters.",
@@ -357,7 +357,7 @@ const docs = [
 
 const footerCols = [
   { title: "Services", links: [
-    { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "svc:02" },
+    { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "ai-automation" },
     { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "svc:04" },
     { label: "Security Cameras", go: "svc:05" }, { label: "Network & Wi-Fi", go: "svc:06" },
     { label: "Websites & Marketing", go: "svc:07" }, { label: "CRM & Business Intelligence", go: "svc:09" },
@@ -934,6 +934,122 @@ function managedITPage() {
   '</main>';
 }
 
+const aiAutomationHandled = [
+  { name: "Custom AI Agents", body: "AI agents built around your specific workflows and business processes.", icon: I.bot },
+  { name: "Voice AI", body: "AI-powered voice handling for calls, intake and routine conversations.", icon: I.headset },
+  { name: "Workflow Automation", body: "Multi-step processes automated from trigger to completion.", icon: I.code },
+  { name: "Customer Support Automation", body: "Automated responses and routing that keep customers moving without waiting.", icon: I.users },
+  { name: "Lead Follow-Up & Appointment Automation", body: "Automated follow-ups, reminders and scheduling that do not fall through the cracks.", icon: I.clock },
+  { name: "Document Processing", body: "Extracting, organizing and summarizing documents automatically.", icon: I.billing },
+  { name: "CRM Automation", body: "Records updated and interactions tracked without manual data entry.", icon: I.chart },
+  { name: "Email & Communication Automation", body: "Automated replies, routing and follow-up across email and messaging.", icon: I.globe },
+  { name: "Reporting & Dashboards", body: "Real-time visibility into what is automated and what it is saving you.", icon: I.growth },
+  { name: "System Integrations", body: "Connecting the tools you already use so data moves automatically between them.", icon: I.wifi }
+];
+
+const aiAutomationProcess = [
+  { no: "01", name: "Discover", detail: "We understand your business, processes and pain points." },
+  { no: "02", name: "Automate", detail: "We build custom workflows and AI-powered solutions." },
+  { no: "03", name: "Integrate", detail: "We connect your tools, systems and data seamlessly." },
+  { no: "04", name: "Improve", detail: "We monitor performance and continuously optimize." }
+];
+
+const aiAutomationWhy = [
+  { name: "Practical, Not Hype", body: "We build automation that solves real problems, not automation for its own sake." },
+  { name: "Custom-Built", body: "Every automation is scoped around how your business actually works." },
+  { name: "Integrates With What You Have", body: "We connect to your existing tools instead of asking you to replace them." },
+  { name: "Measurable Improvements", body: "Automation scoped and measured against the time and cost it actually saves." },
+  { name: "Human Oversight", body: "AI handles the repetitive work while your team stays in control of judgment calls." },
+  { name: "Ongoing Support", body: "We monitor, adjust and improve your automation as your business changes." }
+];
+
+function aiAutomationPage() {
+  const trust = ['AI Agents', 'Workflow Automation', 'Voice AI', 'Smart Integrations'].map((label, i) =>
+    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14.5px; font-weight: 600; color: #cfd8ea; padding: 0 18px; border-left: 1px solid ' +
+    (i === 0 ? "transparent" : "rgba(255,255,255,0.12)") + ';">' + icon([I.bot, I.code, I.headset, I.wifi][i], 18, "#2f7bff") + label + "</div>").join("");
+
+  const handledCards = aiAutomationHandled.map(h =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 26px 24px;">' +
+      '<div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 16px;">' +
+        icon(h.icon, 22, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 17px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + h.name + '</div>' +
+      '<div style="font-size: 14px; line-height: 1.5; color: #46536b;">' + h.body + '</div>' +
+    '</div>').join("");
+
+  const processRows = aiAutomationProcess.map(f =>
+    '<div style="display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px dashed rgba(124,174,255,0.25);">' +
+      '<span style="color: #4d8dff; font-weight: 700; font-size: 15px;">' + f.no + '</span>' +
+      '<div><div style="font-size: 17px; font-weight: 700;">' + f.name + '</div>' +
+      '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + f.detail + '</div></div>' +
+    '</div>').join("");
+
+  const whyCards = aiAutomationWhy.map(w =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 26px;">' +
+      '<div style="font-size: 18px; font-weight: 700; color: #0c1220; margin-bottom: 8px;">' + w.name + '</div>' +
+      '<div style="font-size: 14.5px; line-height: 1.55; color: #46536b;">' + w.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 88px; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr); gap: 48px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">AI &amp; Business Automation</div>' +
+        '<h1 style="font-size: 44px; font-weight: 800; line-height: 1.08; margin: 0 0 18px;">Automate the Work That Slows Your Business Down.</h1>' +
+        '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 54ch;">AxisForce builds custom AI agents and automation that reduce repetitive work, connect your systems and improve day-to-day operations — scoped to your business, not a generic template.</p>' +
+        '<div style="margin-bottom: 30px;">' + btnPrimary("Get Free AI Consultation &nbsp;→", "contact", "15px 26px", "16px") + '</div>' +
+        '<div style="display: flex; align-items: center; flex-wrap: wrap; row-gap: 12px;">' + trust + '</div>' +
+      '</div>' +
+      heroMedia(360, slot("/assets/images/axisforce-ai-automation-hero.webp", "Laptop showing an automation dashboard on a desk with an AxisForce-branded mug", "", "", "")) +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">What We Automate</div>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0 0 14px; color: #0c1220;">Real Work, Handled Automatically</h2>' +
+        '<p style="font-size: 16.5px; color: #46536b; max-width: 62ch; margin: 0 auto; line-height: 1.6;">From the first customer touchpoint to the reporting at the end of the month, here is where automation can take the repetitive work off your plate.</p>' +
+      '</div>' +
+      '<div class="grid-handled" style="display: grid; gap: 18px;">' + handledCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">' +
+      '<div style="border-radius: 14px; overflow: hidden; height: 420px; position: relative;">' +
+        slot("/assets/images/axisforce-ai-automation-process.webp", "AxisForce team member reviewing automation performance dashboards across multiple screens", "", "", "") +
+      '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Our Process</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">A Practical Path to Automation.</h2>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #aeb8cd; margin: 0 0 8px; max-width: 46ch;">We start with the problem your business actually has, then build the automation around it — not the other way around.</p>' +
+        processRows +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 76px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
+      '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
+      '<div>' +
+        '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">No Two Businesses Automate the Same Way</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; line-height: 1.1; letter-spacing: -0.01em;">Let’s Find What You Can Automate.</h2>' +
+      '</div>' +
+      '<div>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">AI automation varies by project, so we do not publish fixed packages here. Tell us what is eating your team’s time and we will scope what is realistic to automate first.</p>' +
+        btnPrimary("Get Free AI Consultation &nbsp;→", "contact", "15px 26px", "16px") +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 0 32px 84px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto; border-top: 1px solid #dbe3f0; padding-top: 56px;">' +
+      '<div style="text-align: center; margin-bottom: 44px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Why AxisForce</div>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0; color: #0c1220;">Automation Built Around Your Business</h2>' +
+      '</div>' +
+      '<div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">' + whyCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
 function contactPage() {
   const rows = contactRows.map(c =>
     '<div style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid #dbe3f0;">' +
@@ -1306,7 +1422,8 @@ const PAGE_META = {
   contact: { title: "Contact AxisForce | Houston, TX", desc: "Get in touch with AxisForce for a free consultation on managed IT, security, networking, billing or marketing services in the Houston area." },
   privacy: { title: "Privacy Policy | AxisForce", desc: "Read the AxisForce Privacy Policy covering how we collect, use and protect information submitted through axisforce.net." },
   terms: { title: "Terms of Service | AxisForce", desc: "Terms of Service governing use of the axisforce.net website." },
-  "managed-it": { title: "Managed IT Support in Houston, TX | AxisForce", desc: "AxisForce provides managed IT support for Houston businesses — unlimited remote help, monitoring, backups and device management from one accountable technology partner." }
+  "managed-it": { title: "Managed IT Support in Houston, TX | AxisForce", desc: "AxisForce provides managed IT support for Houston businesses — unlimited remote help, monitoring, backups and device management from one accountable technology partner." },
+  "ai-automation": { title: "AI & Business Automation in Houston, TX | AxisForce", desc: "AxisForce builds custom AI agents and workflow automation for Houston businesses — reducing repetitive work, connecting systems and improving day-to-day operations." }
 };
 
 function updateMeta() {
@@ -1330,6 +1447,7 @@ function render() {
   let body;
   if (svc) body = svcPage(svc);
   else if (p === "managed-it") body = managedITPage();
+  else if (p === "ai-automation") body = aiAutomationPage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
