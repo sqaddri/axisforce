@@ -285,19 +285,18 @@ const industries = [
 ];
 
 const facts = [
-  { k: "Founded", v: "2024" },
-  { k: "Based", v: "Houston, TX — serving Greater Houston" },
-  { k: "Active clients", v: "Confirm number" },
-  { k: "Primary vertical", v: "Independent medical practices" },
-  { k: "Certifications", v: "List credentials here" },
-  { k: "Insurance", v: "General liability + E&O" },
-  { k: "Response target", v: "Same business day, 1 hr for down" }
+  { k: "Company", v: "AxisForce Inc." },
+  { k: "Based", v: "Houston, Texas" },
+  { k: "Service Area", v: "Greater Houston + Remote Support" },
+  { k: "Focus", v: "Business Technology Solutions" },
+  { k: "Support", v: "On-Site & Remote" },
+  { k: "Engagement", v: "Month-to-Month Options Available" }
 ];
 
 const principles = [
-  { name: "Documented, not improvised", body: "Every network we touch gets an as-built diagram and a credential record you own. If you fire us, you keep everything." },
-  { name: "Fix the risk first", body: "Backups, patching and access control before anything shiny. We will tell you when a project should wait." },
-  { name: "One throat to choke", body: "We coordinate with your EHR, ISP, and equipment vendors so you are not the one relaying messages." }
+  { name: "Document Everything", body: "We keep your systems organized with clear documentation, configurations and records so your business is not dependent on guesswork." },
+  { name: "Fix What Matters First", body: "We prioritize security, reliability and business-critical issues first, then build a practical roadmap for improvements." },
+  { name: "One Technology Partner", body: "From IT and networking to software, automation and vendors, we help coordinate the technology behind your business so you have one team to call." }
 ];
 
 const contactRows = [
@@ -780,23 +779,22 @@ function aboutPage() {
 
   return '<main>' +
   pageHero("About Us",
-    "A Houston shop that answers the phone.",
-    "AxisForce builds and runs the technology a small operation depends on — the network, the endpoints, the cameras, the compliance paperwork, and the systems that get you paid.",
-    heroMedia(300, slot("https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1400&q=80", "The team at work", "Photo by Amy Hirschi on Unsplash", "https://unsplash.com/@amyhirschi", ""))) +
+    "Houston-Based Technology.<br>Built Around Your Business.",
+    "AxisForce helps businesses build, secure, automate and support the technology they depend on — from IT infrastructure and security to business software, medical billing technology and digital growth.",
+    heroMedia(300, slot("/assets/images/axisforce-about-hero.webp", "AxisForce technology professional working at a multi-monitor workstation in a server environment", "", "", "", "about-hero-img"))) +
   '<section style="background: #f2f5fa; color: #131a28; padding: 56px 32px 72px;">' +
     '<div style="max-width: 1280px; margin: 0 auto;">' +
       '<div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-bottom: 56px;">' +
         '<div>' +
-          '<p style="font-size: 17px; line-height: 1.65; color: #34415c; margin: 0 0 18px;">We work with a deliberately small book of clients so the person who scoped your project is the person who picks up. Today that means medical practices, with restaurants, law firms, retail and fuel stations coming online.</p>' +
-          '<p style="font-size: 17px; line-height: 1.65; color: #34415c; margin: 0 0 28px;">Both are businesses where an hour of downtime is measured in real dollars.</p>' +
+          '<p style="font-size: 17px; line-height: 1.65; color: #34415c; margin: 0 0 18px;">AxisForce is a Houston-based technology company helping businesses simplify the systems behind their operations. We bring IT support, security, automation, software, business intelligence and digital solutions together under one technology partner.</p>' +
+          '<p style="font-size: 17px; line-height: 1.65; color: #34415c; margin: 0 0 28px;">Our approach is practical: understand how the business operates, identify what is slowing it down or creating risk, and build the right solution around it. Whether that means supporting an existing environment or developing something new, our focus is technology that produces measurable business value.</p>' +
           '<div style="border: 1px solid #dbe3f0; border-radius: 12px; overflow: hidden; height: 280px; position: relative; background: #fff;">' +
-            slot("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80", "The AxisForce team", "Photo by Marvin Meyer on Unsplash", "https://unsplash.com/@marvelous", "") +
+            slot("/assets/images/axisforce-about-secondary.webp", "Laptop, tablet and AxisForce-branded notebook alongside network equipment and a security camera", "", "", "", "about-secondary-img") +
           '</div>' +
         '</div>' +
         '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 32px; align-self: start; box-shadow: 0 2px 10px rgba(19,26,40,0.05);">' +
           '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 20px;">Facts sheet</div>' +
           factRows +
-          '<div style="font-size: 13px; color: #62708a; margin-top: 14px; line-height: 1.45;">Confirm every line before launch — this block is where prospects check whether you are real.</div>' +
         '</div>' +
       '</div>' +
       '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 28px; color: #0c1220;">How we work</h2>' +
@@ -1171,7 +1169,7 @@ function svcPage(svc) {
 /* ---------- SEO metadata ---------- */
 const PAGE_META = {
   home: { title: "AxisForce — Managed IT, Security & Business Automation | Houston, TX", desc: "AxisForce is a Houston-based technology partner providing managed IT, security camera systems, networking, medical billing technology, CRM & business intelligence and digital marketing for growing businesses." },
-  about: { title: "About AxisForce | Houston, TX Technology Partner", desc: "Learn how AxisForce partners with Houston businesses to manage IT, security, networking, billing systems and growth — without the overhead of an internal team." },
+  about: { title: "About AxisForce | Houston, TX Technology Company", desc: "AxisForce is a Houston-based technology company helping businesses simplify the systems behind their operations — IT support, security, automation, software and digital growth under one technology partner." },
   services: { title: "Services | AxisForce Managed IT, Security & Automation", desc: "Explore AxisForce's technology services: managed IT support, AI & business automation, medical billing, security cameras, networking, CRM & business intelligence, custom software and digital marketing." },
   industries: { title: "Industries We Serve | AxisForce", desc: "AxisForce supports healthcare, professional services, retail & gas stations, restaurants and construction businesses with technology built for environments that can't go down." },
   pricing: { title: "Pricing | AxisForce Technology Services", desc: "Starting prices for AxisForce's managed IT, security, networking, billing and marketing services — published so you know what to expect before you call." },
