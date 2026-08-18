@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -84,7 +84,9 @@ const I = {
   code: "M8 6L2 12l6 6M16 6l6 6-6 6M14 4l-4 16",
   server: "M3 4h18v6H3V4zM3 14h18v6H3v-6zM7 7h.01M11 7h4M7 17h.01M11 17h4",
   box: "M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10",
-  check: "M4 12l5 5L20 6"
+  check: "M4 12l5 5L20 6",
+  link: "M9 17H7a5 5 0 0 1 0-10h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8",
+  search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35"
 };
 
 function icon(path, size, color, extra) {
@@ -145,7 +147,7 @@ const services = [
     outcome: "Reviewable footage of the moments that matter, from your phone.",
     whoFor: "Storefronts, practices, stations and offices that need reliable recording.",
     items: ["Professional installation", "Commercial-grade systems", "NVR configuration", "Network integration", "Remote viewing", "Maintenance"] },
-  { no: "06", name: "Network & Wi-Fi Solutions", meta: "Custom quote per site", group: "Technology Operations", cta: "Explore Network Solutions",
+  { no: "06", name: "Network & Wi-Fi Solutions", meta: "Custom quote per site", group: "Technology Operations", cta: "Explore Network Solutions", page: "network-wifi",
     problem: "Dead zones, dropped payments, and one consumer router doing a building's worth of work.",
     long: "Structured cabling, firewalls, segmented Wi-Fi and failover internet — designed for the building you actually have, and documented so you own it.",
     outcome: "Fast, secure connectivity that survives rush hour and audits alike.",
@@ -362,7 +364,7 @@ const footerCols = [
   { title: "Services", links: [
     { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "ai-automation" },
     { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "medical-billing-software" },
-    { label: "Security Cameras", go: "security-cameras" }, { label: "Network & Wi-Fi", go: "svc:06" },
+    { label: "Security Cameras", go: "security-cameras" }, { label: "Network & Wi-Fi", go: "network-wifi" },
     { label: "Websites & Marketing", go: "svc:07" }, { label: "CRM & Business Intelligence", go: "svc:09" },
     { label: "Custom Software", go: "svc:08" } ] },
   { title: "Company", links: [
@@ -1647,6 +1649,248 @@ function securityCamerasPage() {
   '</main>';
 }
 
+const netCoreServices = [
+  { no: "01", name: "Business Wi-Fi", body: "Design and configure wireless coverage for offices, restaurants, retail locations, medical practices, warehouses, and other business environments.", icon: I.wifi },
+  { no: "02", name: "Wired Networking", body: "Connect computers, phones, printers, cameras, POS systems, and other compatible business devices through organized wired networks.", icon: I.link },
+  { no: "03", name: "Network Equipment Setup", body: "Configure compatible routers, switches, access points, and related network equipment around your business requirements.", icon: I.server },
+  { no: "04", name: "Network Troubleshooting", body: "Diagnose connectivity, coverage, configuration, and network-performance issues.", icon: I.search }
+];
+
+const netInfraFeatures = [
+  { name: "Network Planning", body: "Evaluate coverage areas, connected devices, equipment requirements, and business needs." },
+  { name: "Equipment Configuration", body: "Configure compatible routers, switches, access points, and network devices." },
+  { name: "Structured Cabling", body: "Help organize and route Ethernet connections for compatible business equipment." },
+  { name: "Testing & Optimization", body: "Test connectivity and help identify coverage or configuration issues before completion." }
+];
+
+const netUseCasePoints = [
+  { name: "Business Wi-Fi", body: "Provide wireless coverage throughout compatible areas of your property.", icon: I.wifi },
+  { name: "Connected Devices", body: "Support the network connectivity needed by computers, printers, phones, cameras, and other compatible devices.", icon: I.link },
+  { name: "Guest & Business Networks", body: "Help configure separate wireless networks when supported by the customer's equipment.", icon: I.users },
+  { name: "Coverage Optimization", body: "Position and configure compatible access points around the property's coverage requirements.", icon: I.pin }
+];
+
+const netBusinessTypes = [
+  { name: "Retail Stores", icon: I.bag },
+  { name: "Restaurants", icon: I.utensils },
+  { name: "Offices", icon: I.briefcase },
+  { name: "Medical Practices", icon: I.cross },
+  { name: "Warehouses", icon: I.box },
+  { name: "Gas Stations", icon: I.fuel },
+  { name: "Multi-Location Businesses", icon: I.globe },
+  { name: "Commercial Properties", icon: I.pin }
+];
+
+const netSteps = [
+  { no: "01", name: "Network Assessment", body: "Discuss the property, current internet connection, devices, coverage areas, and existing network equipment." },
+  { no: "02", name: "System Recommendation", body: "Determine equipment, access-point placement, cabling, and configuration requirements." },
+  { no: "03", name: "Installation & Configuration", body: "Install and configure the agreed compatible network equipment and connections." },
+  { no: "04", name: "Testing & Handoff", body: "Test connectivity, coverage, connected devices, and help the customer understand the completed setup." }
+];
+
+const netBasicFeatures = ["Router/network equipment setup", "Access point configuration", "Basic Ethernet connections", "Device connectivity setup", "Wi-Fi configuration", "Basic network testing", "Final connectivity check"];
+const netCompleteFeatures = ["Network planning", "Equipment recommendations", "Access point planning", "Switch/router configuration", "Structured cabling requirements", "Professional installation", "Wi-Fi configuration", "Network testing"];
+
+const netSupportItems = [
+  { name: "Wi-Fi Troubleshooting", body: "Help diagnose wireless connectivity and coverage issues.", icon: I.search },
+  { name: "Network Configuration", body: "Assistance with compatible routers, switches, access points, and network settings.", icon: I.server },
+  { name: "Connected Device Support", body: "Help troubleshoot connectivity for compatible computers, printers, phones, cameras, and business devices.", icon: I.link },
+  { name: "Multi-Location Support", body: "Technical support options for businesses operating multiple locations.", icon: I.globe }
+];
+
+function networkWifiPage() {
+  const heroTrustStrip = ["Business Wi-Fi", "Network Setup", "Structured Cabling", "Troubleshooting"].map((label, i) =>
+    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfd8ea; padding: 0 16px 8px 0;' +
+    (i > 0 ? " border-left: 1px solid rgba(255,255,255,0.12); padding-left: 16px;" : "") + '">' + label + "</div>").join("");
+
+  const coreServiceCards = netCoreServices.map(s =>
+    '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
+      '<div style="font-size: 12.5px; font-weight: 800; color: #9db4dd; letter-spacing: 0.05em; margin-bottom: 10px;">' + s.no + '</div>' +
+      '<div style="width: 42px; height: 42px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 12px;">' +
+        icon(s.icon, 20, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.45; color: #46536b;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const infraRows = netInfraFeatures.map(f =>
+    '<div style="display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">' +
+      '<div style="width: 26px; height: 26px; border-radius: 50%; background: rgba(30,95,224,0.15); border: 1px solid rgba(77,141,255,0.4); display: grid; place-items: center; flex-shrink: 0; margin-top: 2px;">' +
+        icon(I.check, 13, "#4d8dff") + '</div>' +
+      '<div>' +
+        '<div style="font-size: 16px; font-weight: 700; margin-bottom: 3px;">' + f.name + '</div>' +
+        '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + f.body + '</div>' +
+      '</div>' +
+    '</div>').join("");
+
+  const useCaseBlocks = netUseCasePoints.map(p =>
+    '<div>' +
+      '<div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.22); display: grid; place-items: center; margin-bottom: 10px;">' +
+        icon(p.icon, 18, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 15.5px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">' + p.name + '</div>' +
+      '<div style="font-size: 13px; line-height: 1.45; color: #46536b;">' + p.body + '</div>' +
+    '</div>').join("");
+
+  const businessTypeBlocks = netBusinessTypes.map(x =>
+    '<div style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.15); border-radius: 12px; padding: 15px 16px;">' +
+      '<div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(30,95,224,0.12); border: 1px solid rgba(30,95,224,0.3); display: grid; place-items: center; flex-shrink: 0;">' +
+        icon(x.icon, 17, "#4d8dff") + '</div>' +
+      '<div style="font-size: 14.5px; font-weight: 600; color: #eef2fa;">' + x.name + '</div>' +
+    '</div>').join("");
+
+  const stepCards = netSteps.map(s =>
+    '<div style="text-align: center;">' +
+      '<div style="width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 2px solid #1e5fe0; display: grid; place-items: center; margin: 0 auto 16px; font-weight: 800; color: #1e5fe0; font-size: 16px;">' + s.no + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.5; color: #46536b; max-width: 30ch; margin: 0 auto;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const basicFeatureList = netBasicFeatures.map(f =>
+    '<div style="display: flex; align-items: flex-start; gap: 10px; padding: 5px 0;">' +
+      '<span style="flex-shrink: 0; margin-top: 2px;">' + icon(I.check, 15, "#4d8dff") + '</span>' +
+      '<span style="font-size: 14.5px; color: #cfd8ea;">' + f + '</span>' +
+    '</div>').join("");
+
+  const completeFeatureList = netCompleteFeatures.map(f =>
+    '<div style="display: flex; align-items: flex-start; gap: 10px; padding: 5px 0;">' +
+      '<span style="flex-shrink: 0; margin-top: 2px;">' + icon(I.check, 15, "#4d8dff") + '</span>' +
+      '<span style="font-size: 14.5px; color: #cfd8ea;">' + f + '</span>' +
+    '</div>').join("");
+
+  const supportItems = netSupportItems.map(x =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 12px; padding: 18px 20px;">' +
+      '<div style="width: 34px; height: 34px; border-radius: 9px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.22); display: grid; place-items: center; margin-bottom: 10px;">' +
+        icon(x.icon, 16, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 14.5px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">' + x.name + '</div>' +
+      '<div style="font-size: 12.5px; line-height: 1.4; color: #46536b;">' + x.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; background: #060a14; border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden;">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 60px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Network & Wi-Fi Solutions</div>' +
+        '<h1 style="font-size: 42px; font-weight: 800; line-height: 1.1; margin: 0 0 18px;">Reliable Networks.<br><span style="color: #4d8dff;">Better Connected Business.</span></h1>' +
+        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 50ch;">Professional network and Wi-Fi installation, configuration, and troubleshooting for businesses that need reliable connectivity across their operation.</p>' +
+        '<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 26px;">' +
+          btnPrimary("Get a Free Network Quote &nbsp;→", "contact", "15px 26px", "16px") +
+          '<a href="tel:+13462181253" class="btn btn-ghost-dark" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Call ' + PHONE + '</a>' +
+        '</div>' +
+        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + heroTrustStrip + '</div>' +
+      '</div>' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-network-wifi-hero.webp", "Wireless access point broadcasting Wi-Fi coverage across a modern open office", "1260 / 1024", 1260, 1024, false) + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Built for Business Connectivity</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">Everything Your Business Needs to Stay Connected</h2>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 20px;">' + coreServiceCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: center;">' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-network-wifi-infrastructure.webp", "Close-up of a professionally organized network rack with structured cabling and a switch", "1120 / 1024", 1120, 1024, true) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Professional Network Infrastructure</div>' +
+        '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">More Than Just Connecting a Router.</h2>' +
+        '<p style="font-size: 15.5px; line-height: 1.65; color: #aeb8cd; margin: 0 0 8px; max-width: 52ch;">A reliable business network depends on properly configured equipment, organized cabling, wireless coverage, and the devices connected throughout your property. AxisForce can help bring those components together into a cleaner, more manageable network.</p>' +
+        infraRows +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-network-wifi-realworld.webp", "Restaurant with a wall-mounted wireless access point and a tablet showing network status", "1229 / 1024", 1229, 1024, true) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Connect the Way You Operate</div>' +
+        '<h2 style="font-size: 30px; font-weight: 800; margin: 0 0 16px; line-height: 1.15; color: #0c1220;">Connectivity Where Your Business Needs It.</h2>' +
+        '<p style="font-size: 15px; line-height: 1.6; color: #46536b; margin: 0 0 26px; max-width: 52ch;">From customer Wi-Fi and employee workstations to POS systems, phones, printers, cameras, and other connected devices, a properly configured network helps keep everyday business technology connected.</p>' +
+        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px 20px;">' + useCaseBlocks + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 40px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Business Networking</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0 0 14px;">Built for Businesses of Every Size</h2>' +
+        '<p style="font-size: 16px; color: #aeb8cd; max-width: 62ch; margin: 0 auto; line-height: 1.6;">Whether you need connectivity for one small office or multiple business locations, AxisForce can design a network setup around your property, devices, and existing internet service.</p>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 16px;">' + businessTypeBlocks + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 62px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 42px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Simple Network Setup Process</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">From Assessment to Connected Network</h2>' +
+      '</div>' +
+      '<div style="position: relative;">' +
+        '<div class="sec-step-line" style="position: absolute; top: 22px; left: 60px; right: 60px; height: 1px; background: rgba(30,95,224,0.2); z-index: 0;"></div>' +
+        '<div class="grid-services" style="display: grid; gap: 24px; position: relative; z-index: 1;">' + stepCards + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 68px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 40px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Straightforward Pricing</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0;">Professional Network Setup Without Complicated Contracts</h2>' +
+      '</div>' +
+      '<div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 26px;">' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 18px; padding: 33px 31px;">' +
+          '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8b95ab; margin-bottom: 15px;">Basic Network Setup</div>' +
+          '<div style="font-size: 14.5px; color: #8b95ab; margin-bottom: 2px;">Starting at</div>' +
+          '<div style="margin-bottom: 16px;">' +
+            '<span style="font-size: 44px; font-weight: 800; color: #fff;">$300</span>' +
+          '</div>' +
+          '<div style="font-size: 14.5px; line-height: 1.6; color: #aeb8cd; margin-bottom: 18px;">For qualifying basic network jobs where the business already has compatible equipment and needs professional installation, configuration, or troubleshooting.</div>' +
+          '<div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px; margin-bottom: 22px;">' + basicFeatureList + '</div>' +
+          btnPrimary("Schedule Network Service &nbsp;→", "contact", "13px 22px", "15px", false) +
+          '<div style="font-size: 13px; line-height: 1.55; color: #9db4dd; margin-top: 14px;">Starting price applies to qualifying basic network work. Final pricing depends on property size, equipment quantity, cabling requirements, network complexity, existing infrastructure, and scope of work.</div>' +
+        '</div>' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 18px; padding: 33px 31px;">' +
+          '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8b95ab; margin-bottom: 15px;">Complete Business Network</div>' +
+          '<div style="font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 16px;">Custom Quote</div>' +
+          '<div style="font-size: 14.5px; line-height: 1.6; color: #aeb8cd; margin-bottom: 18px;">Need network equipment, multiple access points, structured cabling, switches, or a larger business network? We can recommend and configure a solution based on your property\'s requirements.</div>' +
+          '<div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px; margin-bottom: 22px;">' + completeFeatureList + '</div>' +
+          btnPrimary("Get a Free Quote &nbsp;→", "contact", "13px 22px", "15px", false) +
+          '<div style="font-size: 13px; line-height: 1.55; color: #9db4dd; margin-top: 14px;">Equipment and installation are quoted based on the property, existing infrastructure, and network requirements. Internet service is provided separately by the customer\'s ISP.</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="text-align: center; font-size: 14.5px; color: #8b95ab;">Multi-location business? <span class="go-link" style="color: #4d8dff; font-weight: 700;" onclick="nav(\'contact\')">Contact AxisForce</span> for customized multi-site network installation and support pricing.</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 56px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 30px;">' +
+        '<h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #0c1220;">Need Help After Installation?</h2>' +
+        '<p style="font-size: 15px; line-height: 1.6; color: #46536b; margin: 0 auto; max-width: 56ch;">AxisForce can also provide ongoing technical support for compatible business network and Wi-Fi systems.</p>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 16px; margin-bottom: 28px;">' + supportItems + '</div>' +
+      '<div style="text-align: center;">' + btnPrimary("Ask About Network Support &nbsp;→", "contact", "14px 24px", "15px", false) + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 0 32px 64px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
+      '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
+      '<div>' +
+        '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">Ready To Improve Your Network?</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">Let\'s Build the Right Network for Your Business.</h2>' +
+      '</div>' +
+      '<div>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Tell us about your property, existing internet service, equipment, connected devices, and coverage needs. We\'ll help determine the right next step.</p>' +
+        btnPrimary("Get a Free Network Quote &nbsp;→", "contact", "15px 26px", "16px") +
+        '<div style="font-size: 15px; font-weight: 600; color: #8b95ab; margin-top: 16px;">Or call us directly: <a href="tel:+13462181253" style="color: #eef2fa; text-decoration: none;">' + PHONE + '</a></div>' +
+        '<div style="font-size: 13px; color: #6b7690; margin-top: 10px;">Houston, Texas & surrounding areas</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
 function contactPage() {
   const rows = contactRows.map(c =>
     '<div style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid #dbe3f0;">' +
@@ -2023,7 +2267,8 @@ const PAGE_META = {
   "ai-automation": { title: "AI & Business Automation in Houston, TX | AxisForce", desc: "AxisForce builds custom AI agents and workflow automation for Houston businesses — reducing repetitive work, connecting systems and improving day-to-day operations." },
   "medical-billing": { title: "Medical Billing Services in Houston, TX | AxisForce", desc: "AxisForce provides end-to-end medical billing and revenue cycle management for Houston healthcare practices — 3% of collections, no long-term contract." },
   "medical-billing-software": { title: "Medical Billing Software | AxisForce", desc: "Medical billing software from AxisForce for managing patients, insurance, claims, payments, documents, A/R and billing reports from one centralized platform." },
-  "security-cameras": { title: "Security Camera Systems | AxisForce", desc: "Professional security camera installation for Houston businesses — cameras, NVR/DVR systems, remote viewing and system setup, starting at $300 per site." }
+  "security-cameras": { title: "Security Camera Systems | AxisForce", desc: "Professional security camera installation for Houston businesses — cameras, NVR/DVR systems, remote viewing and system setup, starting at $300 per site." },
+  "network-wifi": { title: "Network & Wi-Fi Solutions | AxisForce", desc: "Professional business network and Wi-Fi installation, configuration and troubleshooting for Houston businesses — wired networking, equipment setup and structured cabling." }
 };
 
 function updateMeta() {
@@ -2051,6 +2296,7 @@ function render() {
   else if (p === "medical-billing") body = medicalBillingPage();
   else if (p === "medical-billing-software") body = medicalBillingSoftwarePage();
   else if (p === "security-cameras") body = securityCamerasPage();
+  else if (p === "network-wifi") body = networkWifiPage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
@@ -2061,7 +2307,7 @@ function render() {
   else if (p === "portal") body = state.signedIn ? portalAppPage() : portalLoginPage();
   else { state.page = "home"; body = homePage(); }
 
-  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras";
+  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi";
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
     header() + body + (showCta ? ctaSection() : "") + footer() +
