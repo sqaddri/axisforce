@@ -1118,7 +1118,7 @@ function medicalBillingPage() {
       '<div style="min-width: 0;">' +
         '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Medical Billing Services</div>' +
         '<h1 style="font-size: 46px; font-weight: 800; line-height: 1.08; margin: 0 0 18px;">We Handle the Billing.<br>You Focus on Care.</h1>' +
-        '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 54ch;">AxisForce provides end-to-end revenue cycle management for healthcare practices — improving collections, reducing denials, and freeing providers to focus on patients.</p>' +
+        '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 54ch;">AxisForce provides end-to-end revenue cycle management for healthcare practices — helping improve collections, manage denials, and free providers to focus on patients.</p>' +
         '<div style="margin-bottom: 30px;">' + btnPrimary("Get Free Billing Consultation &nbsp;→", "contact", "15px 26px", "16px") + '</div>' +
         '<div style="display: flex; align-items: center; flex-wrap: wrap; row-gap: 12px;">' + trust + '</div>' +
       '</div>' +
@@ -1154,7 +1154,7 @@ function medicalBillingPage() {
       '<div class="card-hover" style="background: #fff; border: 1px solid #1e5fe0; border-radius: 16px; padding: 40px 36px; box-shadow: 0 2px 10px rgba(19,26,40,0.05);">' +
         '<div style="font-size: 56px; font-weight: 800; line-height: 1; color: #1e5fe0;">3%</div>' +
         '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #62708a; margin: 8px 0 20px;">of Collections</div>' +
-        '<p style="font-size: 16px; line-height: 1.6; color: #34415c; margin: 0 0 24px;">You pay 3% of the insurance and patient payments we collect on your behalf.</p>' +
+        '<p style="font-size: 16px; line-height: 1.6; color: #34415c; margin: 0 0 24px;">Simple pricing at 3% of collected revenue we manage through your billing cycle.</p>' +
         '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; text-align: left; margin-bottom: 28px;">' +
           ["No long-term contract", "Transparent monthly reporting", "Billing support included", "Pricing aligned with collections"].map(t =>
             '<div style="font-size: 14.5px; line-height: 1.4; color: #34415c; border-left: 2px solid #9db4dd; padding-left: 10px;">' + t + "</div>").join("") +
@@ -1167,7 +1167,7 @@ function medicalBillingPage() {
     '<div style="max-width: 1280px; margin: 0 auto; border-top: 1px solid #dbe3f0; padding-top: 56px;">' +
       '<div style="text-align: center; margin-bottom: 44px;">' +
         '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Why AxisForce</div>' +
-        '<h2 style="font-size: 38px; font-weight: 800; margin: 0; color: #0c1220;">A Billing Partner Focused on Getting You Paid</h2>' +
+        '<h2 style="font-size: 38px; font-weight: 800; margin: 0; color: #0c1220;">A Billing Partner Focused on Your Revenue Cycle.</h2>' +
       '</div>' +
       '<div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">' + whyCards + '</div>' +
     '</div>' +
