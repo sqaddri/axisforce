@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -130,7 +130,7 @@ const services = [
     outcome: "Cleaner claims, faster payment, and visibility into every dollar in flight.",
     whoFor: "Independent practices that want billing handled — not just software.",
     items: ["Eligibility verification", "Charge entry & claim submission", "Payment posting", "Denial management", "A/R follow-up", "Monthly reporting"] },
-  { no: "04", name: "Medical Billing Software", meta: "Starting at $250 / month", group: "Automation & Software", cta: "Explore Billing Software",
+  { no: "04", name: "Medical Billing Software", meta: "Starting at $250 / month", group: "Automation & Software", cta: "Explore Billing Software", page: "medical-billing-software",
     problem: "Legacy billing systems are slow, overpriced and built for hospital groups — not independent practices.",
     long: "A cloud-hosted platform: patient management, insurance, claims, documents, reporting and role-based access — on an AI-ready, healthcare-focused architecture.",
     outcome: "One modern system your front desk and biller actually like using.",
@@ -358,7 +358,7 @@ const docs = [
 const footerCols = [
   { title: "Services", links: [
     { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "ai-automation" },
-    { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "svc:04" },
+    { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "medical-billing-software" },
     { label: "Security Cameras", go: "svc:05" }, { label: "Network & Wi-Fi", go: "svc:06" },
     { label: "Websites & Marketing", go: "svc:07" }, { label: "CRM & Business Intelligence", go: "svc:09" },
     { label: "Custom Software", go: "svc:08" } ] },
@@ -1175,6 +1175,224 @@ function medicalBillingPage() {
   '</main>';
 }
 
+function productFrame(src, alt, w, h) {
+  const dims = (w && h) ? ' width="' + w + '" height="' + h + '"' : '';
+  return '' +
+  '<div style="position: relative;">' +
+    '<div style="position: absolute; inset: -20px; background: radial-gradient(circle at 50% 45%, rgba(47,123,255,0.22), transparent 70%); filter: blur(16px); pointer-events: none;"></div>' +
+    '<div style="position: relative; background: #0d1526; border: 1px solid rgba(77,141,255,0.24); border-radius: 16px; overflow: hidden; box-shadow: 0 18px 48px rgba(8,12,24,0.4), 0 2px 12px rgba(30,95,224,0.1);">' +
+      '<div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+        '<span style="width: 9px; height: 9px; border-radius: 50%; background: #ff5f57; display: inline-block;"></span>' +
+        '<span style="width: 9px; height: 9px; border-radius: 50%; background: #febc2e; display: inline-block;"></span>' +
+        '<span style="width: 9px; height: 9px; border-radius: 50%; background: #28c840; display: inline-block;"></span>' +
+      '</div>' +
+      '<img src="' + src + '" alt="' + alt + '" loading="lazy"' + dims + ' style="display: block; width: 100%; height: auto;">' +
+    '</div>' +
+  '</div>';
+}
+
+function heroShowcaseImage(src, alt, pos) {
+  return '' +
+  '<div style="position: relative;">' +
+    '<div style="position: absolute; inset: -30px; background: radial-gradient(circle at 62% 45%, rgba(47,123,255,0.32), transparent 70%); filter: blur(20px); pointer-events: none;"></div>' +
+    '<div style="position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.5); aspect-ratio: 1017 / 916;">' +
+      '<img src="' + src + '" alt="' + alt + '" width="1717" height="916" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: ' + (pos || "100% 50%") + ';">' +
+    '</div>' +
+  '</div>';
+}
+
+const billingSoftwareFeatures = [
+  { name: "Patient Management", body: "Organize patient information and keep billing records connected.", icon: I.users },
+  { name: "Insurance Management", body: "Maintain insurance policy information alongside patient records.", icon: I.shield },
+  { name: "Claims Management", body: "Create, track and manage claims through their billing lifecycle.", icon: I.billing },
+  { name: "Payment Tracking", body: "Keep visibility into paid and outstanding balances.", icon: I.chart },
+  { name: "Document Management", body: "Store and organize billing-related documents in one place.", icon: I.briefcase },
+  { name: "Reporting & Analytics", body: "Monitor claims, revenue and billing activity from clear dashboards.", icon: I.growth },
+  { name: "Import Claims", body: "Bring claim information into the system through structured imports.", icon: I.wifi },
+  { name: "Administration", body: "Manage users and operational settings from a centralized area.", icon: I.code }
+];
+
+const billingSoftwareActionPoints = [
+  { name: "Claims Visibility", body: "See claim statuses including accepted, created, paid, rejected and submitted." },
+  { name: "Financial Overview", body: "Track charges, payments and outstanding balances." },
+  { name: "Recent Activity", body: "See important billing activity from one centralized view." },
+  { name: "Claims Requiring Attention", body: "Surface items that may need review or follow-up." }
+];
+
+const billingSoftwareToolPoints = [
+  { name: "Quick Actions", body: "Access common billing tasks without digging through multiple screens." },
+  { name: "Document Visibility", body: "Keep recently used billing documents accessible." },
+  { name: "Imported Claims", body: "Review recently imported claim information." },
+  { name: "A/R Aging", body: "See outstanding balances organized by aging period." },
+  { name: "Payer Visibility", body: "Understand the distribution of claims across insurance companies." }
+];
+
+const billingSoftwareWorkflow = [
+  { no: "01", name: "Patient & Insurance", body: "Maintain patient and coverage information." },
+  { no: "02", name: "Claims", body: "Create, import and track billing claims." },
+  { no: "03", name: "Payments", body: "Record payments and monitor balances." },
+  { no: "04", name: "Follow-Up", body: "Identify outstanding and unresolved items." },
+  { no: "05", name: "Reporting", body: "Review revenue, claims and A/R performance." }
+];
+
+const billingSoftwareWhy = [
+  { name: "Centralized Workspace", body: "Patients, claims, insurance, documents and reporting in one system.", icon: I.briefcase },
+  { name: "Clear Billing Visibility", body: "See the information your team needs without relying on scattered spreadsheets.", icon: I.chart },
+  { name: "Simple Workflow", body: "Keep everyday billing tasks organized and accessible.", icon: I.clock },
+  { name: "Operational Reporting", body: "Monitor billing activity, balances and claim status.", icon: I.growth },
+  { name: "Built for Growth", body: "A software foundation that can evolve as operational needs change.", icon: I.globe },
+  { name: "Human Support", body: "Work with AxisForce directly when your team needs assistance.", icon: I.headset }
+];
+
+function medicalBillingSoftwarePage() {
+  const featureStrip = ["Patient Management", "Claims Tracking", "Billing Reports", "Document Management"].map((label, i) =>
+    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfd8ea; padding: 0 16px 8px 0;' +
+    (i > 0 ? " border-left: 1px solid rgba(255,255,255,0.12); padding-left: 16px;" : "") + '">' + label + "</div>").join("");
+
+  const featureCards = billingSoftwareFeatures.map(f =>
+    '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 19px 21px; min-height: 148px;">' +
+      '<div style="width: 40px; height: 40px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 11px;">' +
+        icon(f.icon, 19, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 5px; color: #0c1220;">' + f.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.45; color: #46536b;">' + f.body + '</div>' +
+    '</div>').join("");
+
+  const actionList = billingSoftwareActionPoints.map(p =>
+    '<div style="padding: 14px 0; border-bottom: 1px dashed rgba(124,174,255,0.25);">' +
+      '<div style="font-size: 17px; font-weight: 700; margin-bottom: 4px;">' + p.name + '</div>' +
+      '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + p.body + '</div>' +
+    '</div>').join("");
+
+  const toolList = billingSoftwareToolPoints.map(p =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 12px; padding: 14px 18px;">' +
+      '<div style="font-size: 15.5px; font-weight: 700; margin-bottom: 3px; color: #0c1220;">' + p.name + '</div>' +
+      '<div style="font-size: 13.5px; color: #46536b; line-height: 1.4;">' + p.body + '</div>' +
+    '</div>').join("");
+
+  const workflowCards = billingSoftwareWorkflow.map(s =>
+    '<div class="mbs-wf-step" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 14px; padding: 24px 20px;">' +
+      '<div style="font-size: 26px; font-weight: 800; color: #4d8dff; margin-bottom: 10px;">' + s.no + '</div>' +
+      '<div style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; color: #8b95ab; line-height: 1.5;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const whyCards = billingSoftwareWhy.map(w =>
+    '<div style="border-top: 1px solid #dbe3f0; padding-top: 22px;">' +
+      '<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">' +
+        '<div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.22); display: grid; place-items: center; flex-shrink: 0;">' +
+          icon(w.icon, 18, "#1e5fe0") + '</div>' +
+        '<div style="font-size: 17px; font-weight: 700; color: #0c1220;">' + w.name + '</div>' +
+      '</div>' +
+      '<div style="font-size: 14.5px; line-height: 1.55; color: #46536b;">' + w.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 96px; display: grid; grid-template-columns: minmax(0,0.85fr) minmax(0,1.05fr); gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Medical Billing Software</div>' +
+        '<h1 style="font-size: 42px; font-weight: 800; line-height: 1.1; margin: 0 0 18px;">One Platform to Manage Your Billing Workflow.</h1>' +
+        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 50ch;">AxisForce brings patients, insurance, claims, payments, documents and reporting into one organized billing workspace — giving your team clearer visibility across the revenue cycle.</p>' +
+        '<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 26px;">' +
+          btnPrimary("Request a Software Demo &nbsp;→", "contact", "15px 26px", "16px") +
+          '<span class="go-link" style="font-size: 15px; font-weight: 700; color: #cfd8ea;" onclick="document.getElementById(\'billing-software-features\').scrollIntoView({behavior:\'smooth\'})">Explore Features &nbsp;↓</span>' +
+        '</div>' +
+        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + featureStrip + '</div>' +
+      '</div>' +
+      '<div style="min-width: 0;">' + heroShowcaseImage("/assets/images/axisforce-medical-billing-software-hero.webp", "AxisForce Medical Billing Software — smarter billing, stronger revenue, shown on a laptop billing dashboard") + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section id="billing-software-features" style="background: #f2f5fa; color: #131a28; padding: 76px 32px; scroll-margin-top: 96px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Built for Billing Operations</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0 0 14px; color: #0c1220;">Everything Your Billing Team Needs in One Place</h2>' +
+        '<p style="font-size: 16.5px; color: #46536b; max-width: 62ch; margin: 0 auto; line-height: 1.6;">Replace scattered spreadsheets and disconnected workflows with one centralized workspace for managing day-to-day billing operations.</p>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 20px;">' + featureCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 64px; align-items: center;">' +
+      '<div style="min-width: 0;">' + productFrame("/assets/images/axisforce-billing-software-claims.webp", "AxisForce Billing Software claims by status, financial summary, recent activity and claims requiring attention", 1300, 568) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Your Billing Workspace</div>' +
+        '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">See the Revenue Cycle More Clearly.</h2>' +
+        actionList +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 64px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' + productFrame("/assets/images/axisforce-billing-software-tools.webp", "AxisForce Billing Software quick actions, recent documents, latest imported claims, A/R aging summary and top insurance companies", 1300, 461) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">More Than Claim Tracking</div>' +
+        '<h2 style="font-size: 30px; font-weight: 800; margin: 0 0 18px; line-height: 1.15; color: #0c1220;">Keep the Details That Matter Within Reach.</h2>' +
+        '<div style="display: grid; gap: 10px;">' + toolList + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 44px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">From Patient to Payment</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0;">A More Organized Billing Workflow</h2>' +
+      '</div>' +
+      '<div class="grid-handled" style="display: grid; gap: 18px;">' + workflowCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 44px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Why AxisForce</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">Built Around Real Billing Workflows</h2>' +
+      '</div>' +
+      '<div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px 40px;">' + whyCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 44px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Software or Full-Service Support</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0;">Use the Platform Your Way.</h2>' +
+      '</div>' +
+      '<div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px;">' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 16px; padding: 34px;">' +
+          '<div style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4d8dff; background: rgba(77,141,255,0.12); border: 1px solid rgba(77,141,255,0.28); padding: 5px 12px; border-radius: 999px; margin-bottom: 18px;">' +
+            icon(I.users, 13, "#4d8dff") + 'Option A — You Manage Billing' +
+          '</div>' +
+          '<div style="font-size: 21px; font-weight: 800; margin-bottom: 10px;">Medical Billing Software</div>' +
+          '<div style="font-size: 15px; line-height: 1.6; color: #aeb8cd; margin-bottom: 22px;">For organizations that want their own team to manage billing using the AxisForce platform.</div>' +
+          btnPrimary("Request Software Demo &nbsp;→", "contact", "13px 22px", "15px", false) +
+        '</div>' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 16px; padding: 34px;">' +
+          '<div style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4d8dff; background: rgba(77,141,255,0.12); border: 1px solid rgba(77,141,255,0.28); padding: 5px 12px; border-radius: 999px; margin-bottom: 18px;">' +
+            icon(I.headset, 13, "#4d8dff") + 'Option B — AxisForce Manages Billing' +
+          '</div>' +
+          '<div style="font-size: 21px; font-weight: 800; margin-bottom: 10px;">Medical Billing Services</div>' +
+          '<div style="font-size: 15px; line-height: 1.6; color: #aeb8cd; margin-bottom: 22px;">For practices that want AxisForce to help manage the revenue cycle.</div>' +
+          btnPrimary("Explore Billing Services &nbsp;→", "medical-billing", "13px 22px", "15px", false) +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 0 32px 64px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
+      '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
+      '<div>' +
+        '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">Ready To See It In Action?</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">See How AxisForce Can Simplify Your Billing Workflow.</h2>' +
+      '</div>' +
+      '<div>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Schedule a conversation with our team to see the platform and discuss how it could fit your billing operation.</p>' +
+        btnPrimary("Request a Software Demo &nbsp;→", "contact", "15px 26px", "16px") +
+        '<div style="font-size: 15px; font-weight: 600; color: #8b95ab; margin-top: 16px;">Or call us directly: <a href="tel:+13462181253" style="color: #eef2fa; text-decoration: none;">' + PHONE + '</a></div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
 function contactPage() {
   const rows = contactRows.map(c =>
     '<div style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid #dbe3f0;">' +
@@ -1549,7 +1767,8 @@ const PAGE_META = {
   terms: { title: "Terms of Service | AxisForce", desc: "Terms of Service governing use of the axisforce.net website." },
   "managed-it": { title: "Managed IT Support in Houston, TX | AxisForce", desc: "AxisForce provides managed IT support for Houston businesses — unlimited remote help, monitoring, backups and device management from one accountable technology partner." },
   "ai-automation": { title: "AI & Business Automation in Houston, TX | AxisForce", desc: "AxisForce builds custom AI agents and workflow automation for Houston businesses — reducing repetitive work, connecting systems and improving day-to-day operations." },
-  "medical-billing": { title: "Medical Billing Services in Houston, TX | AxisForce", desc: "AxisForce provides end-to-end medical billing and revenue cycle management for Houston healthcare practices — 3% of collections, no long-term contract." }
+  "medical-billing": { title: "Medical Billing Services in Houston, TX | AxisForce", desc: "AxisForce provides end-to-end medical billing and revenue cycle management for Houston healthcare practices — 3% of collections, no long-term contract." },
+  "medical-billing-software": { title: "Medical Billing Software | AxisForce", desc: "Medical billing software from AxisForce for managing patients, insurance, claims, payments, documents, A/R and billing reports from one centralized platform." }
 };
 
 function updateMeta() {
@@ -1575,6 +1794,7 @@ function render() {
   else if (p === "managed-it") body = managedITPage();
   else if (p === "ai-automation") body = aiAutomationPage();
   else if (p === "medical-billing") body = medicalBillingPage();
+  else if (p === "medical-billing-software") body = medicalBillingSoftwarePage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
@@ -1585,7 +1805,7 @@ function render() {
   else if (p === "portal") body = state.signedIn ? portalAppPage() : portalLoginPage();
   else { state.page = "home"; body = homePage(); }
 
-  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms";
+  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software";
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
     header() + body + (showCta ? ctaSection() : "") + footer() +
