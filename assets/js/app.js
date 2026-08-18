@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/", "websites-marketing": "/services/websites-marketing/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi", "/services/websites-marketing": "websites-marketing" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -86,7 +86,8 @@ const I = {
   box: "M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10",
   check: "M4 12l5 5L20 6",
   link: "M9 17H7a5 5 0 0 1 0-10h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8",
-  search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35"
+  search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35",
+  device: "M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 19h2"
 };
 
 function icon(path, size, color, extra) {
@@ -153,7 +154,7 @@ const services = [
     outcome: "Fast, secure connectivity that survives rush hour and audits alike.",
     whoFor: "Any site where the network carries payments, phones or patient data.",
     items: ["Site survey & design", "Structured cabling", "Firewall & VLAN segmentation", "Guest / staff separation", "Failover internet", "As-built documentation"] },
-  { no: "07", name: "Websites & Marketing", meta: "Starting at $800 / month", group: "Growth", cta: "Explore Marketing Solutions",
+  { no: "07", name: "Websites & Marketing", meta: "Starting at $800 / month", group: "Growth", cta: "Explore Marketing Solutions", page: "websites-marketing",
     problem: "A 9pm Google search should end with your phone ringing — not a competitor's.",
     long: "Professional website, local SEO, Google Business Profile, analytics, lead generation, maintenance and hosting — measured against booked work, not clicks.",
     outcome: "More calls from people already looking for exactly what you sell.",
@@ -365,7 +366,7 @@ const footerCols = [
     { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "ai-automation" },
     { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "medical-billing-software" },
     { label: "Security Cameras", go: "security-cameras" }, { label: "Network & Wi-Fi", go: "network-wifi" },
-    { label: "Websites & Marketing", go: "svc:07" }, { label: "CRM & Business Intelligence", go: "svc:09" },
+    { label: "Websites & Marketing", go: "websites-marketing" }, { label: "CRM & Business Intelligence", go: "svc:09" },
     { label: "Custom Software", go: "svc:08" } ] },
   { title: "Company", links: [
     { label: "About", go: "about" }, { label: "Industries", go: "industries" }, { label: "Pricing", go: "pricing" },
@@ -1398,12 +1399,12 @@ function medicalBillingSoftwarePage() {
   '</main>';
 }
 
-function secImageFrame(src, alt, ratio, w, h, lazy) {
+function secImageFrame(src, alt, ratio, w, h, lazy, objPos) {
   return '' +
   '<div style="position: relative;">' +
     '<div style="position: absolute; inset: -14px; background: radial-gradient(circle at 50% 40%, rgba(47,123,255,0.12), transparent 72%); filter: blur(14px); pointer-events: none;"></div>' +
     '<div style="position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(124,174,255,0.16); box-shadow: 0 20px 50px rgba(4,8,16,0.45); aspect-ratio: ' + ratio + ';">' +
-      '<img src="' + src + '" alt="' + alt + '" width="' + w + '" height="' + h + '"' + (lazy ? ' loading="lazy"' : '') + ' style="display: block; width: 100%; height: 100%; object-fit: cover;">' +
+      '<img src="' + src + '" alt="' + alt + '" width="' + w + '" height="' + h + '"' + (lazy ? ' loading="lazy"' : '') + ' style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: ' + (objPos || "50% 50%") + ';">' +
     '</div>' +
   '</div>';
 }
@@ -1891,6 +1892,249 @@ function networkWifiPage() {
   '</main>';
 }
 
+const mktCoreServices = [
+  { no: "01", name: "Website Design", body: "Modern, responsive websites designed around your business, services, customers, and brand.", icon: I.code },
+  { no: "02", name: "Digital Marketing", body: "Marketing strategies and campaigns designed to increase visibility and connect your business with potential customers.", icon: I.growth },
+  { no: "03", name: "Local SEO", body: "Improve your local online presence and help customers discover your business through search and map results.", icon: I.search },
+  { no: "04", name: "Social Media", body: "Build a consistent business presence across relevant social platforms with professional content and account support.", icon: I.users }
+];
+
+const mktMarketingFeatures = [
+  { name: "Online Presence", body: "Build a consistent digital presence across the channels relevant to your business." },
+  { name: "Campaign Management", body: "Plan and manage digital campaigns based on your services, audience, and business objectives." },
+  { name: "Local Visibility", body: "Improve how your business is presented across search, maps, and other relevant online platforms." },
+  { name: "Performance Reporting", body: "Review available campaign and website data to better understand activity and make informed marketing decisions." }
+];
+
+const mktWebsiteFeatures = [
+  { name: "Modern Design", body: "Clean, professional layouts designed around your brand and services.", icon: I.code },
+  { name: "Mobile Responsive", body: "Pages designed to work properly across desktop, tablet, and mobile devices.", icon: I.device },
+  { name: "Clear Calls to Action", body: "Help visitors quickly understand your services and how to contact your business.", icon: I.check },
+  { name: "Business-Focused Structure", body: "Organize content around the information your customers need most.", icon: I.briefcase }
+];
+
+const mktBusinessTypes = [
+  { name: "Medical Practices", icon: I.cross },
+  { name: "Restaurants", icon: I.utensils },
+  { name: "Retail Stores", icon: I.bag },
+  { name: "Professional Services", icon: I.briefcase },
+  { name: "Local Businesses", icon: I.pin },
+  { name: "Multi-Location Businesses", icon: I.globe },
+  { name: "Home & Field Services", icon: I.hardhat },
+  { name: "Growing Companies", icon: I.growth }
+];
+
+const mktSteps = [
+  { no: "01", name: "Discovery", body: "Learn about the business, services, audience, current online presence, and goals." },
+  { no: "02", name: "Strategy", body: "Determine the right website, content, search, social, and marketing approach based on the agreed scope." },
+  { no: "03", name: "Build & Launch", body: "Design the website and/or prepare the agreed marketing channels and campaigns." },
+  { no: "04", name: "Improve", body: "Review available performance data and continue refining the agreed marketing activities over time." }
+];
+
+const mktBasicFeatures = ["Digital marketing strategy", "Local online presence support", "Social media management", "Website content updates", "Campaign management", "Performance reporting", "Ongoing optimization"];
+const mktCustomFeatures = ["Website design", "Website development", "Multi-page websites", "Search presence", "Social media", "Digital advertising management", "Content support", "Multi-location marketing", "Custom strategy"];
+
+const mktSupportItems = [
+  { name: "Website Updates", body: "Help keep website content, services, and business information current.", icon: I.code },
+  { name: "Marketing Support", body: "Ongoing assistance with agreed digital marketing activities and campaigns.", icon: I.growth },
+  { name: "Social Media", body: "Support with maintaining a consistent business presence across relevant social platforms.", icon: I.users },
+  { name: "Multi-Location Marketing", body: "Marketing support options for businesses operating multiple locations.", icon: I.globe }
+];
+
+function websitesMarketingPage() {
+  const heroTrustStrip = ["Website Design", "Digital Marketing", "Local SEO", "Social Media"].map((label, i) =>
+    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfd8ea; padding: 0 16px 8px 0;' +
+    (i > 0 ? " border-left: 1px solid rgba(255,255,255,0.12); padding-left: 16px;" : "") + '">' + label + "</div>").join("");
+
+  const coreServiceCards = mktCoreServices.map(s =>
+    '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
+      '<div style="font-size: 12.5px; font-weight: 800; color: #9db4dd; letter-spacing: 0.05em; margin-bottom: 10px;">' + s.no + '</div>' +
+      '<div style="width: 42px; height: 42px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 12px;">' +
+        icon(s.icon, 20, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.45; color: #46536b;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const marketingRows = mktMarketingFeatures.map(f =>
+    '<div style="display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">' +
+      '<div style="width: 26px; height: 26px; border-radius: 50%; background: rgba(30,95,224,0.15); border: 1px solid rgba(77,141,255,0.4); display: grid; place-items: center; flex-shrink: 0; margin-top: 2px;">' +
+        icon(I.check, 13, "#4d8dff") + '</div>' +
+      '<div>' +
+        '<div style="font-size: 16px; font-weight: 700; margin-bottom: 3px;">' + f.name + '</div>' +
+        '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + f.body + '</div>' +
+      '</div>' +
+    '</div>').join("");
+
+  const websiteBlocks = mktWebsiteFeatures.map(f =>
+    '<div>' +
+      '<div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.22); display: grid; place-items: center; margin-bottom: 10px;">' +
+        icon(f.icon, 18, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 15.5px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">' + f.name + '</div>' +
+      '<div style="font-size: 13px; line-height: 1.45; color: #46536b;">' + f.body + '</div>' +
+    '</div>').join("");
+
+  const businessTypeBlocks = mktBusinessTypes.map(x =>
+    '<div style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.15); border-radius: 12px; padding: 15px 16px;">' +
+      '<div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(30,95,224,0.12); border: 1px solid rgba(30,95,224,0.3); display: grid; place-items: center; flex-shrink: 0;">' +
+        icon(x.icon, 17, "#4d8dff") + '</div>' +
+      '<div style="font-size: 14.5px; font-weight: 600; color: #eef2fa;">' + x.name + '</div>' +
+    '</div>').join("");
+
+  const stepCards = mktSteps.map(s =>
+    '<div style="text-align: center;">' +
+      '<div style="width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 2px solid #1e5fe0; display: grid; place-items: center; margin: 0 auto 16px; font-weight: 800; color: #1e5fe0; font-size: 16px;">' + s.no + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.5; color: #46536b; max-width: 30ch; margin: 0 auto;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const basicFeatureList = mktBasicFeatures.map(f =>
+    '<div style="display: flex; align-items: flex-start; gap: 10px; padding: 5px 0;">' +
+      '<span style="flex-shrink: 0; margin-top: 2px;">' + icon(I.check, 15, "#4d8dff") + '</span>' +
+      '<span style="font-size: 14.5px; color: #cfd8ea;">' + f + '</span>' +
+    '</div>').join("");
+
+  const customFeatureList = mktCustomFeatures.map(f =>
+    '<div style="display: flex; align-items: flex-start; gap: 10px; padding: 5px 0;">' +
+      '<span style="flex-shrink: 0; margin-top: 2px;">' + icon(I.check, 15, "#4d8dff") + '</span>' +
+      '<span style="font-size: 14.5px; color: #cfd8ea;">' + f + '</span>' +
+    '</div>').join("");
+
+  const supportItems = mktSupportItems.map(x =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 12px; padding: 18px 20px;">' +
+      '<div style="width: 34px; height: 34px; border-radius: 9px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.22); display: grid; place-items: center; margin-bottom: 10px;">' +
+        icon(x.icon, 16, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 14.5px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">' + x.name + '</div>' +
+      '<div style="font-size: 12.5px; line-height: 1.4; color: #46536b;">' + x.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; background: #060a14; border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden;">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 60px; display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 44px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Websites & Marketing</div>' +
+        '<h1 style="font-size: 42px; font-weight: 800; line-height: 1.1; margin: 0 0 18px;">Build Your Presence.<br><span style="color: #4d8dff;">Grow Your Business.</span></h1>' +
+        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 50ch;">Modern websites and practical digital marketing solutions designed to help businesses build a stronger online presence, reach more customers, and support continued growth.</p>' +
+        '<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 26px;">' +
+          btnPrimary("Get a Free Marketing Consultation &nbsp;→", "contact", "15px 26px", "16px") +
+          '<a href="tel:+13462181253" class="btn btn-ghost-dark" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Call ' + PHONE + '</a>' +
+        '</div>' +
+        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + heroTrustStrip + '</div>' +
+      '</div>' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-websites-marketing-hero.webp", "Website design and marketing dashboard concept shown on a desktop monitor", "845 / 740", 845, 1091, false, "50% 12%") + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Built for Your Digital Presence</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">Everything Your Business Needs to Stand Out Online</h2>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 20px;">' + coreServiceCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: center;">' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-websites-marketing-performance.webp", "Marketing performance dashboard concept shown on a laptop and phone", "1536 / 1024", 1536, 1024, true) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Digital Marketing That Supports Growth</div>' +
+        '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">More Than Just Posting Online.</h2>' +
+        '<p style="font-size: 15.5px; line-height: 1.65; color: #aeb8cd; margin: 0 0 8px; max-width: 52ch;">Effective digital marketing requires more than simply creating posts or running occasional ads. AxisForce helps businesses build a coordinated online presence across their website, search visibility, advertising, social media, and performance reporting.</p>' +
+        marketingRows +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-websites-marketing-strategy.webp", "Website design concept shown on a laptop", "970 / 964", 1536, 964, true, "0% 50%") + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Your Digital Front Door</div>' +
+        '<h2 style="font-size: 30px; font-weight: 800; margin: 0 0 16px; line-height: 1.15; color: #0c1220;">A Website Built Around Your Business.</h2>' +
+        '<p style="font-size: 15px; line-height: 1.6; color: #46536b; margin: 0 0 26px; max-width: 52ch;">Your website is often one of the first places customers learn about your business. AxisForce builds modern, responsive websites designed to clearly present your services, strengthen your professional image, and make it easier for customers to take the next step.</p>' +
+        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px 20px;">' + websiteBlocks + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 40px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Marketing for Real Businesses</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0 0 14px;">Built for Businesses Ready to Grow Their Presence</h2>' +
+        '<p style="font-size: 16px; color: #aeb8cd; max-width: 62ch; margin: 0 auto; line-height: 1.6;">Whether you\'re building your first professional online presence or improving an existing one, AxisForce can tailor website and marketing services around your business and goals.</p>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 16px;">' + businessTypeBlocks + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 62px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 42px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">A Simple Process</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">From Strategy to Stronger Digital Presence</h2>' +
+      '</div>' +
+      '<div style="position: relative;">' +
+        '<div class="sec-step-line" style="position: absolute; top: 22px; left: 60px; right: 60px; height: 1px; background: rgba(30,95,224,0.2); z-index: 0;"></div>' +
+        '<div class="grid-services" style="display: grid; gap: 24px; position: relative; z-index: 1;">' + stepCards + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 68px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 40px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Straightforward Pricing</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0;">Professional Marketing Without Complicated Contracts</h2>' +
+      '</div>' +
+      '<div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 26px;">' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 18px; padding: 33px 31px;">' +
+          '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8b95ab; margin-bottom: 15px;">Websites & Marketing</div>' +
+          '<div style="font-size: 14.5px; color: #8b95ab; margin-bottom: 2px;">Starting at</div>' +
+          '<div style="display: flex; align-items: baseline; gap: 6px; margin-bottom: 16px;">' +
+            '<span style="font-size: 44px; font-weight: 800; color: #fff;">$800</span>' +
+            '<span style="font-size: 15px; color: #8b95ab;">/ month</span>' +
+          '</div>' +
+          '<div style="font-size: 14.5px; line-height: 1.6; color: #aeb8cd; margin-bottom: 18px;">For qualifying businesses that need ongoing digital marketing support and management of their online presence.</div>' +
+          '<div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px; margin-bottom: 22px;">' + basicFeatureList + '</div>' +
+          btnPrimary("Start a Conversation &nbsp;→", "contact", "13px 22px", "15px", false) +
+          '<div style="font-size: 13px; line-height: 1.55; color: #9db4dd; margin-top: 14px;">Starting price applies to qualifying service packages. Final pricing depends on scope, platforms, content requirements, advertising needs, website requirements, and ongoing management needs.</div>' +
+          '<div style="font-size: 12.5px; line-height: 1.5; color: #6b7690; margin-top: 10px;">Advertising and media spend are not automatically included in the monthly management fee unless specifically quoted.</div>' +
+        '</div>' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 18px; padding: 33px 31px;">' +
+          '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8b95ab; margin-bottom: 15px;">Custom Website & Marketing Plan</div>' +
+          '<div style="font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 16px;">Custom Quote</div>' +
+          '<div style="font-size: 14.5px; line-height: 1.6; color: #aeb8cd; margin-bottom: 18px;">Need a new website, larger marketing campaign, multiple locations, additional content, or a broader digital strategy? We can prepare a custom solution based on your business requirements.</div>' +
+          '<div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px; margin-bottom: 22px;">' + customFeatureList + '</div>' +
+          btnPrimary("Get a Free Consultation &nbsp;→", "contact", "13px 22px", "15px", false) +
+          '<div style="font-size: 13px; line-height: 1.55; color: #9db4dd; margin-top: 14px;">Website projects, advertising budgets, third-party services, and additional marketing requirements are quoted based on scope.</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 56px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 30px;">' +
+        '<h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #0c1220;">Need Ongoing Marketing Support?</h2>' +
+        '<p style="font-size: 15px; line-height: 1.6; color: #46536b; margin: 0 auto; max-width: 56ch;">AxisForce can continue supporting your website and digital presence as your business changes and grows.</p>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 16px; margin-bottom: 28px;">' + supportItems + '</div>' +
+      '<div style="text-align: center;">' + btnPrimary("Ask About Marketing Support &nbsp;→", "contact", "14px 24px", "15px", false) + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 0 32px 64px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
+      '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
+      '<div>' +
+        '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">Ready To Grow Your Online Presence?</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">Let\'s Build a Stronger Digital Presence for Your Business.</h2>' +
+      '</div>' +
+      '<div>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Tell us about your business, current website, marketing needs, and goals. We\'ll help determine the right next step.</p>' +
+        btnPrimary("Get a Free Marketing Consultation &nbsp;→", "contact", "15px 26px", "16px") +
+        '<div style="font-size: 15px; font-weight: 600; color: #8b95ab; margin-top: 16px;">Or call us directly: <a href="tel:+13462181253" style="color: #eef2fa; text-decoration: none;">' + PHONE + '</a></div>' +
+        '<div style="font-size: 13px; color: #6b7690; margin-top: 10px;">Houston, Texas & surrounding areas</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
 function contactPage() {
   const rows = contactRows.map(c =>
     '<div style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid #dbe3f0;">' +
@@ -2268,7 +2512,8 @@ const PAGE_META = {
   "medical-billing": { title: "Medical Billing Services in Houston, TX | AxisForce", desc: "AxisForce provides end-to-end medical billing and revenue cycle management for Houston healthcare practices — 3% of collections, no long-term contract." },
   "medical-billing-software": { title: "Medical Billing Software | AxisForce", desc: "Medical billing software from AxisForce for managing patients, insurance, claims, payments, documents, A/R and billing reports from one centralized platform." },
   "security-cameras": { title: "Security Camera Systems | AxisForce", desc: "Professional security camera installation for Houston businesses — cameras, NVR/DVR systems, remote viewing and system setup, starting at $300 per site." },
-  "network-wifi": { title: "Network & Wi-Fi Solutions | AxisForce", desc: "Professional business network and Wi-Fi installation, configuration and troubleshooting for Houston businesses — wired networking, equipment setup and structured cabling." }
+  "network-wifi": { title: "Network & Wi-Fi Solutions | AxisForce", desc: "Professional business network and Wi-Fi installation, configuration and troubleshooting for Houston businesses — wired networking, equipment setup and structured cabling." },
+  "websites-marketing": { title: "Websites & Digital Marketing Services | AxisForce Houston", desc: "AxisForce provides website design and digital marketing services for businesses in Houston, including local SEO, social media, digital campaigns, website support, and online presence management." }
 };
 
 function updateMeta() {
@@ -2297,6 +2542,7 @@ function render() {
   else if (p === "medical-billing-software") body = medicalBillingSoftwarePage();
   else if (p === "security-cameras") body = securityCamerasPage();
   else if (p === "network-wifi") body = networkWifiPage();
+  else if (p === "websites-marketing") body = websitesMarketingPage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
@@ -2307,7 +2553,7 @@ function render() {
   else if (p === "portal") body = state.signedIn ? portalAppPage() : portalLoginPage();
   else { state.page = "home"; body = homePage(); }
 
-  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi";
+  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi" && state.page !== "websites-marketing";
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
     header() + body + (showCta ? ctaSection() : "") + footer() +
