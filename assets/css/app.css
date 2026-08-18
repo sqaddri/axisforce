@@ -94,3 +94,5 @@ input, select, textarea, button { font-family: 'Barlow', sans-serif; }
   font-size: 15px; font-weight: 700; color: rgba(124,174,255,0.4); pointer-events: none;
 }
 @media (max-width: 980px) { .mbs-wf-step:not(:last-child)::after { display: none; } }
+
+@media (max-width: 980px) { .sec-step-line { display: none; } }

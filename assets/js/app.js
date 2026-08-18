@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -81,7 +81,10 @@ const I = {
   briefcase: "M3 8h18v12H3zM8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18",
   hardhat: "M2 18h20M4 18v-2a8 8 0 0 1 5-7.4M20 18v-2a8 8 0 0 0-5-7.4M10 5a2 2 0 0 1 4 0v6h-4z",
   growth: "M3 17l6-6 4 4 8-8M15 7h6v6",
-  code: "M8 6L2 12l6 6M16 6l6 6-6 6M14 4l-4 16"
+  code: "M8 6L2 12l6 6M16 6l6 6-6 6M14 4l-4 16",
+  server: "M3 4h18v6H3V4zM3 14h18v6H3v-6zM7 7h.01M11 7h4M7 17h.01M11 17h4",
+  box: "M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10",
+  check: "M4 12l5 5L20 6"
 };
 
 function icon(path, size, color, extra) {
@@ -136,7 +139,7 @@ const services = [
     outcome: "One modern system your front desk and biller actually like using.",
     whoFor: "Independent medical practices running their own billing.",
     items: ["Patient management", "Insurance & claims", "Document management", "Reporting", "Role-based access", "Healthcare-focused architecture"] },
-  { no: "05", name: "Security Camera Systems", meta: "Starting at $300", group: "Security", cta: "Explore Security Cameras",
+  { no: "05", name: "Security Camera Systems", meta: "Starting at $300", group: "Security", cta: "Explore Security Cameras", page: "security-cameras",
     problem: "When something happens, the first question is always: did the cameras catch it?",
     long: "Commercial-grade design and installation: NVR configuration, network integration, remote viewing and ongoing maintenance — placed to answer the questions you'll actually ask.",
     outcome: "Reviewable footage of the moments that matter, from your phone.",
@@ -359,7 +362,7 @@ const footerCols = [
   { title: "Services", links: [
     { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "ai-automation" },
     { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "medical-billing-software" },
-    { label: "Security Cameras", go: "svc:05" }, { label: "Network & Wi-Fi", go: "svc:06" },
+    { label: "Security Cameras", go: "security-cameras" }, { label: "Network & Wi-Fi", go: "svc:06" },
     { label: "Websites & Marketing", go: "svc:07" }, { label: "CRM & Business Intelligence", go: "svc:09" },
     { label: "Custom Software", go: "svc:08" } ] },
   { title: "Company", links: [
@@ -1393,6 +1396,257 @@ function medicalBillingSoftwarePage() {
   '</main>';
 }
 
+function secImageFrame(src, alt, ratio, w, h, lazy) {
+  return '' +
+  '<div style="position: relative;">' +
+    '<div style="position: absolute; inset: -14px; background: radial-gradient(circle at 50% 40%, rgba(47,123,255,0.12), transparent 72%); filter: blur(14px); pointer-events: none;"></div>' +
+    '<div style="position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(124,174,255,0.16); box-shadow: 0 20px 50px rgba(4,8,16,0.45); aspect-ratio: ' + ratio + ';">' +
+      '<img src="' + src + '" alt="' + alt + '" width="' + w + '" height="' + h + '"' + (lazy ? ' loading="lazy"' : '') + ' style="display: block; width: 100%; height: 100%; object-fit: cover;">' +
+    '</div>' +
+  '</div>';
+}
+
+const secSolutions = [
+  { no: "01", name: "Indoor & Outdoor Cameras", body: "Professional camera placement for entrances, parking areas, offices, sales floors, warehouses, and other important areas.", icon: I.camera },
+  { no: "02", name: "NVR / DVR Systems", body: "Centralized recording and organized access to surveillance footage.", icon: I.server },
+  { no: "03", name: "Remote Viewing", body: "Access compatible camera systems from your phone, tablet, or computer.", icon: I.wifi },
+  { no: "04", name: "System Setup & Configuration", body: "Camera configuration, recording setup, network connectivity, and system testing.", icon: I.code }
+];
+
+const secSystemFeatures = [
+  { name: "Camera Placement", body: "Position cameras around important areas of your property." },
+  { name: "Recording Setup", body: "Configure compatible NVR/DVR recording and storage." },
+  { name: "Remote Access", body: "Set up compatible mobile and desktop viewing." },
+  { name: "System Testing", body: "Verify cameras, recording, connectivity, and viewing before completion." }
+];
+
+const secProtection = [
+  { name: "Deter Crime", body: "Visible surveillance can help discourage theft, vandalism, and unauthorized activity.", icon: I.shield },
+  { name: "Monitor Remotely", body: "View compatible systems remotely when you are away from the property.", icon: I.wifi },
+  { name: "Review Incidents", body: "Recorded footage makes it easier to review activity when something happens.", icon: I.clock },
+  { name: "24/7 Recording", body: "Configure compatible systems for continuous recording based on the business's needs.", icon: I.camera }
+];
+
+const secIndustries = [
+  { name: "Retail Stores", icon: I.bag },
+  { name: "Restaurants", icon: I.utensils },
+  { name: "Gas Stations", icon: I.fuel },
+  { name: "Offices", icon: I.briefcase },
+  { name: "Warehouses", icon: I.box },
+  { name: "Medical Practices", icon: I.cross },
+  { name: "Multi-Location Businesses", icon: I.globe },
+  { name: "Large Properties", icon: I.pin }
+];
+
+const secSteps = [
+  { no: "01", name: "Site Assessment", body: "We discuss the property, coverage areas, existing equipment, and what you want to monitor." },
+  { no: "02", name: "System Recommendation", body: "We determine camera placement, equipment requirements, recording, and connectivity." },
+  { no: "03", name: "Professional Installation", body: "We install and configure the agreed camera system." },
+  { no: "04", name: "Setup & Handoff", body: "We test the system and help configure compatible viewing access." }
+];
+
+const secInstallFeatures = ["Camera mounting", "Basic cable routing", "NVR/DVR connection", "Camera configuration", "Recording setup", "Compatible remote-viewing setup", "Final system test"];
+const secQuoteFeatures = ["Camera system planning", "Camera and recorder recommendations", "Cabling requirements", "Professional installation", "NVR/DVR configuration", "Remote viewing setup", "System testing"];
+const secSupportFeatures = [
+  { name: "Remote Troubleshooting", body: "Help diagnose compatible camera and recording-system issues remotely.", icon: I.headset },
+  { name: "Camera & NVR Configuration", body: "Assistance with compatible camera, recorder, and system settings.", icon: I.server },
+  { name: "Viewing Access Support", body: "Help with compatible mobile and desktop viewing access.", icon: I.wifi },
+  { name: "Multi-Location Support", body: "Technical support options for businesses operating multiple locations.", icon: I.globe }
+];
+
+function securityCamerasPage() {
+  const heroTrustStrip = ["Professional Installation", "Remote Viewing", "NVR/DVR Setup", "Business Security"].map((label, i) =>
+    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfd8ea; padding: 0 16px 8px 0;' +
+    (i > 0 ? " border-left: 1px solid rgba(255,255,255,0.12); padding-left: 16px;" : "") + '">' + label + "</div>").join("");
+
+  const solutionCards = secSolutions.map(s =>
+    '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
+      '<div style="font-size: 12.5px; font-weight: 800; color: #9db4dd; letter-spacing: 0.05em; margin-bottom: 10px;">' + s.no + '</div>' +
+      '<div style="width: 42px; height: 42px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 12px;">' +
+        icon(s.icon, 20, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.45; color: #46536b;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const systemRows = secSystemFeatures.map(f =>
+    '<div style="display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">' +
+      '<div style="width: 26px; height: 26px; border-radius: 50%; background: rgba(30,95,224,0.15); border: 1px solid rgba(77,141,255,0.4); display: grid; place-items: center; flex-shrink: 0; margin-top: 2px;">' +
+        icon(I.check, 13, "#4d8dff") + '</div>' +
+      '<div>' +
+        '<div style="font-size: 16px; font-weight: 700; margin-bottom: 3px;">' + f.name + '</div>' +
+        '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + f.body + '</div>' +
+      '</div>' +
+    '</div>').join("");
+
+  const protectionBlocks = secProtection.map(p =>
+    '<div>' +
+      '<div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.22); display: grid; place-items: center; margin-bottom: 10px;">' +
+        icon(p.icon, 18, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 15.5px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">' + p.name + '</div>' +
+      '<div style="font-size: 13px; line-height: 1.45; color: #46536b;">' + p.body + '</div>' +
+    '</div>').join("");
+
+  const industryBlocks = secIndustries.map(x =>
+    '<div style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.15); border-radius: 12px; padding: 15px 16px;">' +
+      '<div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(30,95,224,0.12); border: 1px solid rgba(30,95,224,0.3); display: grid; place-items: center; flex-shrink: 0;">' +
+        icon(x.icon, 17, "#4d8dff") + '</div>' +
+      '<div style="font-size: 14.5px; font-weight: 600; color: #eef2fa;">' + x.name + '</div>' +
+    '</div>').join("");
+
+  const stepCards = secSteps.map(s =>
+    '<div style="text-align: center;">' +
+      '<div style="width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 2px solid #1e5fe0; display: grid; place-items: center; margin: 0 auto 16px; font-weight: 800; color: #1e5fe0; font-size: 16px;">' + s.no + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.5; color: #46536b; max-width: 30ch; margin: 0 auto;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const installFeatureList = secInstallFeatures.map(f =>
+    '<div style="display: flex; align-items: flex-start; gap: 10px; padding: 6px 0;">' +
+      '<span style="flex-shrink: 0; margin-top: 2px;">' + icon(I.check, 15, "#4d8dff") + '</span>' +
+      '<span style="font-size: 14.5px; color: #cfd8ea;">' + f + '</span>' +
+    '</div>').join("");
+
+  const quoteFeatureList = secQuoteFeatures.map(f =>
+    '<div style="display: flex; align-items: flex-start; gap: 10px; padding: 6px 0;">' +
+      '<span style="flex-shrink: 0; margin-top: 2px;">' + icon(I.check, 15, "#4d8dff") + '</span>' +
+      '<span style="font-size: 14.5px; color: #cfd8ea;">' + f + '</span>' +
+    '</div>').join("");
+
+  const supportItems = secSupportFeatures.map(x =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 12px; padding: 18px 20px;">' +
+      '<div style="width: 34px; height: 34px; border-radius: 9px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.22); display: grid; place-items: center; margin-bottom: 10px;">' +
+        icon(x.icon, 16, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 14.5px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">' + x.name + '</div>' +
+      '<div style="font-size: 12.5px; line-height: 1.4; color: #46536b;">' + x.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 96px; display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr); gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Security Camera Systems</div>' +
+        '<h1 style="font-size: 42px; font-weight: 800; line-height: 1.1; margin: 0 0 18px;">Protect Your Business.<br><span style="color: #4d8dff;">See What Matters.</span></h1>' +
+        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 50ch;">Professional security camera installation and surveillance solutions for businesses that need clear visibility, reliable recording, and remote access.</p>' +
+        '<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 26px;">' +
+          btnPrimary("Get a Free Camera Quote &nbsp;→", "contact", "15px 26px", "16px") +
+          '<a href="tel:+13462181253" class="btn btn-ghost-dark" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Call ' + PHONE + '</a>' +
+        '</div>' +
+        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + heroTrustStrip + '</div>' +
+      '</div>' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-security-camera-hero.webp", "AxisForce-installed security cameras mounted outside a commercial building at night", "736 / 780", 736, 780, false) + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Built Around Your Property</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">Security Solutions for the Way You Operate</h2>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 20px;">' + solutionCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: center;">' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-security-camera-system.webp", "Security camera system components: a bullet camera, NVR, monitor showing a multi-camera live view, and a remote viewing tablet", "886 / 890", 886, 890, true) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Complete Surveillance Setup</div>' +
+        '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">More Than Just Mounting Cameras.</h2>' +
+        '<p style="font-size: 15.5px; line-height: 1.65; color: #aeb8cd; margin: 0 0 8px; max-width: 52ch;">A security system works best when the cameras, recorder, network, storage, and viewing access are configured as one system. AxisForce can help install and configure the components your business needs.</p>' +
+        systemRows +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-security-camera-realworld.webp", "Close-up of an AxisForce-installed security camera mounted outside a commercial building at night", "756 / 650", 756, 830, true) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Protect What You Built</div>' +
+        '<h2 style="font-size: 30px; font-weight: 800; margin: 0 0 16px; line-height: 1.15; color: #0c1220;">Visibility When You Need It.</h2>' +
+        '<p style="font-size: 15px; line-height: 1.6; color: #46536b; margin: 0 0 26px; max-width: 52ch;">From storefronts and restaurants to offices, warehouses, gas stations, and larger properties, AxisForce designs camera installations around the areas that matter most to your operation.</p>' +
+        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px 20px;">' + protectionBlocks + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 40px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Commercial Security</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0 0 14px;">Built for Businesses of Every Size</h2>' +
+        '<p style="font-size: 16px; color: #aeb8cd; max-width: 62ch; margin: 0 auto; line-height: 1.6;">Whether you need cameras for one storefront or multiple business locations, we can design an installation around your property and existing infrastructure.</p>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 16px;">' + industryBlocks + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 62px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 42px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Simple Installation Process</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">From Walkthrough to Working System</h2>' +
+      '</div>' +
+      '<div style="position: relative;">' +
+        '<div class="sec-step-line" style="position: absolute; top: 22px; left: 60px; right: 60px; height: 1px; background: rgba(30,95,224,0.2); z-index: 0;"></div>' +
+        '<div class="grid-services" style="display: grid; gap: 24px; position: relative; z-index: 1;">' + stepCards + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 44px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Straightforward Pricing</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0;">Professional Installation Without Complicated Contracts</h2>' +
+      '</div>' +
+      '<div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 28px;">' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 18px; padding: 36px 34px;">' +
+          '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8b95ab; margin-bottom: 16px;">Small Business Installation</div>' +
+          '<div style="font-size: 14.5px; color: #8b95ab; margin-bottom: 2px;">Starting at</div>' +
+          '<div style="margin-bottom: 18px;">' +
+            '<span style="font-size: 44px; font-weight: 800; color: #fff;">$300</span>' +
+          '</div>' +
+          '<div style="font-size: 14.5px; line-height: 1.6; color: #aeb8cd; margin-bottom: 20px;">For qualifying basic installations where the business already has compatible camera equipment and needs professional installation and setup.</div>' +
+          '<div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; margin-bottom: 24px;">' + installFeatureList + '</div>' +
+          btnPrimary("Schedule Installation &nbsp;→", "contact", "13px 22px", "15px", false) +
+          '<div style="font-size: 13px; line-height: 1.55; color: #9db4dd; margin-top: 16px;">Starting price applies to qualifying basic installations. Final pricing depends on camera quantity, cabling, property layout, installation complexity, and existing equipment.</div>' +
+        '</div>' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 18px; padding: 36px 34px;">' +
+          '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8b95ab; margin-bottom: 16px;">Complete Camera System</div>' +
+          '<div style="font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 18px;">Custom Quote</div>' +
+          '<div style="font-size: 14.5px; line-height: 1.6; color: #aeb8cd; margin-bottom: 20px;">Need cameras, recorder, storage, cabling, and installation? We can recommend and install a complete system based on your property\'s requirements.</div>' +
+          '<div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; margin-bottom: 24px;">' + quoteFeatureList + '</div>' +
+          btnPrimary("Get a Free Quote &nbsp;→", "contact", "13px 22px", "15px", false) +
+          '<div style="font-size: 12.5px; line-height: 1.5; color: #6b7690; margin-top: 16px;">Equipment and installation are quoted based on the property and system requirements.</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="text-align: center; font-size: 14.5px; color: #8b95ab;">Multi-location business? <span class="go-link" style="color: #4d8dff; font-weight: 700;" onclick="nav(\'contact\')">Contact AxisForce</span> for customized multi-site installation and support pricing.</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 56px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 30px;">' +
+        '<h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #0c1220;">Need Help After Installation?</h2>' +
+        '<p style="font-size: 15px; line-height: 1.6; color: #46536b; margin: 0 auto; max-width: 56ch;">AxisForce can also provide ongoing technical support for compatible camera and recording systems.</p>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 16px; margin-bottom: 28px;">' + supportItems + '</div>' +
+      '<div style="text-align: center;">' + btnPrimary("Ask About Camera Support &nbsp;→", "contact", "14px 24px", "15px", false) + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 0 32px 64px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
+      '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
+      '<div>' +
+        '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">Ready To Protect Your Property?</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">Let\'s Build the Right Camera System for Your Business.</h2>' +
+      '</div>' +
+      '<div>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Tell us about your property, existing equipment, and the areas you want to monitor. We\'ll help determine the right next step.</p>' +
+        btnPrimary("Get a Free Camera Quote &nbsp;→", "contact", "15px 26px", "16px") +
+        '<div style="font-size: 15px; font-weight: 600; color: #8b95ab; margin-top: 16px;">Or call us directly: <a href="tel:+13462181253" style="color: #eef2fa; text-decoration: none;">' + PHONE + '</a></div>' +
+        '<div style="font-size: 13px; color: #6b7690; margin-top: 10px;">Houston, Texas & surrounding areas</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
 function contactPage() {
   const rows = contactRows.map(c =>
     '<div style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid #dbe3f0;">' +
@@ -1768,7 +2022,8 @@ const PAGE_META = {
   "managed-it": { title: "Managed IT Support in Houston, TX | AxisForce", desc: "AxisForce provides managed IT support for Houston businesses — unlimited remote help, monitoring, backups and device management from one accountable technology partner." },
   "ai-automation": { title: "AI & Business Automation in Houston, TX | AxisForce", desc: "AxisForce builds custom AI agents and workflow automation for Houston businesses — reducing repetitive work, connecting systems and improving day-to-day operations." },
   "medical-billing": { title: "Medical Billing Services in Houston, TX | AxisForce", desc: "AxisForce provides end-to-end medical billing and revenue cycle management for Houston healthcare practices — 3% of collections, no long-term contract." },
-  "medical-billing-software": { title: "Medical Billing Software | AxisForce", desc: "Medical billing software from AxisForce for managing patients, insurance, claims, payments, documents, A/R and billing reports from one centralized platform." }
+  "medical-billing-software": { title: "Medical Billing Software | AxisForce", desc: "Medical billing software from AxisForce for managing patients, insurance, claims, payments, documents, A/R and billing reports from one centralized platform." },
+  "security-cameras": { title: "Security Camera Systems | AxisForce", desc: "Professional security camera installation for Houston businesses — cameras, NVR/DVR systems, remote viewing and system setup, starting at $300 per site." }
 };
 
 function updateMeta() {
@@ -1795,6 +2050,7 @@ function render() {
   else if (p === "ai-automation") body = aiAutomationPage();
   else if (p === "medical-billing") body = medicalBillingPage();
   else if (p === "medical-billing-software") body = medicalBillingSoftwarePage();
+  else if (p === "security-cameras") body = securityCamerasPage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
@@ -1805,7 +2061,7 @@ function render() {
   else if (p === "portal") body = state.signedIn ? portalAppPage() : portalLoginPage();
   else { state.page = "home"; body = homePage(); }
 
-  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software";
+  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras";
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
     header() + body + (showCta ? ctaSection() : "") + footer() +
