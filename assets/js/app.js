@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/", "websites-marketing": "/services/websites-marketing/", "custom-software": "/services/custom-software/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi", "/services/websites-marketing": "websites-marketing", "/services/custom-software": "custom-software" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/", "websites-marketing": "/services/websites-marketing/", "custom-software": "/services/custom-software/", "crm-business-intelligence": "/services/crm-business-intelligence/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi", "/services/websites-marketing": "websites-marketing", "/services/custom-software": "custom-software", "/services/crm-business-intelligence": "crm-business-intelligence" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -41,10 +41,36 @@ window.addEventListener("hashchange", syncFromLocation);
 function setTab(tab) { state.tab = tab; render(); }
 function signIn() { state.signedIn = true; render(); window.scrollTo(0, 0); }
 function signOut() { state.signedIn = false; state.tab = "billing"; render(); window.scrollTo(0, 0); }
-function contactSubmit(e) {
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/myeygqrw";
+
+async function contactSubmit(e) {
   e.preventDefault();
-  const note = document.getElementById("cf-thanks");
-  if (note) note.style.display = "block";
+  const form = e.target;
+  const btn = document.getElementById("cf-submit");
+  const thanks = document.getElementById("cf-thanks");
+  const error = document.getElementById("cf-error");
+  const originalLabel = btn.textContent;
+  thanks.style.display = "none";
+  error.style.display = "none";
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(form)
+    });
+    if (res.ok) {
+      form.reset();
+      thanks.style.display = "block";
+    } else {
+      error.style.display = "block";
+    }
+  } catch (err) {
+    error.style.display = "block";
+  }
+  btn.disabled = false;
+  btn.textContent = originalLabel;
   return false;
 }
 
@@ -167,7 +193,7 @@ const services = [
     outcome: "Software shaped to your operation, owned by you.",
     whoFor: "Businesses with a process worth automating properly.",
     items: ["Internal portals", "Dashboards & reporting", "System integrations", "Process automation", "Cloud hosting", "Ongoing support"] },
-  { no: "09", name: "CRM & Business Intelligence", meta: "Request a Quote", group: "Automation & Software", cta: "Explore CRM & BI",
+  { no: "09", name: "CRM & Business Intelligence", meta: "Request a Quote", group: "Automation & Software", cta: "Explore CRM & BI", page: "crm-business-intelligence",
     problem: "Customer data lives in spreadsheets and inboxes instead of a system your team can actually use to sell, service and report.",
     long: "CRM implementation, automation, integrations, dashboards and reporting solutions built around your business.",
     outcome: "A CRM and reporting setup that fits how your team actually works — with real visibility into what's happening.",
@@ -367,7 +393,7 @@ const footerCols = [
     { label: "Managed IT Support", go: "svc:01" }, { label: "AI & Business Automation", go: "ai-automation" },
     { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "medical-billing-software" },
     { label: "Security Cameras", go: "security-cameras" }, { label: "Network & Wi-Fi", go: "network-wifi" },
-    { label: "Websites & Marketing", go: "websites-marketing" }, { label: "CRM & Business Intelligence", go: "svc:09" },
+    { label: "Websites & Marketing", go: "websites-marketing" }, { label: "CRM & Business Intelligence", go: "crm-business-intelligence" },
     { label: "Custom Software", go: "custom-software" } ] },
   { title: "Company", links: [
     { label: "About", go: "about" }, { label: "Industries", go: "industries" }, { label: "Pricing", go: "pricing" },
@@ -2301,6 +2327,190 @@ function customSoftwarePage() {
   '</main>';
 }
 
+const crmCoreServices = [
+  { no: "01", name: "CRM Implementation", body: "End-to-end setup and configuration of Salesforce, Dynamics 365, HubSpot, or another CRM platform.", icon: I.users },
+  { no: "02", name: "CRM Customization", body: "Tailored fields, workflows, and views that match how your team actually sells and operates.", icon: I.code },
+  { no: "03", name: "Workflow Automation", body: "Automate repetitive tasks, approvals, and follow-ups so your team spends less time on data entry.", icon: I.bot },
+  { no: "04", name: "System Integrations", body: "Connect your CRM with the other tools, platforms, and systems your business already runs on.", icon: I.link },
+  { no: "05", name: "Data Migration", body: "Secure, accurate migration of existing customer and business data with minimal disruption.", icon: I.server },
+  { no: "06", name: "Dashboards & Reporting", body: "Real-time dashboards and reports that turn raw data into decisions you can act on.", icon: I.chart }
+];
+
+const crmPlatforms = [
+  { name: "Salesforce CRM", icon: I.cloud },
+  { name: "Microsoft Dynamics 365", icon: I.server },
+  { name: "HubSpot CRM", icon: I.link },
+  { name: "Power BI Analytics", icon: I.chart },
+  { name: "Other CRM/Business Systems", icon: I.globe }
+];
+
+const crmBenefits = [
+  { name: "Centralized Customer Data", body: "One consistent view of every customer, account, and interaction across your business." },
+  { name: "Better Visibility", body: "Clear insight into pipeline, performance, and operations without digging through spreadsheets." },
+  { name: "Automated Workflows", body: "Less manual data entry and fewer dropped follow-ups, with routine tasks handled automatically." },
+  { name: "Improved Reporting", body: "Dashboards and reports built around the metrics that actually matter to your business." },
+  { name: "Connected Systems", body: "Your CRM working together with the other platforms your team relies on every day." },
+  { name: "Scalable Processes", body: "A setup that grows with your business instead of needing to be rebuilt as you add users." }
+];
+
+const crmWhoFor = [
+  { name: "Medical Practices", icon: I.cross },
+  { name: "Professional Services", icon: I.briefcase },
+  { name: "Retail Businesses", icon: I.bag },
+  { name: "Multi-Location Businesses", icon: I.globe },
+  { name: "Sales Organizations", icon: I.growth },
+  { name: "Growing Companies", icon: I.chart }
+];
+
+const crmSteps = [
+  { no: "01", name: "Discovery", body: "Understand the business, current systems, processes, data, and goals." },
+  { no: "02", name: "Solution Design", body: "Determine the appropriate CRM, integrations, automation, and reporting structure." },
+  { no: "03", name: "Implementation", body: "Configure, integrate, migrate data, test, and deploy the agreed solution." },
+  { no: "04", name: "Support & Optimization", body: "Provide ongoing support and improvements as business requirements evolve." }
+];
+
+function crmBusinessIntelligencePage() {
+  const heroTrustStrip = ["CRM Implementation", "Automation", "Integrations", "Business Intelligence"].map(label =>
+    '<div class="hero-tag">' + label + '</div>').join("");
+
+  const coreServiceCards = crmCoreServices.map(s =>
+    '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
+      '<div style="font-size: 12.5px; font-weight: 800; color: #9db4dd; letter-spacing: 0.05em; margin-bottom: 10px;">' + s.no + '</div>' +
+      '<div style="width: 42px; height: 42px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 12px;">' +
+        icon(s.icon, 20, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.45; color: #46536b;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const platformBlocks = crmPlatforms.map(p =>
+    '<div style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 12px; padding: 15px 16px;">' +
+      '<div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(30,95,224,0.12); border: 1px solid rgba(77,141,255,0.3); display: grid; place-items: center; flex-shrink: 0;">' +
+        icon(p.icon, 17, "#4d8dff") + '</div>' +
+      '<div style="font-size: 14px; font-weight: 600; color: #eef2fa;">' + p.name + '</div>' +
+    '</div>').join("");
+
+  const benefitCards = crmBenefits.map(b =>
+    '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
+      '<div style="width: 26px; height: 26px; border-radius: 50%; background: rgba(30,95,224,0.09); border: 1px solid rgba(30,95,224,0.3); display: grid; place-items: center; margin-bottom: 14px;">' +
+        icon(I.check, 13, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + b.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.45; color: #46536b;">' + b.body + '</div>' +
+    '</div>').join("");
+
+  const whoForBlocks = crmWhoFor.map(w =>
+    '<div style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #dbe3f0; border-radius: 12px; padding: 15px 16px;">' +
+      '<div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; flex-shrink: 0;">' +
+        icon(w.icon, 17, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 14px; font-weight: 600; color: #0c1220;">' + w.name + '</div>' +
+    '</div>').join("");
+
+  const stepCards = crmSteps.map(s =>
+    '<div style="text-align: center;">' +
+      '<div style="width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 2px solid #1e5fe0; display: grid; place-items: center; margin: 0 auto 16px; font-weight: 800; color: #1e5fe0; font-size: 16px;">' + s.no + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.5; color: #46536b; max-width: 30ch; margin: 0 auto;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; background: #060a14; border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden;">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 60px; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">CRM & Business Intelligence</div>' +
+        '<h1 style="font-size: 40px; font-weight: 800; line-height: 1.15; margin: 0 0 18px;">Turn Business Data Into<br><span style="color: #4d8dff;">Better Decisions.</span></h1>' +
+        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 50ch;">AxisForce helps businesses implement, customize, integrate, and optimize CRM and business intelligence solutions built around their operations.</p>' +
+        '<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 26px;">' +
+          btnPrimary("Request a CRM & BI Quote &nbsp;→", "contact", "15px 26px", "16px") +
+          '<a href="tel:+13462181253" class="btn btn-ghost-dark" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Call ' + PHONE + '</a>' +
+        '</div>' +
+        '<div class="hero-tags">' + heroTrustStrip + '</div>' +
+      '</div>' +
+      '<div style="min-width: 0;">' + fullImageFrame("/assets/images/axisforce-crm-hero.webp", "AxisForce CRM and business intelligence dashboard on a laptop showing revenue, pipeline, and reporting connected to customers, sales, automation, and insights", 1536, 1024, false) + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">What We Do</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">CRM & BI Built Around Your Business</h2>' +
+      '</div>' +
+      '<div class="grid-sw-process" style="gap: 20px;">' + coreServiceCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 76px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; margin-bottom: 48px;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Platforms We Work With</div>' +
+        '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">One Connected View of Your Business.</h2>' +
+        '<p style="font-size: 15.5px; line-height: 1.65; color: #aeb8cd; margin: 0; max-width: 52ch;">AxisForce connects customer information, operational data, and sales activity into a single, more useful view — whether your business runs on Salesforce, Microsoft Dynamics 365, HubSpot, Power BI, or another platform.</p>' +
+      '</div>' +
+      '<div style="min-width: 0;">' + fullImageFrame("/assets/images/axisforce-crm-platforms.webp", "Salesforce, Microsoft Dynamics 365, HubSpot, and Power BI platform logos connected to an AxisForce executive dashboard on a laptop", 1536, 1024, true) + '</div>' +
+    '</div>' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div class="grid-services" style="display: grid; gap: 16px;">' + platformBlocks + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Why It Matters</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">Built to Make Your Business Run Smarter</h2>' +
+      '</div>' +
+      '<div class="grid-sw-process" style="gap: 20px;">' + benefitCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 40px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Who We Work With</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0 0 14px;">CRM & BI Solutions For Growing Businesses</h2>' +
+      '</div>' +
+      '<div class="grid-services" style="display: grid; gap: 16px;">' + whoForBlocks + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 62px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 42px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">A Simple Process</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">From Discovery to Ongoing Optimization</h2>' +
+      '</div>' +
+      '<div style="position: relative;">' +
+        '<div class="sec-step-line" style="position: absolute; top: 22px; left: 60px; right: 60px; height: 1px; background: rgba(30,95,224,0.2); z-index: 0;"></div>' +
+        '<div class="grid-services" style="display: grid; gap: 24px; position: relative; z-index: 1;">' + stepCards + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 76px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' + fullImageFrame("/assets/images/axisforce-crm-executive-dashboard.webp", "Business professional reviewing a connected CRM and business intelligence executive dashboard on a desktop monitor", 1536, 1024, true) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Straightforward Pricing</div>' +
+        '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">Custom CRM & BI Solutions.</h2>' +
+        '<p style="font-size: 15.5px; line-height: 1.65; color: #aeb8cd; margin: 0 0 26px; max-width: 52ch;">CRM and business intelligence projects vary considerably depending on users, platforms, integrations, data migration, dashboards, automation, and business requirements — so pricing is scoped individually rather than fixed.</p>' +
+        '<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(124,174,255,0.2); border-radius: 14px; padding: 22px 24px; display: inline-block;">' +
+          '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9db4dd; margin-bottom: 10px;">CRM & Business Intelligence</div>' +
+          '<div style="font-size: 30px; font-weight: 800; color: #eef2fa; margin-bottom: 16px;">Custom Quote</div>' +
+          btnPrimary("Request a Quote &nbsp;→", "contact", "14px 26px", "15.5px") +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 0 32px 64px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
+      '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
+      '<div>' +
+        '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">Let\'s Get Started</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">Build a Smarter, More Connected Business.</h2>' +
+      '</div>' +
+      '<div>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Tell us about your current CRM, reporting, integration, or automation needs. We\'ll help determine the right combination of platform, configuration, and support for your business.</p>' +
+        btnPrimary("Request a CRM & BI Quote &nbsp;→", "contact", "15px 26px", "16px") +
+        '<div style="font-size: 15px; font-weight: 600; color: #8b95ab; margin-top: 16px;">Or call us directly: <a href="tel:+13462181253" style="color: #eef2fa; text-decoration: none;">' + PHONE + '</a></div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
 function contactPage() {
   const rows = contactRows.map(c =>
     '<div class="info-row">' +
@@ -2317,35 +2527,41 @@ function contactPage() {
     '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start;">' +
       '<div>' + rows +
         '<div class="grid-cases" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px;">' +
-          '<div style="border: 1.5px dashed #c7d2e4; border-radius: 12px; padding: 28px 22px; text-align: center; background: #fff;">' +
-            icon(I.pin, 30, "#62708a", "margin-bottom: 8px;") +
-            '<div style="font-size: 14.5px; font-weight: 700; color: #34415c;">Google Map</div>' +
-            '<div style="font-size: 13px; color: #62708a; margin-top: 4px;">Embed goes here once the office address is public.</div>' +
+          '<div style="border: 1px solid #dbe3f0; border-radius: 12px; padding: 28px 22px; text-align: center; background: #fff;">' +
+            '<div style="width: 44px; height: 44px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin: 0 auto 12px;">' +
+              icon(I.headset, 21, "#1e5fe0") + '</div>' +
+            '<div style="font-size: 16px; font-weight: 700; color: #0c1220; margin-bottom: 6px;">Call Us</div>' +
+            '<div style="font-size: 13px; color: #62708a; line-height: 1.45; margin-bottom: 16px;">Speak directly with our team about your technology needs.</div>' +
+            '<a href="tel:+13462181253" class="btn btn-primary" style="padding: 10px 18px; font-size: 14.5px; box-shadow: none; text-decoration: none; display: inline-flex; align-items: center;">Call Now &nbsp;→</a>' +
           '</div>' +
-          '<div style="border: 1.5px dashed #c7d2e4; border-radius: 12px; padding: 28px 22px; text-align: center; background: #fff;">' +
-            icon("M8 2v4M16 2v4M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z", 30, "#62708a", "margin-bottom: 8px;") +
-            '<div style="font-size: 14.5px; font-weight: 700; color: #34415c;">Book Directly</div>' +
-            '<div style="font-size: 13px; color: #62708a; margin-top: 4px;">Calendly embed goes here — send your booking link.</div>' +
+          '<div style="border: 1px solid #dbe3f0; border-radius: 12px; padding: 28px 22px; text-align: center; background: #fff;">' +
+            '<div style="width: 44px; height: 44px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin: 0 auto 12px;">' +
+              icon("M8 2v4M16 2v4M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z", 21, "#1e5fe0") + '</div>' +
+            '<div style="font-size: 16px; font-weight: 700; color: #0c1220; margin-bottom: 6px;">Schedule a Consultation</div>' +
+            '<div style="font-size: 13px; color: #62708a; line-height: 1.45; margin-bottom: 16px;">Choose a convenient time for a 30-minute consultation with our team.</div>' +
+            '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 18px; font-size: 14.5px; box-shadow: none; text-decoration: none; display: inline-flex; align-items: center;">Schedule Consultation &nbsp;→</a>' +
           '</div>' +
         '</div>' +
       '</div>' +
       '<form style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 36px; box-shadow: 0 2px 10px rgba(19,26,40,0.05); display: grid; gap: 18px;" onsubmit="return contactSubmit(event)">' +
-        '<div class="field"><label for="cf-name">Name</label><input id="cf-name" placeholder="Jane Okoye"></div>' +
-        '<div class="field"><label for="cf-org">Practice or business</label><input id="cf-org" placeholder="Bayou City Family Medicine"></div>' +
+        '<div class="field"><label for="cf-name">Name</label><input id="cf-name" name="name" required placeholder="Jane Okoye"></div>' +
+        '<div class="field"><label for="cf-org">Practice or business</label><input id="cf-org" name="company" placeholder="Bayou City Family Medicine"></div>' +
         '<div class="grid-cases" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">' +
-          '<div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" placeholder="you@business.com"></div>' +
-          '<div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" placeholder="(346) 000-0000"></div>' +
+          '<div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" required placeholder="you@business.com"></div>' +
+          '<div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" name="phone" type="tel" placeholder="(346) 000-0000"></div>' +
         '</div>' +
         '<div class="field"><label for="cf-need">What do you need?</label>' +
-          '<select id="cf-need">' +
+          '<select id="cf-need" name="service" required>' +
             '<option>Managed IT &amp; helpdesk</option><option>Security cameras &amp; access control</option>' +
             '<option>Network or WiFi buildout</option><option>Medical billing &amp; billing systems</option>' +
             '<option>Website, SEO or ads</option><option>AI automation</option><option>Not sure yet</option>' +
           '</select>' +
         '</div>' +
-        '<div class="field"><label for="cf-msg">Details</label><textarea id="cf-msg" rows="4" placeholder="Four providers, two locations, Athena EHR, current IT guy is unreachable."></textarea></div>' +
-        '<button type="submit" class="btn btn-primary" style="padding: 14px; font-size: 16px; box-shadow: none;">Request the Call</button>' +
-        '<div id="cf-thanks" style="display: none; font-size: 14.5px; font-weight: 700; color: #1e5fe0;">Thanks — we reply within one business day.</div>' +
+        '<div class="field"><label for="cf-msg">Details</label><textarea id="cf-msg" name="message" required rows="4" placeholder="Four providers, two locations, Athena EHR, current IT guy is unreachable."></textarea></div>' +
+        '<input type="text" name="_gotcha" style="display: none;" tabindex="-1" autocomplete="off">' +
+        '<button type="submit" id="cf-submit" class="btn btn-primary" style="padding: 14px; font-size: 16px; box-shadow: none;">Request the Call</button>' +
+        '<div id="cf-thanks" role="status" aria-live="polite" style="display: none; font-size: 14.5px; font-weight: 700; color: #1e5fe0;">Thank you! Your message has been sent. Our team will get back to you soon.</div>' +
+        '<div id="cf-error" role="alert" aria-live="assertive" style="display: none; font-size: 14.5px; font-weight: 700; color: #c0392b;">We couldn\'t send your message. Please try again or contact us directly at info@axisforce.net.</div>' +
         '<div style="font-size: 13px; color: #62708a; line-height: 1.45;">We reply within one business day. Nothing sent here is treated as PHI — please do not include patient information.</div>' +
       '</form>' +
     '</div>' +
@@ -2680,7 +2896,8 @@ const PAGE_META = {
   "security-cameras": { title: "Security Camera Systems | AxisForce", desc: "Professional security camera installation for Houston businesses — cameras, NVR/DVR systems, remote viewing and system setup, starting at $300 per site." },
   "network-wifi": { title: "Network & Wi-Fi Solutions | AxisForce", desc: "Professional business network and Wi-Fi installation, configuration and troubleshooting for Houston businesses — wired networking, equipment setup and structured cabling." },
   "websites-marketing": { title: "Websites & Digital Marketing Services | AxisForce Houston", desc: "AxisForce provides website design and digital marketing services for businesses in Houston, including local SEO, social media, digital campaigns, website support, and online presence management." },
-  "custom-software": { title: "Custom Software Development | AxisForce Houston", desc: "AxisForce builds custom software, internal portals, dashboards, integrations, and business automation designed around how your business actually operates — not generic off-the-shelf tools." }
+  "custom-software": { title: "Custom Software Development | AxisForce Houston", desc: "AxisForce builds custom software, internal portals, dashboards, integrations, and business automation designed around how your business actually operates — not generic off-the-shelf tools." },
+  "crm-business-intelligence": { title: "CRM & Business Intelligence | AxisForce Houston", desc: "AxisForce provides CRM implementation, customization, automation, integrations, data migration, dashboards, and reporting for Salesforce, Microsoft Dynamics 365, HubSpot, Power BI, and other business platforms." }
 };
 
 function updateMeta() {
@@ -2711,6 +2928,7 @@ function render() {
   else if (p === "network-wifi") body = networkWifiPage();
   else if (p === "websites-marketing") body = websitesMarketingPage();
   else if (p === "custom-software") body = customSoftwarePage();
+  else if (p === "crm-business-intelligence") body = crmBusinessIntelligencePage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
@@ -2721,7 +2939,7 @@ function render() {
   else if (p === "portal") body = state.signedIn ? portalAppPage() : portalLoginPage();
   else { state.page = "home"; body = homePage(); }
 
-  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi" && state.page !== "websites-marketing" && state.page !== "custom-software";
+  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi" && state.page !== "websites-marketing" && state.page !== "custom-software" && state.page !== "crm-business-intelligence";
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
     header() + body + (showCta ? ctaSection() : "") + footer() +
