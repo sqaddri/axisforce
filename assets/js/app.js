@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/", "websites-marketing": "/services/websites-marketing/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi", "/services/websites-marketing": "websites-marketing" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/", "websites-marketing": "/services/websites-marketing/", "custom-software": "/services/custom-software/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi", "/services/websites-marketing": "websites-marketing", "/services/custom-software": "custom-software" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -87,7 +87,8 @@ const I = {
   check: "M4 12l5 5L20 6",
   link: "M9 17H7a5 5 0 0 1 0-10h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8",
   search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35",
-  device: "M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 19h2"
+  device: "M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 19h2",
+  cloud: "M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A4.5 4.5 0 0 1 17 18H7z"
 };
 
 function icon(path, size, color, extra) {
@@ -160,7 +161,7 @@ const services = [
     outcome: "More calls from people already looking for exactly what you sell.",
     whoFor: "Local businesses that win by being found first.",
     items: ["Professional website", "Local SEO", "Google Business Profile", "Analytics & lead tracking", "Maintenance & hosting", "Monthly reporting"] },
-  { no: "08", name: "Custom Software", meta: "Request a Quote", group: "Automation & Software", cta: "Explore Custom Software",
+  { no: "08", name: "Custom Software", meta: "Request a Quote", group: "Automation & Software", cta: "Explore Custom Software", page: "custom-software",
     problem: "Off-the-shelf tools almost fit — so your team lives in spreadsheets and workarounds.",
     long: "Custom internal portals, dashboards, integrations and business applications built around your actual processes.",
     outcome: "Software shaped to your operation, owned by you.",
@@ -367,7 +368,7 @@ const footerCols = [
     { label: "Medical Billing Services", go: "svc:03" }, { label: "Medical Billing Software", go: "medical-billing-software" },
     { label: "Security Cameras", go: "security-cameras" }, { label: "Network & Wi-Fi", go: "network-wifi" },
     { label: "Websites & Marketing", go: "websites-marketing" }, { label: "CRM & Business Intelligence", go: "svc:09" },
-    { label: "Custom Software", go: "svc:08" } ] },
+    { label: "Custom Software", go: "custom-software" } ] },
   { title: "Company", links: [
     { label: "About", go: "about" }, { label: "Industries", go: "industries" }, { label: "Pricing", go: "pricing" },
     { label: "Contact", go: "contact" }, { label: "Client Login", go: "portal" } ] },
@@ -486,7 +487,7 @@ function footer() {
     '</div>').join("");
   return '' +
   '<footer style="border-top: 1px solid rgba(255,255,255,0.07); background: #05080f;">' +
-    '<div class="grid-4" style="max-width: 1280px; margin: 0 auto; padding: 52px 32px 32px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px;">' +
+    '<div class="grid-4 footer-grid" style="max-width: 1280px; margin: 0 auto; padding: 52px 32px 32px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px;">' +
       '<div>' +
         '<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">' +
           '<img src="/assets/images/branding/axisforce-mark.png" alt="AxisForce logo" style="width: 28px; height: 28px; object-fit: contain;">' +
@@ -524,9 +525,9 @@ function homePage() {
 
   const partnersRow = SHOW_PARTNERS ?
     '<section style="border-bottom: 1px solid rgba(255,255,255,0.06); background: #08101f;">' +
-      '<div style="max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">' +
+      '<div class="tech-row" style="max-width: 1280px; margin: 0 auto; padding: 22px 32px;">' +
       '<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #4d8dff; white-space: nowrap;">Technologies We Work With</span>' +
-      '<div style="display: flex; flex-wrap: wrap; gap: 24px; flex: 1; justify-content: flex-end;">' +
+      '<div class="tech-grid">' +
       partners.map(pt => '<span style="font-size: 16px; font-weight: 700; letter-spacing: 0.02em; color: #5c6579;">' + pt + "</span>").join("") +
       '</div></div></section>' : "";
 
@@ -1251,9 +1252,8 @@ const billingSoftwareWhy = [
 ];
 
 function medicalBillingSoftwarePage() {
-  const featureStrip = ["Patient Management", "Claims Tracking", "Billing Reports", "Document Management"].map((label, i) =>
-    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfd8ea; padding: 0 16px 8px 0;' +
-    (i > 0 ? " border-left: 1px solid rgba(255,255,255,0.12); padding-left: 16px;" : "") + '">' + label + "</div>").join("");
+  const featureStrip = ["Patient Management", "Claims Tracking", "Billing Reports", "Document Management"].map(label =>
+    '<div class="hero-tag">' + label + '</div>').join("");
 
   const featureCards = billingSoftwareFeatures.map(f =>
     '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 19px 21px; min-height: 148px;">' +
@@ -1303,7 +1303,7 @@ function medicalBillingSoftwarePage() {
           btnPrimary("Request a Software Demo &nbsp;→", "contact", "15px 26px", "16px") +
           '<span class="go-link" style="font-size: 15px; font-weight: 700; color: #cfd8ea;" onclick="document.getElementById(\'billing-software-features\').scrollIntoView({behavior:\'smooth\'})">Explore Features &nbsp;↓</span>' +
         '</div>' +
-        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + featureStrip + '</div>' +
+        '<div class="hero-tags">' + featureStrip + '</div>' +
       '</div>' +
       '<div style="min-width: 0;">' + heroShowcaseImage("/assets/images/axisforce-medical-billing-software-hero.webp", "AxisForce Medical Billing Software — smarter billing, stronger revenue, shown on a laptop billing dashboard") + '</div>' +
     '</div>' +
@@ -1458,9 +1458,8 @@ const secSupportFeatures = [
 ];
 
 function securityCamerasPage() {
-  const heroTrustStrip = ["Professional Installation", "Remote Viewing", "NVR/DVR Setup", "Business Security"].map((label, i) =>
-    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfd8ea; padding: 0 16px 8px 0;' +
-    (i > 0 ? " border-left: 1px solid rgba(255,255,255,0.12); padding-left: 16px;" : "") + '">' + label + "</div>").join("");
+  const heroTrustStrip = ["Professional Installation", "Remote Viewing", "NVR/DVR Setup", "Business Security"].map(label =>
+    '<div class="hero-tag">' + label + '</div>').join("");
 
   const solutionCards = secSolutions.map(s =>
     '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
@@ -1534,7 +1533,7 @@ function securityCamerasPage() {
           btnPrimary("Get a Free Camera Quote &nbsp;→", "contact", "15px 26px", "16px") +
           '<a href="tel:+13462181253" class="btn btn-ghost-dark" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Call ' + PHONE + '</a>' +
         '</div>' +
-        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + heroTrustStrip + '</div>' +
+        '<div class="hero-tags hero-tags-1col">' + heroTrustStrip + '</div>' +
       '</div>' +
       '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-security-camera-hero.webp", "AxisForce-installed security cameras mounted outside a commercial building at night", "736 / 780", 736, 780, false) + '</div>' +
     '</div>' +
@@ -1700,9 +1699,8 @@ const netSupportItems = [
 ];
 
 function networkWifiPage() {
-  const heroTrustStrip = ["Business Wi-Fi", "Network Setup", "Structured Cabling", "Troubleshooting"].map((label, i) =>
-    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfd8ea; padding: 0 16px 8px 0;' +
-    (i > 0 ? " border-left: 1px solid rgba(255,255,255,0.12); padding-left: 16px;" : "") + '">' + label + "</div>").join("");
+  const heroTrustStrip = ["Business Wi-Fi", "Network Setup", "Structured Cabling", "Troubleshooting"].map(label =>
+    '<div class="hero-tag">' + label + '</div>').join("");
 
   const coreServiceCards = netCoreServices.map(s =>
     '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
@@ -1776,7 +1774,7 @@ function networkWifiPage() {
           btnPrimary("Get a Free Network Quote &nbsp;→", "contact", "15px 26px", "16px") +
           '<a href="tel:+13462181253" class="btn btn-ghost-dark" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Call ' + PHONE + '</a>' +
         '</div>' +
-        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + heroTrustStrip + '</div>' +
+        '<div class="hero-tags">' + heroTrustStrip + '</div>' +
       '</div>' +
       '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-network-wifi-hero.webp", "Wireless access point broadcasting Wi-Fi coverage across a modern open office", "1260 / 1024", 1260, 1024, false) + '</div>' +
     '</div>' +
@@ -1942,9 +1940,8 @@ const mktSupportItems = [
 ];
 
 function websitesMarketingPage() {
-  const heroTrustStrip = ["Website Design", "Digital Marketing", "Local SEO", "Social Media"].map((label, i) =>
-    '<div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfd8ea; padding: 0 16px 8px 0;' +
-    (i > 0 ? " border-left: 1px solid rgba(255,255,255,0.12); padding-left: 16px;" : "") + '">' + label + "</div>").join("");
+  const heroTrustStrip = ["Website Design", "Digital Marketing", "Local SEO", "Social Media"].map(label =>
+    '<div class="hero-tag">' + label + '</div>').join("");
 
   const coreServiceCards = mktCoreServices.map(s =>
     '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
@@ -2018,7 +2015,7 @@ function websitesMarketingPage() {
           btnPrimary("Get a Free Marketing Consultation &nbsp;→", "contact", "15px 26px", "16px") +
           '<a href="tel:+13462181253" class="btn btn-ghost-dark" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Call ' + PHONE + '</a>' +
         '</div>' +
-        '<div style="display: flex; align-items: center; flex-wrap: wrap;">' + heroTrustStrip + '</div>' +
+        '<div class="hero-tags">' + heroTrustStrip + '</div>' +
       '</div>' +
       '<div style="min-width: 0;">' + secImageFrame("/assets/images/axisforce-websites-marketing-hero.webp", "Website design and marketing dashboard concept shown on a desktop monitor", "845 / 740", 845, 1091, false, "50% 12%") + '</div>' +
     '</div>' +
@@ -2135,9 +2132,178 @@ function websitesMarketingPage() {
   '</main>';
 }
 
+function fullImageFrame(src, alt, w, h, lazy) {
+  return '' +
+  '<div style="position: relative;">' +
+    '<div style="position: absolute; inset: -14px; background: radial-gradient(circle at 50% 40%, rgba(47,123,255,0.12), transparent 72%); filter: blur(14px); pointer-events: none;"></div>' +
+    '<div style="position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(124,174,255,0.16); box-shadow: 0 20px 50px rgba(4,8,16,0.45); line-height: 0;">' +
+      '<img src="' + src + '" alt="' + alt + '" width="' + w + '" height="' + h + '"' + (lazy ? ' loading="lazy"' : '') + ' style="display: block; width: 100%; height: auto; object-fit: contain;">' +
+    '</div>' +
+  '</div>';
+}
+
+const swCoreServices = [
+  { no: "01", name: "Internal Portals", body: "Centralized systems for managing business information, workflows, users, and operations.", icon: I.briefcase },
+  { no: "02", name: "Dashboards & Reporting", body: "Custom dashboards that turn business data into clear, useful information.", icon: I.chart },
+  { no: "03", name: "System Integrations", body: "Connect existing platforms, applications, APIs, and business systems.", icon: I.link },
+  { no: "04", name: "Process Automation", body: "Reduce repetitive manual work by automating business processes and workflows.", icon: I.bot },
+  { no: "05", name: "Cloud Applications", body: "Modern web applications designed for secure and reliable cloud deployment.", icon: I.cloud },
+  { no: "06", name: "Ongoing Support", body: "Continued improvements, maintenance, troubleshooting, and application support.", icon: I.headset }
+];
+
+const swApproachFeatures = [
+  { name: "Dedicated Development", body: "Software built specifically around your workflow, not adapted from a generic template." },
+  { name: "Modern Technology", body: "Applications built using current, reliable web and cloud technologies." },
+  { name: "Integration-Ready", body: "Designed to connect with the other systems your business already uses." },
+  { name: "Ongoing Collaboration", body: "Regular communication throughout discovery, development, and deployment." }
+];
+
+const swWorkflowExamples = [
+  { name: "Internal Business Applications", icon: I.briefcase },
+  { name: "Customer/Client Portals", icon: I.users },
+  { name: "Reporting Dashboards", icon: I.chart },
+  { name: "Workflow Automation", icon: I.bot },
+  { name: "API Integrations", icon: I.link },
+  { name: "Multi-Location Systems", icon: I.globe },
+  { name: "Healthcare/Business Applications", icon: I.cross },
+  { name: "Custom Operational Tools", icon: I.code }
+];
+
+const swSteps = [
+  { no: "01", name: "Discovery", body: "Learn about the business, current workflow, and what the software needs to solve." },
+  { no: "02", name: "Planning", body: "Define scope, requirements, and a roadmap for the application." },
+  { no: "03", name: "Development", body: "Build the application around the agreed scope and requirements." },
+  { no: "04", name: "Testing", body: "Verify functionality, reliability, and performance before launch." },
+  { no: "05", name: "Deployment", body: "Launch and migrate the application to its production environment." },
+  { no: "06", name: "Support", body: "Provide ongoing improvements, maintenance, and troubleshooting." }
+];
+
+function customSoftwarePage() {
+  const heroTrustStrip = ["Internal Portals", "Dashboards", "Integrations", "Automation"].map(label =>
+    '<div class="hero-tag">' + label + '</div>').join("");
+
+  const coreServiceCards = swCoreServices.map(s =>
+    '<div class="mbs-feature-card" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 22px;">' +
+      '<div style="font-size: 12.5px; font-weight: 800; color: #9db4dd; letter-spacing: 0.05em; margin-bottom: 10px;">' + s.no + '</div>' +
+      '<div style="width: 42px; height: 42px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 12px;">' +
+        icon(s.icon, 20, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #0c1220;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.45; color: #46536b;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  const approachRows = swApproachFeatures.map(f =>
+    '<div style="display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">' +
+      '<div style="width: 26px; height: 26px; border-radius: 50%; background: rgba(30,95,224,0.15); border: 1px solid rgba(77,141,255,0.4); display: grid; place-items: center; flex-shrink: 0; margin-top: 2px;">' +
+        icon(I.check, 13, "#4d8dff") + '</div>' +
+      '<div>' +
+        '<div style="font-size: 16px; font-weight: 700; margin-bottom: 3px;">' + f.name + '</div>' +
+        '<div style="font-size: 14px; color: #8b95ab; line-height: 1.45;">' + f.body + '</div>' +
+      '</div>' +
+    '</div>').join("");
+
+  const workflowBlocks = swWorkflowExamples.map(x =>
+    '<div style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #dbe3f0; border-radius: 12px; padding: 15px 16px;">' +
+      '<div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; flex-shrink: 0;">' +
+        icon(x.icon, 17, "#1e5fe0") + '</div>' +
+      '<div style="font-size: 14px; font-weight: 600; color: #0c1220;">' + x.name + '</div>' +
+    '</div>').join("");
+
+  const stepCards = swSteps.map(s =>
+    '<div style="text-align: center;">' +
+      '<div style="width: 44px; height: 44px; border-radius: 50%; background: #060a14; border: 2px solid #4d8dff; display: grid; place-items: center; margin: 0 auto 16px; font-weight: 800; color: #4d8dff; font-size: 16px;">' + s.no + '</div>' +
+      '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: #eef2fa;">' + s.name + '</div>' +
+      '<div style="font-size: 13.5px; line-height: 1.5; color: #8b95ab; max-width: 32ch; margin: 0 auto;">' + s.body + '</div>' +
+    '</div>').join("");
+
+  return '<main>' +
+  '<section style="position: relative; background: #060a14; border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden;">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 60px; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Custom Software Solutions</div>' +
+        '<h1 style="font-size: 40px; font-weight: 800; line-height: 1.15; margin: 0 0 18px;">Software Built Around Your Business.<br><span style="color: #4d8dff;">Not the Other Way Around.</span></h1>' +
+        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0 0 28px; max-width: 50ch;">Custom applications, internal portals, dashboards, integrations, and automation designed around the way your business actually operates.</p>' +
+        '<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 26px;">' +
+          btnPrimary("Request a Custom Software Quote &nbsp;→", "contact", "15px 26px", "16px") +
+          '<a href="tel:+13462181253" class="btn btn-ghost-dark" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Call ' + PHONE + '</a>' +
+        '</div>' +
+        '<div class="hero-tags">' + heroTrustStrip + '</div>' +
+      '</div>' +
+      '<div style="min-width: 0;">' + fullImageFrame("/assets/images/axisforce-custom-software-hero.webp", "Custom software concept showing a desktop dashboard, tablet, and laptop with the AxisForce build-test-deploy process and technology stack", 1536, 1024, false) + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0; color: #0c1220;">Custom Software Designed for Real Business Needs</h2>' +
+      '</div>' +
+      '<div class="grid-sw-process" style="gap: 20px;">' + coreServiceCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 76px 32px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center;">' +
+      '<div style="min-width: 0;">' + fullImageFrame("/assets/images/axisforce-custom-software-solutions.webp", "Custom software solutions concept showing internal portals, dashboards, system integrations, process automation, and a project progress timeline", 1536, 1024, true) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">How We Build Software</div>' +
+        '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 18px; line-height: 1.1;">From Concept to Fully Supported Software.</h2>' +
+        '<p style="font-size: 15.5px; line-height: 1.65; color: #aeb8cd; margin: 0 0 8px; max-width: 52ch;">Custom software is more than writing code. AxisForce plans, builds, tests, deploys, and supports each application as part of one coordinated process — designed around your business rather than a generic template.</p>' +
+        approachRows +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; margin-bottom: 56px;">' +
+      '<div style="min-width: 0;">' + fullImageFrame("/assets/images/axisforce-custom-software-dashboard.webp", "AxisForce-branded custom dashboard application shown across a monitor, laptop, and tablet", 1535, 1024, true) + '</div>' +
+      '<div>' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Not One-Size-Fits-All</div>' +
+        '<h2 style="font-size: 30px; font-weight: 800; margin: 0 0 16px; line-height: 1.15; color: #0c1220;">Technology That Fits Your Workflow.</h2>' +
+        '<p style="font-size: 15px; line-height: 1.6; color: #46536b; margin: 0;">Off-the-shelf software often forces a business to adapt to the tool. AxisForce takes the opposite approach — starting with how your business actually operates, then designing software around that reality.</p>' +
+      '</div>' +
+    '</div>' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div class="grid-services" style="display: grid; gap: 16px;">' + workflowBlocks + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 76px 32px;">' +
+    '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="text-align: center; margin-bottom: 48px;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">A Simple Process</div>' +
+        '<h2 style="font-size: 36px; font-weight: 800; margin: 0;">Discovery to Ongoing Support</h2>' +
+      '</div>' +
+      '<div class="grid-sw-process">' + stepCards + '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="background: #f2f5fa; color: #131a28; padding: 76px 32px;">' +
+    '<div style="max-width: 700px; margin: 0 auto; text-align: center;">' +
+      '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1e5fe0; margin-bottom: 12px;">Straightforward Pricing</div>' +
+      '<h2 style="font-size: 32px; font-weight: 800; margin: 0 0 32px; color: #0c1220;">Custom Software, Custom Scope.</h2>' +
+      '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 18px; padding: 40px 36px;">' +
+        '<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #62708a; margin-bottom: 14px;">Custom Software</div>' +
+        '<div style="font-size: 34px; font-weight: 800; color: #0c1220; margin-bottom: 18px;">Custom Quote</div>' +
+        '<div style="font-size: 15px; line-height: 1.6; color: #46536b; margin-bottom: 26px;">Pricing depends on project scope, integrations, complexity, number of users, hosting requirements, and ongoing support needs. We\'ll scope your project before providing a quote.</div>' +
+        btnPrimary("Request a Quote &nbsp;→", "contact", "14px 26px", "15.5px") +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '<section style="padding: 76px 32px 64px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
+      '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
+      '<div>' +
+        '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">Ready To Build Something?</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">Have a Process That Should Be Software?</h2>' +
+      '</div>' +
+      '<div>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Tell us how your business currently works and what you want to improve. We\'ll help determine whether a custom application, integration, dashboard, or automation is the right solution.</p>' +
+        btnPrimary("Start a Conversation &nbsp;→", "contact", "15px 26px", "16px") +
+        '<div style="font-size: 15px; font-weight: 600; color: #8b95ab; margin-top: 16px;">Or call us directly: <a href="tel:+13462181253" style="color: #eef2fa; text-decoration: none;">' + PHONE + '</a></div>' +
+      '</div>' +
+    '</div>' +
+  '</section>' +
+  '</main>';
+}
+
 function contactPage() {
   const rows = contactRows.map(c =>
-    '<div style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid #dbe3f0;">' +
+    '<div class="info-row">' +
       '<span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #62708a; padding-top: 2px;">' + c.k + '</span>' +
       '<span style="font-size: 16px; color: #0c1220;">' + c.v + '</span>' +
     '</div>').join("");
@@ -2513,7 +2679,8 @@ const PAGE_META = {
   "medical-billing-software": { title: "Medical Billing Software | AxisForce", desc: "Medical billing software from AxisForce for managing patients, insurance, claims, payments, documents, A/R and billing reports from one centralized platform." },
   "security-cameras": { title: "Security Camera Systems | AxisForce", desc: "Professional security camera installation for Houston businesses — cameras, NVR/DVR systems, remote viewing and system setup, starting at $300 per site." },
   "network-wifi": { title: "Network & Wi-Fi Solutions | AxisForce", desc: "Professional business network and Wi-Fi installation, configuration and troubleshooting for Houston businesses — wired networking, equipment setup and structured cabling." },
-  "websites-marketing": { title: "Websites & Digital Marketing Services | AxisForce Houston", desc: "AxisForce provides website design and digital marketing services for businesses in Houston, including local SEO, social media, digital campaigns, website support, and online presence management." }
+  "websites-marketing": { title: "Websites & Digital Marketing Services | AxisForce Houston", desc: "AxisForce provides website design and digital marketing services for businesses in Houston, including local SEO, social media, digital campaigns, website support, and online presence management." },
+  "custom-software": { title: "Custom Software Development | AxisForce Houston", desc: "AxisForce builds custom software, internal portals, dashboards, integrations, and business automation designed around how your business actually operates — not generic off-the-shelf tools." }
 };
 
 function updateMeta() {
@@ -2543,6 +2710,7 @@ function render() {
   else if (p === "security-cameras") body = securityCamerasPage();
   else if (p === "network-wifi") body = networkWifiPage();
   else if (p === "websites-marketing") body = websitesMarketingPage();
+  else if (p === "custom-software") body = customSoftwarePage();
   else if (p === "services") body = servicesPage();
   else if (p === "pricing") body = pricingPage();
   else if (p === "industries") body = industriesPage();
@@ -2553,7 +2721,7 @@ function render() {
   else if (p === "portal") body = state.signedIn ? portalAppPage() : portalLoginPage();
   else { state.page = "home"; body = homePage(); }
 
-  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi" && state.page !== "websites-marketing";
+  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi" && state.page !== "websites-marketing" && state.page !== "custom-software";
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
     header() + body + (showCta ? ctaSection() : "") + footer() +
