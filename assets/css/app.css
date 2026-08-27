@@ -102,12 +102,14 @@ input, select, textarea, button { font-family: 'Barlow', sans-serif; }
   .hero-media { margin-right: 0 !important; }
   .footer-grid { grid-template-columns: 1fr 1fr !important; }
 }
+@media (max-width: 1100px) { .portal-login-grid { grid-template-columns: 1fr !important; } }
 @media (max-width: 720px) {
   .grid-4 { grid-template-columns: 1fr 1fr !important; }
   .grid-3 { grid-template-columns: 1fr !important; }
   .hero-cards { position: static !important; margin-top: 14px; grid-template-columns: 1fr 1fr !important; }
   .svc-row { grid-template-columns: 1fr !important; }
   .table-scroll { overflow-x: auto; }
+  .portal-login-media img { max-width: 240px !important; }
 }
 .hdr-burger { display: none; background: transparent; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 9px 11px; cursor: pointer; margin-left: auto; align-items: center; }
 .mob-menu { display: none; background: #0a101e; border-top: 1px solid rgba(255,255,255,0.08); }

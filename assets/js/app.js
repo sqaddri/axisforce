@@ -2650,14 +2650,17 @@ function termsPage() {
 
 function portalLoginPage() {
   return '' +
-  '<main class="grid-2" style="max-width: 1280px; margin: 0 auto; padding: 96px 32px; display: grid; grid-template-columns: 1fr 420px; gap: 72px; align-items: center; min-height: 62vh;">' +
-    '<div>' +
+  '<main class="grid-2 portal-login-grid" style="max-width: 1400px; margin: 0 auto; padding: 96px 32px; display: grid; grid-template-columns: 0.85fr 1.5fr 420px; gap: 40px; align-items: center; min-height: 62vh;">' +
+    '<div style="min-width: 0;">' +
       '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Client Portal</div>' +
-      '<h1 style="font-size: 52px; font-weight: 800; line-height: 1; margin: 0 0 18px;">Sign in.</h1>' +
-      '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; max-width: 44ch; margin: 0 0 28px;">Invoices, claim status, remittances and open tickets — one place, updated nightly from Availity and our ticketing system.</p>' +
+      '<h1 style="font-size: 52px; font-weight: 800; line-height: 1; margin: 0 0 18px;">Welcome back.</h1>' +
+      '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; max-width: 34ch; margin: 0 0 28px;">Access your AxisForce services, support requests, billing information, and account resources — all in one secure place.</p>' +
       '<div style="display: flex; flex-wrap: wrap; gap: 8px;">' +
         portalBadges.map(b => '<span style="padding: 5px 13px; border-radius: 999px; font-size: 13px; font-weight: 700; border: 1px solid rgba(124,174,255,0.35); color: #cfd8ea;">' + b + "</span>").join("") +
       '</div>' +
+    '</div>' +
+    '<div class="portal-login-media" style="min-width: 0; display: flex; align-items: center; justify-content: center;">' +
+      '<img src="/assets/images/axisforce-portal-hero.webp" alt="AxisForce client portal security and dashboard preview" width="1672" height="941" style="width: 100%; max-width: 560px; height: auto; display: block;">' +
     '</div>' +
     '<div style="background: rgba(10,16,30,0.85); border: 1px solid rgba(124,174,255,0.25); border-radius: 14px; padding: 34px; display: grid; gap: 18px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);">' +
       '<div class="field field-dark"><label for="pf-email">Work email</label><input id="pf-email" placeholder="you@business.com"></div>' +
@@ -2666,7 +2669,7 @@ function portalLoginPage() {
       '<div style="display: flex; justify-content: space-between; font-size: 14px; color: #8b95ab;">' +
         '<span style="cursor: pointer;">Forgot password</span><span style="cursor: pointer;">Request access</span>' +
       '</div>' +
-      '<div style="font-size: 13px; color: #8b95ab; border-top: 1px dashed rgba(124,174,255,0.25); padding-top: 14px; line-height: 1.45;">Prototype — press Sign In to view the demo account (Bayou City Family Medicine).</div>' +
+      '<div style="font-size: 12.5px; color: #62708a; text-align: center; border-top: 1px solid rgba(124,174,255,0.15); padding-top: 14px; line-height: 1.45;">Your information is protected with secure, encrypted access.</div>' +
     '</div>' +
   '</main>';
 }
