@@ -2526,21 +2526,14 @@ function contactPage() {
   '<section style="background: #f2f5fa; color: #131a28; padding: 56px 32px 72px;">' +
     '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start;">' +
       '<div>' + rows +
-        '<div class="grid-cases" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px;">' +
-          '<div style="border: 1px solid #dbe3f0; border-radius: 12px; padding: 28px 22px; text-align: center; background: #fff;">' +
-            '<div style="width: 44px; height: 44px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin: 0 auto 12px;">' +
-              icon(I.headset, 21, "#1e5fe0") + '</div>' +
-            '<div style="font-size: 16px; font-weight: 700; color: #0c1220; margin-bottom: 6px;">Call Us</div>' +
-            '<div style="font-size: 13px; color: #62708a; line-height: 1.45; margin-bottom: 16px;">Speak directly with our team about your technology needs.</div>' +
-            '<a href="tel:+13462181253" class="btn btn-primary" style="padding: 10px 18px; font-size: 14.5px; box-shadow: none; text-decoration: none; display: inline-flex; align-items: center;">Call Now &nbsp;→</a>' +
+        '<div class="consult-card" style="border: 1px solid #dbe3f0; border-radius: 12px; padding: 28px 32px; background: #fff; margin-top: 28px;">' +
+          '<div style="width: 52px; height: 52px; border-radius: 12px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; flex-shrink: 0;">' +
+            icon("M8 2v4M16 2v4M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z", 24, "#1e5fe0") + '</div>' +
+          '<div style="flex: 1;">' +
+            '<div style="font-size: 17px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">Schedule a Consultation</div>' +
+            '<div style="font-size: 13.5px; color: #62708a; line-height: 1.45;">Choose a convenient time for a 30-minute consultation with our team.</div>' +
           '</div>' +
-          '<div style="border: 1px solid #dbe3f0; border-radius: 12px; padding: 28px 22px; text-align: center; background: #fff;">' +
-            '<div style="width: 44px; height: 44px; border-radius: 11px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin: 0 auto 12px;">' +
-              icon("M8 2v4M16 2v4M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z", 21, "#1e5fe0") + '</div>' +
-            '<div style="font-size: 16px; font-weight: 700; color: #0c1220; margin-bottom: 6px;">Schedule a Consultation</div>' +
-            '<div style="font-size: 13px; color: #62708a; line-height: 1.45; margin-bottom: 16px;">Choose a convenient time for a 30-minute consultation with our team.</div>' +
-            '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 18px; font-size: 14.5px; box-shadow: none; text-decoration: none; display: inline-flex; align-items: center;">Schedule Consultation &nbsp;→</a>' +
-          '</div>' +
+          '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 12px 22px; font-size: 14.5px; box-shadow: none; text-decoration: none; display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap;">Schedule Consultation &nbsp;→</a>' +
         '</div>' +
       '</div>' +
       '<form style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 36px; box-shadow: 0 2px 10px rgba(19,26,40,0.05); display: grid; gap: 18px;" onsubmit="return contactSubmit(event)">' +
