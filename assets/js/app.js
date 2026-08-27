@@ -2522,7 +2522,7 @@ function contactPage() {
   pageHero("Contact",
     "Tell us what is breaking.",
     "Thirty-minute call, no pitch deck. We will tell you what we would do first and roughly what it costs — even if that is nothing.",
-    heroMedia(300, slot("/assets/images/axisforce-contact-hero.webp", "Headset next to a laptop showing Call, Email, and Location icons for contacting AxisForce", "", "", "", "contact-hero-img"))) +
+    heroMedia(300, slot("https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80", "On a call with a client", "Photo by Cytonn Photography on Unsplash", "https://unsplash.com/@cytonn_photography", ""))) +
   '<section style="background: #f2f5fa; color: #131a28; padding: 56px 32px 72px;">' +
     '<div class="contact-layout" style="max-width: 1280px; margin: 0 auto;">' +
       '<div class="contact-left">' +
