@@ -2524,17 +2524,18 @@ function contactPage() {
     "Thirty-minute call, no pitch deck. We will tell you what we would do first and roughly what it costs — even if that is nothing.",
     heroMedia(300, slot("https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80", "On a call with a client", "Photo by Cytonn Photography on Unsplash", "https://unsplash.com/@cytonn_photography", ""))) +
   '<section style="background: #f2f5fa; color: #131a28; padding: 56px 32px 72px;">' +
-    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start;">' +
-      '<div>' + rows +
-        '<div class="consult-card" style="border: 1px solid #dbe3f0; border-radius: 12px; padding: 28px 32px; background: #fff; margin-top: 28px;">' +
-          '<div style="width: 52px; height: 52px; border-radius: 12px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; flex-shrink: 0;">' +
-            icon("M8 2v4M16 2v4M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z", 24, "#1e5fe0") + '</div>' +
-          '<div style="flex: 1;">' +
-            '<div style="font-size: 17px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">Schedule a Consultation</div>' +
-            '<div style="font-size: 13.5px; color: #62708a; line-height: 1.45;">Choose a convenient time for a 30-minute consultation with our team.</div>' +
-          '</div>' +
-          '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 12px 22px; font-size: 14.5px; box-shadow: none; text-decoration: none; display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap;">Schedule Consultation &nbsp;→</a>' +
+    '<div class="contact-layout" style="max-width: 1280px; margin: 0 auto;">' +
+      '<div class="contact-left">' +
+      '<div class="contact-info">' + rows + '</div>' +
+      '<div class="consult-card" style="border: 1px solid #dbe3f0; border-radius: 12px; padding: 28px 32px; background: #fff;">' +
+        '<div style="width: 52px; height: 52px; border-radius: 12px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; flex-shrink: 0;">' +
+          icon("M8 2v4M16 2v4M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z", 24, "#1e5fe0") + '</div>' +
+        '<div style="flex: 1;">' +
+          '<div style="font-size: 17px; font-weight: 700; color: #0c1220; margin-bottom: 4px;">Schedule a Consultation</div>' +
+          '<div style="font-size: 13.5px; color: #62708a; line-height: 1.45;">Choose a convenient time for a 30-minute consultation with our team.</div>' +
         '</div>' +
+        '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 12px 22px; font-size: 14.5px; box-shadow: none; text-decoration: none; display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap;">Schedule Consultation &nbsp;→</a>' +
+      '</div>' +
       '</div>' +
       '<form style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 36px; box-shadow: 0 2px 10px rgba(19,26,40,0.05); display: grid; gap: 18px;" onsubmit="return contactSubmit(event)">' +
         '<div class="field"><label for="cf-name">Name</label><input id="cf-name" name="name" required placeholder="Jane Okoye"></div>' +

@@ -35,6 +35,20 @@ input, select, textarea, button { font-family: 'Barlow', sans-serif; }
 .consult-card { display: flex; align-items: center; gap: 24px; }
 @media (max-width: 720px) { .consult-card { flex-direction: column; text-align: center; } }
 
+.contact-layout { display: grid; grid-template-columns: 1fr 1.1fr; column-gap: 56px; align-items: start; }
+.contact-left > .consult-card { margin-top: 28px; }
+@media (max-width: 980px) {
+  .contact-layout { grid-template-columns: 1fr; row-gap: 28px; }
+  .contact-layout > form, .contact-info, .consult-card { min-width: 0; }
+}
+@media (max-width: 720px) {
+  .contact-left { display: contents; }
+  .contact-left > .consult-card { margin-top: 0; }
+  .contact-layout > form { order: -3; }
+  .contact-info { order: -1; }
+  .consult-card { order: -2; }
+}
+
 .imgslot { position: relative; width: 100%; height: 100%; overflow: hidden; }
 .imgslot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .imgslot .credit { position: absolute; right: 8px; bottom: 8px; font-size: 11px; color: rgba(255,255,255,0.75); background: rgba(6,10,20,0.55); padding: 3px 8px; border-radius: 999px; }
