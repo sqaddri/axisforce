@@ -424,7 +424,7 @@ function mobileMenu() {
     pages.map(([k, label]) =>
       '<div class="mob-link' + (state.page === k ? " active" : "") + '" onclick="nav(\'' + k + '\')">' + label + "</div>").join("") +
     '<div style="display: flex; gap: 12px; padding: 16px 24px; align-items: center; flex-wrap: wrap;">' +
-      '<button class="btn btn-primary" style="padding: 12px 18px; font-size: 15px;" onclick="nav(\'contact\')">Free Consultation</button>' +
+      '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 12px 18px; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center;">Free Consultation</a>' +
       '<button class="btn btn-ghost-dark" style="color: #cfd8ea; padding: 12px 18px; font-size: 14.5px;" onclick="nav(\'portal\')">Client Login</button>' +
     '</div>' +
     '<a href="tel:+13462181253" style="display: block; padding: 0 24px 16px; color: #8b95ab; font-weight: 700; font-size: 15px; text-decoration: none;">' + PHONE + '</a>' +
@@ -454,7 +454,7 @@ function header() {
           PHONE +
         '</a>' +
         '<button class="hdr-login btn" style="background: transparent; color: #cfd8ea; border: 1px solid rgba(255,255,255,0.25); padding: 10px 16px; font-size: 14.5px; white-space: nowrap;" onmouseover="this.style.borderColor=\'#7caeff\';this.style.color=\'#7caeff\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,0.25)\';this.style.color=\'#cfd8ea\'" onclick="nav(\'portal\')">Client Login</button>' +
-        '<button class="hdr-cta btn btn-primary" style="padding: 11px 20px; font-size: 15px; white-space: nowrap; box-shadow: 0 4px 18px rgba(47,123,255,0.35);" onclick="nav(\'contact\')">Free Consultation</button>' +
+        '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="hdr-cta btn btn-primary" style="padding: 11px 20px; font-size: 15px; white-space: nowrap; box-shadow: 0 4px 18px rgba(47,123,255,0.35); text-decoration: none; display: inline-flex; align-items: center;">Free Consultation</a>' +
       '</nav>' +
       '<button class="hdr-burger" aria-label="Open menu" onclick="toggleMenu()">' +
         '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#cfd8ea" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>' +
