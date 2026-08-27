@@ -2551,7 +2551,7 @@ function contactPage() {
             '<option>Website, SEO or ads</option><option>AI automation</option><option>Not sure yet</option>' +
           '</select>' +
         '</div>' +
-        '<div class="field"><label for="cf-msg">Details</label><textarea id="cf-msg" name="message" required rows="4" placeholder="Four providers, two locations, Athena EHR, current IT guy is unreachable."></textarea></div>' +
+        '<div class="field"><label for="cf-msg">Details</label><textarea id="cf-msg" name="message" required rows="4" placeholder="Tell us about your business and how we can help."></textarea></div>' +
         '<input type="text" name="_gotcha" style="display: none;" tabindex="-1" autocomplete="off">' +
         '<button type="submit" id="cf-submit" class="btn btn-primary" style="padding: 14px; font-size: 16px; box-shadow: none;">Request the Call</button>' +
         '<div id="cf-thanks" role="status" aria-live="polite" style="display: none; font-size: 14.5px; font-weight: 700; color: #1e5fe0;">Thank you! Your message has been sent. Our team will get back to you soon.</div>' +
