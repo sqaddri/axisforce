@@ -285,35 +285,39 @@ const faqs = [
 const industries = [
   { name: "Medical & Dental Practices", img: "/assets/images/axisforce-industry-medical.webp",
     alt: "Medical exam room with an EKG monitor, exam table, and cabinetry representing a medical or dental practice",
-    body: "Technology support for independent practices that need secure, reliable systems without disrupting patient care.",
+    body: "Keep your practice connected and your technology working so your team can spend less time dealing with systems and more time serving patients.",
     cells: [
-      { name: "EHR & Practice Technology", detail: "Support for EHR-adjacent technology, workstations, networks, integrations, and day-to-day IT.", icon: I.device },
-      { name: "Billing & Claims Support", detail: "Technology and workflow support for eligibility, claims, billing operations, and reporting.", icon: I.billing },
-      { name: "Security & Compliance", detail: "Secure access, documentation, backups, and technology practices designed around healthcare environments.", icon: I.shield }
+      { name: "Practice Technology Support", detail: "Support for workstations, networks, printers, practice software and the everyday technology your staff depends on.", icon: I.device },
+      { name: "Billing & Workflow Technology", detail: "Help connect and support the systems behind billing, claims, eligibility and administrative workflows.", icon: I.billing },
+      { name: "Reliable & Secure Operations", detail: "Backups, access management, monitoring and technology maintenance designed to reduce interruptions to your practice.", icon: I.shield },
+      { name: "Staff Setup & Training", detail: "When we implement or improve a system, we can help configure it, onboard your team and show staff how to use it effectively.", icon: I.users }
     ] },
   { name: "Law Firms", img: "/assets/images/axisforce-industry-law.webp",
     alt: "Law office desk with legal books, a gavel, and scales of justice representing a law firm",
-    body: "Reliable technology for firms where downtime, security, and access to client information directly affect the business.",
+    body: "Your attorneys and staff should be able to work securely and access what they need without becoming their own IT department.",
     cells: [
-      { name: "Secure IT Infrastructure", detail: "Reliable networks, devices, access controls, backups, and business technology support.", icon: I.server },
-      { name: "Practice Software Support", detail: "Support and coordination for case management, document systems, and other legal technology platforms.", icon: I.code },
-      { name: "Email & Data Security", detail: "Microsoft 365, Google Workspace, MFA, secure access, retention, and data protection.", icon: I.shield }
+      { name: "Technology That Keeps the Firm Moving", detail: "Support for computers, networks, printers, office technology and the systems your team uses every day.", icon: I.device },
+      { name: "Documents & Business Systems", detail: "Help with document workflows, shared files, business applications and coordination with your software vendors.", icon: I.box },
+      { name: "Monitoring & Data Protection", detail: "Proactive monitoring, backups, secure access and maintenance designed to catch technology problems before they interrupt the firm.", icon: I.shield },
+      { name: "Setup, Support & Training", detail: "We can implement technology, help migrate or configure systems and train your staff so they can actually use what was built.", icon: I.users }
     ] },
   { name: "Gas Stations & Retail", img: "/assets/images/axisforce-industry-gas-retail.webp",
     alt: "Gas station fuel pumps and convenience store storefront at night representing gas stations and retail",
-    body: "Technology for locations where connectivity, payments, cameras, and business systems need to stay online.",
+    body: "From a single location to a growing group of stores, we help keep the technology behind daily operations connected, visible and manageable.",
     cells: [
-      { name: "Network & Wi-Fi", detail: "Reliable business networks with proper separation for operational, payment, employee, and guest traffic.", icon: I.wifi },
-      { name: "Security Cameras", detail: "Camera systems, remote viewing, recording infrastructure, and ongoing support.", icon: I.camera },
-      { name: "Multi-Site Technology", detail: "Standardized technology deployments and centralized support across multiple locations.", icon: I.globe }
+      { name: "Location Monitoring", detail: "Monitor critical network and technology infrastructure so problems can be identified and addressed before they become prolonged disruptions.", icon: I.search },
+      { name: "Store Technology & Connectivity", detail: "Support the networks, Wi-Fi, business devices and connectivity that keep employees and day-to-day operations moving.", icon: I.wifi },
+      { name: "Cameras & Remote Visibility", detail: "Security camera systems, recording, remote viewing and support that give owners better visibility into their locations.", icon: I.camera },
+      { name: "Multi-Location Management", detail: "Standardize technology across locations, coordinate vendors, document systems and provide one place to call when something stops working.", icon: I.globe }
     ] },
   { name: "Restaurants", img: "/assets/images/axisforce-industry-restaurant.webp",
     alt: "Warmly lit restaurant dining room with set tables representing a restaurant",
-    body: "Practical technology support that keeps restaurant operations connected, secure, and running smoothly.",
+    body: "Your technology should quietly support the operation in the background while your team focuses on customers, food and service.",
     cells: [
-      { name: "Reliable Connectivity", detail: "Business Wi-Fi and networking for POS systems, staff devices, cameras, and guest connectivity.", icon: I.wifi },
-      { name: "Security & Cameras", detail: "Surveillance systems, remote access, recording, and technology support for restaurant locations.", icon: I.camera },
-      { name: "Digital Presence", detail: "Websites, local SEO, digital marketing, social media, and technology that helps customers find the business.", icon: I.growth }
+      { name: "Restaurant Technology Support", detail: "Help keep the connectivity and business technology your staff relies on operating reliably.", icon: I.headset },
+      { name: "Network & Guest Connectivity", detail: "Reliable connectivity for business systems, staff devices, cameras and guest Wi-Fi without making technology complicated for your team.", icon: I.wifi },
+      { name: "Cameras & Remote Monitoring", detail: "Camera systems and remote visibility that help owners and managers stay connected to their locations.", icon: I.camera },
+      { name: "Digital Growth & Staff Support", detail: "Websites, local presence and digital marketing when needed, plus setup and training for technology we implement for your team.", icon: I.growth }
     ] }
 ];
 
@@ -769,7 +773,7 @@ function pricingPage() {
 
 function industriesPage() {
   const sections = industries.map((ind, i) => {
-    const dark = i % 2 === 0;
+    const dark = i % 2 === 1;
     const imgLeft = i % 2 === 0;
     const cards = ind.cells.map(c =>
       '<div class="mbs-feature-card" style="background: ' + (dark ? "rgba(255,255,255,0.03)" : "#fff") + '; border: 1px solid ' + (dark ? "rgba(124,174,255,0.2)" : "#dbe3f0") + '; border-radius: 14px; padding: 24px;">' +
@@ -787,37 +791,31 @@ function industriesPage() {
     const imgCol = '<div style="min-width: 0;">' + secImageFrame(ind.img, ind.alt, "3 / 2", 1536, 1024, true) + '</div>';
 
     return '' +
-    '<section style="background: ' + (dark ? "#060a14" : "#f2f5fa") + '; color: ' + (dark ? "#eef2fa" : "#131a28") + '; padding: 72px 32px; ' + (i < industries.length - 1 ? "border-bottom: 1px solid " + (dark ? "rgba(255,255,255,0.06)" : "#e5eaf3") + ";" : "") + '">' +
+    '<section style="background: ' + (dark ? "#060a14" : "#f2f5fa") + '; color: ' + (dark ? "#eef2fa" : "#131a28") + '; padding: 76px 32px; ' + (i < industries.length - 1 ? "border-bottom: 1px solid " + (dark ? "rgba(255,255,255,0.06)" : "#e5eaf3") + ";" : "") + '">' +
       '<div style="max-width: 1280px; margin: 0 auto;">' +
-        '<div class="grid-ind" style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 40px;">' +
+        '<div class="grid-ind" style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 44px;">' +
           (imgLeft ? imgCol + textCol : textCol + imgCol) +
         '</div>' +
-        '<div class="grid-sw-process" style="gap: 20px;">' + cards + '</div>' +
+        '<div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">' + cards + '</div>' +
       '</div>' +
     '</section>';
   }).join("");
 
   return '<main>' +
-  '<section style="position: relative; background: #060a14; border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden;">' +
-    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 60px; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; align-items: center;">' +
-      '<div style="min-width: 0;">' +
-        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Industries</div>' +
-        '<h1 style="font-size: 44px; font-weight: 800; line-height: 1.08; margin: 0 0 18px;">Where downtime costs real money.</h1>' +
-        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0; max-width: 52ch;">We support businesses where technology, security, connectivity, and reliable systems are critical to everyday operations.</p>' +
-      '</div>' +
-      '<div style="min-width: 0;">' + fullImageFrame("/assets/images/axisforce-industries-hero.webp", "Connected technology icons representing cloud, security, networking, and devices across the industries AxisForce supports", 1536, 1024, false) + '</div>' +
-    '</div>' +
-  '</section>' +
+  pageHero("Industries",
+    "Where downtime costs real money.",
+    "We support businesses where technology, security, connectivity, and reliable systems are critical to everyday operations.",
+    heroMedia(320, slot("/assets/images/axisforce-industries-hero.webp", "Connected technology icons representing cloud, security, networking, and devices across the industries AxisForce supports", "", "", "", "industries-hero-img"))) +
   sections +
   '<section style="padding: 76px 32px;">' +
     '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
       '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
       '<div>' +
         '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">Every Industry, One Partner</div>' +
-        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">Your industry. Your systems.<br>One technology partner.</h2>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">Technology should support your business — not slow it down.</h2>' +
       '</div>' +
       '<div>' +
-        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Tell us what your business depends on, and we\'ll help you build a technology plan around it.</p>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Tell us how your business operates and where technology is getting in the way. We\'ll help you determine what makes sense next.</p>' +
         '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Free Consultation &nbsp;→</a>' +
       '</div>' +
     '</div>' +

@@ -58,6 +58,8 @@ input, select, textarea, button { font-family: 'Barlow', sans-serif; }
 
 .services-hero-img img { object-position: 50% 42%; }
 
+.industries-hero-img img { object-position: 50% 38%; }
+
 .contact-hero-img img { object-position: 85% 45%; }
 
 .grid-services { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
