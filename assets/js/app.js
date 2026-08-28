@@ -792,7 +792,7 @@ function industriesPage() {
 
     return '' +
     '<section style="background: ' + (dark ? "#060a14" : "#f2f5fa") + '; color: ' + (dark ? "#eef2fa" : "#131a28") + '; padding: 76px 32px; ' + (i < industries.length - 1 ? "border-bottom: 1px solid " + (dark ? "rgba(255,255,255,0.06)" : "#e5eaf3") + ";" : "") + '">' +
-      '<div style="max-width: 1280px; margin: 0 auto;">' +
+      '<div style="max-width: 1440px; margin: 0 auto;">' +
         '<div class="grid-ind" style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 44px;">' +
           (imgLeft ? imgCol + textCol : textCol + imgCol) +
         '</div>' +
