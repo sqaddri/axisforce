@@ -283,37 +283,37 @@ const faqs = [
 ];
 
 const industries = [
-  { tag: "Primary", name: "Medical & dental practices", imgSrc: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=1200&q=80", imgCredit: "Photo by Martha Dominguez de Gouveia on Unsplash", imgCreditHref: "https://unsplash.com/@martzzl",
-    body: "Independent practices from two to twenty providers. The technology has to satisfy HIPAA, survive an audit, and never get between a provider and a chart.",
+  { name: "Medical & Dental Practices", img: "/assets/images/axisforce-industry-medical.webp",
+    alt: "Medical exam room with an EKG monitor, exam table, and cabinetry representing a medical or dental practice",
+    body: "Technology support for independent practices that need secure, reliable systems without disrupting patient care.",
     cells: [
-      { name: "EHR-adjacent IT", detail: "We stay in our lane and coordinate with Athena, eCW, Epic Community or whatever you run." },
-      { name: "Claims visibility", detail: "Availity-fed aging and denial views so nothing sits at 90 days unnoticed." },
-      { name: "Compliance file", detail: "Risk analysis, policies, training records and BAA kept current, not reconstructed at audit time." },
-      { name: "Front desk uptime", detail: "Printers, scanners, check-in tablets and phones treated as clinical equipment." }
+      { name: "EHR & Practice Technology", detail: "Support for EHR-adjacent technology, workstations, networks, integrations, and day-to-day IT.", icon: I.device },
+      { name: "Billing & Claims Support", detail: "Technology and workflow support for eligibility, claims, billing operations, and reporting.", icon: I.billing },
+      { name: "Security & Compliance", detail: "Secure access, documentation, backups, and technology practices designed around healthcare environments.", icon: I.shield }
     ] },
-  { tag: "Featured", name: "Law firms", imgSrc: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80", imgCredit: "Photo by Tingey Injury Law Firm on Unsplash", imgCreditHref: "https://unsplash.com/@tingeyinjurylawfirm",
-    body: "Firms bill by the hour — downtime and data exposure are unbillable. We run the systems that keep client files confidential and attorneys working.",
+  { name: "Law Firms", img: "/assets/images/axisforce-industry-law.webp",
+    alt: "Law office desk with legal books, a gavel, and scales of justice representing a law firm",
+    body: "Reliable technology for firms where downtime, security, and access to client information directly affect the business.",
     cells: [
-      { name: "Confidentiality by design", detail: "Encryption, access control and audit trails on every client file and mailbox." },
-      { name: "Practice software support", detail: "Clio, case management and document systems supported and coordinated with the vendor." },
-      { name: "Email & compliance", detail: "Retention policies, litigation hold and MFA enforced without slowing anyone down." },
-      { name: "Uptime for billable hours", detail: "Same-day response, reliable VoIP and workstations treated as revenue equipment." }
+      { name: "Secure IT Infrastructure", detail: "Reliable networks, devices, access controls, backups, and business technology support.", icon: I.server },
+      { name: "Practice Software Support", detail: "Support and coordination for case management, document systems, and other legal technology platforms.", icon: I.code },
+      { name: "Email & Data Security", detail: "Microsoft 365, Google Workspace, MFA, secure access, retention, and data protection.", icon: I.shield }
     ] },
-  { tag: "Expanding", name: "Gas stations & retail", imgSrc: "https://images.unsplash.com/photo-1573706375595-fa829a0e226a?auto=format&fit=crop&w=1200&q=80", imgCredit: "Photo by Erik Mclean on Unsplash", imgCreditHref: "https://unsplash.com/@introspectivedsgn",
-    body: "Stations, c-stores and shops where the network carries payment, fuel control, and a camera system somebody will subpoena.",
+  { name: "Gas Stations & Retail", img: "/assets/images/axisforce-industry-gas-retail.webp",
+    alt: "Gas station fuel pumps and convenience store storefront at night representing gas stations and retail",
+    body: "Technology for locations where connectivity, payments, cameras, and business systems need to stay online.",
     cells: [
-      { name: "PCI-aware networking", detail: "Payment traffic segmented from back office and guest WiFi, documented." },
-      { name: "Forecourt coverage", detail: "Outdoor-rated cameras and WiFi that survive Gulf Coast weather." },
-      { name: "Multi-site rollout", detail: "One standard build repeated across locations, with remote management." },
-      { name: "Loss prevention", detail: "Camera-to-POS correlation and retention sized to your insurer's ask." }
+      { name: "Network & Wi-Fi", detail: "Reliable business networks with proper separation for operational, payment, employee, and guest traffic.", icon: I.wifi },
+      { name: "Security Cameras", detail: "Camera systems, remote viewing, recording infrastructure, and ongoing support.", icon: I.camera },
+      { name: "Multi-Site Technology", detail: "Standardized technology deployments and centralized support across multiple locations.", icon: I.globe }
     ] },
-  { tag: "Served", name: "Restaurants, law firms & services", imgSrc: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80", imgCredit: "Photo by Austin Distel on Unsplash", imgCreditHref: "https://unsplash.com/@austindistel",
-    body: "Small firms, restaurants and agencies that need reliable IT, cameras and a marketing engine without hiring either role.",
+  { name: "Restaurants", img: "/assets/images/axisforce-industry-restaurant.webp",
+    alt: "Warmly lit restaurant dining room with set tables representing a restaurant",
+    body: "Practical technology support that keeps restaurant operations connected, secure, and running smoothly.",
     cells: [
-      { name: "Cloud-first setup", detail: "M365 or Workspace done properly — MFA, retention, shared drives that make sense." },
-      { name: "Automation", detail: "Intake, scheduling and reporting workflows that remove repetitive admin." },
-      { name: "Website & SEO", detail: "A site that ranks for what you actually sell, and converts." },
-      { name: "Device lifecycle", detail: "Procurement, imaging, and a plan for replacing hardware on a schedule." }
+      { name: "Reliable Connectivity", detail: "Business Wi-Fi and networking for POS systems, staff devices, cameras, and guest connectivity.", icon: I.wifi },
+      { name: "Security & Cameras", detail: "Surveillance systems, remote access, recording, and technology support for restaurant locations.", icon: I.camera },
+      { name: "Digital Presence", detail: "Websites, local SEO, digital marketing, social media, and technology that helps customers find the business.", icon: I.growth }
     ] }
 ];
 
@@ -768,32 +768,59 @@ function pricingPage() {
 }
 
 function industriesPage() {
-  const blocks = industries.map(ind =>
-    '<div class="grid-ind" style="border-bottom: 1px solid #dbe3f0; padding: 48px 0; display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: start;">' +
-      '<div>' +
-        '<span style="padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; background: rgba(30,95,224,0.09); color: #1e5fe0; border: 1px solid rgba(30,95,224,0.25);">' + ind.tag + '</span>' +
-        '<h2 style="font-size: 34px; font-weight: 800; line-height: 1.05; margin: 16px 0 14px; color: #0c1220;">' + ind.name + '</h2>' +
-        '<p style="font-size: 15.5px; line-height: 1.6; color: #46536b; margin: 0 0 22px;">' + ind.body + '</p>' +
-        '<div style="border: 1px solid #dbe3f0; border-radius: 12px; overflow: hidden; height: 190px; position: relative; background: #fff;">' +
-          slot(ind.imgSrc, ind.name, ind.imgCredit, ind.imgCreditHref, "") +
+  const sections = industries.map((ind, i) => {
+    const dark = i % 2 === 0;
+    const imgLeft = i % 2 === 0;
+    const cards = ind.cells.map(c =>
+      '<div class="mbs-feature-card" style="background: ' + (dark ? "rgba(255,255,255,0.03)" : "#fff") + '; border: 1px solid ' + (dark ? "rgba(124,174,255,0.2)" : "#dbe3f0") + '; border-radius: 14px; padding: 24px;">' +
+        '<div style="width: 42px; height: 42px; border-radius: 11px; background: rgba(30,95,224,' + (dark ? "0.12" : "0.08") + '); border: 1px solid rgba(' + (dark ? "77,141,255,0.3" : "30,95,224,0.25") + '); display: grid; place-items: center; margin-bottom: 14px;">' +
+          icon(c.icon, 20, dark ? "#4d8dff" : "#1e5fe0") + '</div>' +
+        '<div style="font-size: 16.5px; font-weight: 700; margin-bottom: 6px; color: ' + (dark ? "#eef2fa" : "#0c1220") + ';">' + c.name + '</div>' +
+        '<div style="font-size: 13.5px; line-height: 1.5; color: ' + (dark ? "#aeb8cd" : "#46536b") + ';">' + c.detail + '</div>' +
+      '</div>').join("");
+
+    const textCol =
+      '<div style="min-width: 0;">' +
+        '<h2 style="font-size: 32px; font-weight: 800; line-height: 1.1; margin: 0 0 14px; color: ' + (dark ? "#eef2fa" : "#0c1220") + ';">' + ind.name + '</h2>' +
+        '<p style="font-size: 16px; line-height: 1.6; color: ' + (dark ? "#aeb8cd" : "#46536b") + '; margin: 0; max-width: 46ch;">' + ind.body + '</p>' +
+      '</div>';
+    const imgCol = '<div style="min-width: 0;">' + secImageFrame(ind.img, ind.alt, "3 / 2", 1536, 1024, true) + '</div>';
+
+    return '' +
+    '<section style="background: ' + (dark ? "#060a14" : "#f2f5fa") + '; color: ' + (dark ? "#eef2fa" : "#131a28") + '; padding: 72px 32px; ' + (i < industries.length - 1 ? "border-bottom: 1px solid " + (dark ? "rgba(255,255,255,0.06)" : "#e5eaf3") + ";" : "") + '">' +
+      '<div style="max-width: 1280px; margin: 0 auto;">' +
+        '<div class="grid-ind" style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 40px;">' +
+          (imgLeft ? imgCol + textCol : textCol + imgCol) +
         '</div>' +
+        '<div class="grid-sw-process" style="gap: 20px;">' + cards + '</div>' +
       '</div>' +
-      '<div class="grid-cases" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">' +
-        ind.cells.map(c =>
-          '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 12px; padding: 22px;">' +
-            '<div style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #0c1220;">' + c.name + '</div>' +
-            '<div style="font-size: 14px; line-height: 1.5; color: #46536b;">' + c.detail + '</div>' +
-          '</div>').join("") +
-      '</div>' +
-    '</div>').join("");
+    '</section>';
+  }).join("");
 
   return '<main>' +
-  pageHero("Industries",
-    "We go deep where downtime costs real money.",
-    "Medical practices, fuel &amp; convenience retail, restaurants, law firms and local retail — environments where the systems can't stop.",
-    heroMedia(300, slot("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80", "Client storefronts", "Photo by Sean Pollock on Unsplash", "https://unsplash.com/@seanpollock", ""))) +
-  '<section style="background: #f2f5fa; color: #131a28; padding: 24px 32px 72px;">' +
-    '<div style="max-width: 1280px; margin: 0 auto;">' + blocks + '</div>' +
+  '<section style="position: relative; background: #060a14; border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden;">' +
+    '<div class="hero-grid-cols" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 60px; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; align-items: center;">' +
+      '<div style="min-width: 0;">' +
+        '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Industries</div>' +
+        '<h1 style="font-size: 44px; font-weight: 800; line-height: 1.08; margin: 0 0 18px;">Where downtime costs real money.</h1>' +
+        '<p style="font-size: 17px; line-height: 1.6; color: #aeb8cd; margin: 0; max-width: 52ch;">We support businesses where technology, security, connectivity, and reliable systems are critical to everyday operations.</p>' +
+      '</div>' +
+      '<div style="min-width: 0;">' + fullImageFrame("/assets/images/axisforce-industries-hero.webp", "Connected technology icons representing cloud, security, networking, and devices across the industries AxisForce supports", 1536, 1024, false) + '</div>' +
+    '</div>' +
+  '</section>' +
+  sections +
+  '<section style="padding: 76px 32px;">' +
+    '<div class="grid-2" style="max-width: 1280px; margin: 0 auto; background: linear-gradient(120deg, #0d1526, #12203c 60%, #0e2a5c); border: 1px solid rgba(124,174,255,0.25); border-radius: 16px; padding: 48px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden;">' +
+      '<div style="position: absolute; right: -60px; bottom: -80px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.25), transparent 65%); pointer-events: none;"></div>' +
+      '<div>' +
+        '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4d8dff; margin-bottom: 14px;">Every Industry, One Partner</div>' +
+        '<h2 style="font-size: 34px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: -0.01em;">Your industry. Your systems.<br>One technology partner.</h2>' +
+      '</div>' +
+      '<div>' +
+        '<p style="font-size: 16.5px; line-height: 1.6; color: #cfd8ea; margin: 0 0 22px;">Tell us what your business depends on, and we\'ll help you build a technology plan around it.</p>' +
+        '<a href="https://calendly.com/sameed-axisforce/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 15px 26px; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center;">Free Consultation &nbsp;→</a>' +
+      '</div>' +
+    '</div>' +
   '</section>' +
   '</main>';
 }
@@ -2936,7 +2963,7 @@ function render() {
   else if (p === "portal") body = state.signedIn ? portalAppPage() : portalLoginPage();
   else { state.page = "home"; body = homePage(); }
 
-  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi" && state.page !== "websites-marketing" && state.page !== "custom-software" && state.page !== "crm-business-intelligence";
+  const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi" && state.page !== "websites-marketing" && state.page !== "custom-software" && state.page !== "crm-business-intelligence" && state.page !== "industries";
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
     header() + body + (showCta ? ctaSection() : "") + footer() +
