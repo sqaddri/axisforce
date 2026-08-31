@@ -738,7 +738,7 @@ function pricingPage() {
     '</div>').join("");
 
   const tableRows = services.map(s =>
-    '<div style="display: grid; grid-template-columns: 2fr 1.2fr 1.4fr; padding: 14px 24px; border-bottom: 1px solid #e9eef7; font-size: 15px; align-items: baseline;">' +
+    '<div class="pt-row" style="display: grid; grid-template-columns: 2fr 1.2fr 1.4fr; padding: 14px 24px; border-bottom: 1px solid #e9eef7; font-size: 15px; align-items: baseline;">' +
       '<span style="font-weight: 600; color: #0c1220;">' + s.name + '</span>' +
       '<span style="color: #62708a;">' + s.group + '</span>' +
       '<span style="font-variant-numeric: tabular-nums; color: #34415c;">' + s.meta + '</span>' +
@@ -760,8 +760,8 @@ function pricingPage() {
         '</div>' +
       '</div>' +
       '<h2 style="font-size: 30px; font-weight: 800; margin: 0 0 22px; color: #0c1220;">Service starting points</h2>' +
-      '<div class="table-scroll" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; overflow: hidden;">' +
-        '<div style="display: grid; grid-template-columns: 2fr 1.2fr 1.4fr; padding: 14px 24px; border-bottom: 2px solid #dbe3f0; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #62708a;">' +
+      '<div class="table-scroll pricing-table" style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; overflow: hidden;">' +
+        '<div class="pt-head" style="display: grid; grid-template-columns: 2fr 1.2fr 1.4fr; padding: 14px 24px; border-bottom: 2px solid #dbe3f0; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #62708a;">' +
           '<span>Service</span><span>Group</span><span>Starting at</span>' +
         '</div>' + tableRows +
       '</div>' +

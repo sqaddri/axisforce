@@ -112,6 +112,12 @@ input, select, textarea, button { font-family: 'Barlow', sans-serif; }
   .svc-row { grid-template-columns: 1fr !important; }
   .table-scroll { overflow-x: auto; }
   .portal-login-media img { max-width: 240px !important; }
+  .pricing-table { overflow-x: visible !important; }
+  .pricing-table > div { min-width: 0 !important; }
+  .pricing-table .pt-head { display: none !important; }
+  .pricing-table .pt-row { grid-template-columns: 1fr !important; gap: 4px; padding: 16px 20px !important; }
+  .pricing-table .pt-row span:nth-child(2)::before { content: "Group: "; color: #62708a; font-weight: 700; }
+  .pricing-table .pt-row span:nth-child(3)::before { content: "Starting at: "; color: #62708a; font-weight: 700; }
 }
 .hdr-burger { display: none; background: transparent; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 9px 11px; cursor: pointer; margin-left: auto; align-items: center; }
 .mob-menu { display: none; background: #0a101e; border-top: 1px solid rgba(255,255,255,0.08); }
