@@ -18,6 +18,13 @@ function pageFromLocation() {
   return PATH_TO_PAGE[clean] || "home";
 }
 
+// Rewrites a legacy #hash link to its clean path (e.g. /#portal -> /client-login/)
+// without adding a history entry, so old bookmarks/shares self-heal on load.
+function normalizeHashUrl(page) {
+  const clean = CLEAN_PATHS[page];
+  if (clean && location.hash) history.replaceState({ page: page }, "", clean);
+}
+
 function nav(page) {
   state.page = page;
   const clean = CLEAN_PATHS[page];
@@ -33,6 +40,7 @@ function nav(page) {
 
 function syncFromLocation() {
   const p = pageFromLocation();
+  normalizeHashUrl(p);
   if (p !== state.page) { state.page = p; render(); window.scrollTo(0, 0); }
 }
 window.addEventListener("popstate", syncFromLocation);
@@ -3011,4 +3019,5 @@ function render() {
 }
 
 state.page = pageFromLocation();
+normalizeHashUrl(state.page);
 render();
