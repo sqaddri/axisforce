@@ -8,8 +8,8 @@ const SHOW_PARTNERS = true;
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
 
-const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/", "websites-marketing": "/services/websites-marketing/", "custom-software": "/services/custom-software/", "crm-business-intelligence": "/services/crm-business-intelligence/" };
-const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi", "/services/websites-marketing": "websites-marketing", "/services/custom-software": "custom-software", "/services/crm-business-intelligence": "crm-business-intelligence" };
+const CLEAN_PATHS = { home: "/", about: "/about/", services: "/services/", industries: "/industries/", pricing: "/pricing/", contact: "/contact/", privacy: "/privacy.html", terms: "/terms.html", portal: "/client-login/", "managed-it": "/services/managed-it/", "ai-automation": "/services/ai-automation/", "medical-billing": "/services/medical-billing/", "medical-billing-software": "/services/medical-billing-software/", "security-cameras": "/services/security-cameras/", "network-wifi": "/services/network-wifi/", "websites-marketing": "/services/websites-marketing/", "custom-software": "/services/custom-software/", "crm-business-intelligence": "/services/crm-business-intelligence/" };
+const PATH_TO_PAGE = { "": "home", "/about": "about", "/services": "services", "/industries": "industries", "/pricing": "pricing", "/contact": "contact", "/privacy.html": "privacy", "/terms.html": "terms", "/client-login": "portal", "/services/managed-it": "managed-it", "/services/ai-automation": "ai-automation", "/services/medical-billing": "medical-billing", "/services/medical-billing-software": "medical-billing-software", "/services/security-cameras": "security-cameras", "/services/network-wifi": "network-wifi", "/services/websites-marketing": "websites-marketing", "/services/custom-software": "custom-software", "/services/crm-business-intelligence": "crm-business-intelligence" };
 
 function pageFromLocation() {
   const h = location.hash.slice(1);
@@ -2726,7 +2726,7 @@ function portalLoginPage() {
         '<h1 style="font-size: 36px; font-weight: 800; line-height: 1.1; margin: 0 0 10px;">Welcome back</h1>' +
         '<p style="font-size: 16.5px; color: #8b95ab; margin: 0 0 30px;">Sign in to your AxisForce account</p>' +
         '<div style="display: grid; gap: 18px;">' +
-          '<div class="field field-dark"><label for="pf-email">Work email</label><input id="pf-email" placeholder="you@business.com"></div>' +
+          '<div class="field field-dark"><label for="pf-email">Email</label><input id="pf-email" placeholder="you@business.com"></div>' +
           '<div class="field field-dark"><label for="pf-pw">Password</label><input id="pf-pw" type="password" placeholder="••••••••••"></div>' +
           '<button class="btn btn-primary" style="padding: 16px; font-size: 17px;" onclick="signIn()">Sign In</button>' +
           '<div style="display: flex; justify-content: space-between; font-size: 14.5px; color: #8b95ab;">' +
@@ -2950,6 +2950,7 @@ const PAGE_META = {
   contact: { title: "Contact AxisForce | Houston, TX", desc: "Get in touch with AxisForce for a free consultation on managed IT, security, networking, billing or marketing services in the Houston area." },
   privacy: { title: "Privacy Policy | AxisForce", desc: "Read the AxisForce Privacy Policy covering how we collect, use and protect information submitted through axisforce.net." },
   terms: { title: "Terms of Service | AxisForce", desc: "Terms of Service governing use of the axisforce.net website." },
+  portal: { title: "Client Login | AxisForce", desc: "Sign in to the AxisForce Client Portal to access your invoices, claims, support tickets and account information." },
   "managed-it": { title: "Managed IT Support in Houston, TX | AxisForce", desc: "AxisForce provides managed IT support for Houston businesses — unlimited remote help, monitoring, backups and device management from one accountable technology partner." },
   "ai-automation": { title: "AI & Business Automation in Houston, TX | AxisForce", desc: "AxisForce builds custom AI agents and workflow automation for Houston businesses — reducing repetitive work, connecting systems and improving day-to-day operations." },
   "medical-billing": { title: "Medical Billing Services in Houston, TX | AxisForce", desc: "AxisForce provides end-to-end medical billing and revenue cycle management for Houston healthcare practices — 3% of collections, no long-term contract." },
