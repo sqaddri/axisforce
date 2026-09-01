@@ -116,7 +116,7 @@ const I = {
   device: "M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 19h2",
   cloud: "M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A4.5 4.5 0 0 1 17 18H7z",
   lock: "M5 11h14v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9zM8 11V7a4 4 0 0 1 8 0v4M12 15v3",
-  doc: "M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM14 2v5h5M9 13h6M9 17h6"
+  arrowLeft: "M19 12H5M12 19l-7-7 7-7"
 };
 
 function icon(path, size, color, extra) {
@@ -346,13 +346,6 @@ const contactRows = [
   { k: "Existing client?", v: "Use the client portal for tickets" }
 ];
 
-const portalSecurityFeatures = [
-  { label: "MFA required", detail: "Enterprise-grade security", icon: I.lock },
-  { label: "Session timeout 15 min", detail: "Automatic logout for your safety", icon: I.clock },
-  { label: "Audit-logged", detail: "All access is recorded", icon: I.doc },
-  { label: "BAA covered", detail: "HIPAA & compliance ready", icon: I.shield }
-];
-
 const kpis = [
   { label: "Balance due", value: "$4,850", note: "Invoice 2026-041 · due Aug 20" },
   { label: "Claims in flight", value: "138", note: "$96,420 billed" },
@@ -473,6 +466,38 @@ function header() {
     '</div>' +
     mobileMenu() +
   '</header>';
+}
+
+function portalHeader() {
+  return '' +
+  '<header style="position: sticky; top: 0; z-index: 30; background: rgba(6,10,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07);">' +
+    '<div style="max-width: 1280px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px;">' +
+      '<div style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="nav(\'home\')">' +
+        '<img src="/assets/images/branding/axisforce-mark.png" alt="AxisForce logo" style="width: 34px; height: 34px; object-fit: contain;">' +
+        '<div style="font-weight: 800; font-size: 21px; letter-spacing: 0.01em; line-height: 1;"><span style="color: #fff;">Axis</span><span style="color: #2f7bff;">Force</span></div>' +
+      '</div>' +
+      '<div class="navlink" style="display: flex; align-items: center; gap: 7px; font-size: 14.5px; font-weight: 600; color: #cfd8ea; cursor: pointer; white-space: nowrap;" onclick="nav(\'home\')">' +
+        icon(I.arrowLeft, 16, "#cfd8ea") + "Back to Website" +
+      '</div>' +
+    '</div>' +
+  '</header>';
+}
+
+function portalFooter() {
+  return '' +
+  '<footer style="border-top: 1px solid rgba(255,255,255,0.07); background: #05080f;">' +
+    '<div style="max-width: 1280px; margin: 0 auto; padding: 22px 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">' +
+      '<div style="display: flex; align-items: center; gap: 9px;">' +
+        '<img src="/assets/images/branding/axisforce-mark.png" alt="AxisForce logo" style="width: 22px; height: 22px; object-fit: contain;">' +
+        '<span style="font-weight: 800; font-size: 15.5px;"><span style="color: #fff;">Axis</span><span style="color: #2f7bff;">Force</span></span>' +
+      '</div>' +
+      '<span style="font-size: 13.5px; color: #5c6579;">© 2026 AxisForce Inc. All rights reserved.</span>' +
+      '<div style="display: flex; align-items: center; gap: 18px; font-size: 13.5px;">' +
+        '<span class="hoverlink" style="color: #8b95ab; cursor: pointer;" onclick="nav(\'privacy\')">Privacy</span>' +
+        '<span class="hoverlink" style="color: #8b95ab; cursor: pointer;" onclick="nav(\'terms\')">Terms</span>' +
+      '</div>' +
+    '</div>' +
+  '</footer>';
 }
 
 function pageHero(kicker, title, sub, media) {
@@ -2681,36 +2706,33 @@ function termsPage() {
 }
 
 function portalLoginPage() {
-  const featureRows = portalSecurityFeatures.map(f =>
-    '<div style="display: flex; gap: 14px; align-items: flex-start;">' +
-      '<div style="width: 40px; height: 40px; border-radius: 11px; background: rgba(30,95,224,0.15); border: 1px solid rgba(77,141,255,0.35); display: grid; place-items: center; flex-shrink: 0;">' +
-        icon(f.icon, 19, "#4d8dff") + '</div>' +
-      '<div>' +
-        '<div style="font-size: 15.5px; font-weight: 700; color: #eef2fa;">' + f.label + '</div>' +
-        '<div style="font-size: 13.5px; color: #8b95ab; margin-top: 2px;">' + f.detail + '</div>' +
-      '</div>' +
-    '</div>').join("");
-
   return '' +
-  '<main class="grid-2 portal-login-grid" style="max-width: 1560px; margin: 0 auto; padding: 96px 32px; display: grid; grid-template-columns: 0.75fr 1.6fr 420px; gap: 40px; align-items: center; min-height: 62vh;">' +
-    '<div style="min-width: 0;">' +
-      '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Client Portal</div>' +
-      '<h1 style="font-size: 52px; font-weight: 800; line-height: 1; margin: 0 0 18px;">Sign in.</h1>' +
-      '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; margin: 0 0 32px;">Invoices, claim status, remittances and open tickets — one place, updated nightly from Availity and our ticketing system.</p>' +
-      '<div style="display: grid; gap: 20px;">' + featureRows + '</div>' +
-    '</div>' +
-    '<div class="portal-login-media" style="min-width: 0; display: flex; align-items: center; justify-content: center;">' +
-      '<img src="/assets/images/axisforce-portal-hero.webp" alt="AxisForce client portal security and dashboard preview" width="1672" height="941" style="width: 100%; height: auto; display: block;">' +
-    '</div>' +
-    '<div style="background: rgba(10,16,30,0.85); border: 1px solid rgba(124,174,255,0.25); border-radius: 14px; padding: 34px; display: grid; gap: 18px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);">' +
-      '<div class="field field-dark"><label for="pf-email">Work email</label><input id="pf-email" placeholder="you@business.com"></div>' +
-      '<div class="field field-dark"><label for="pf-pw">Password</label><input id="pf-pw" type="password" placeholder="••••••••••"></div>' +
-      '<button class="btn btn-primary" style="padding: 14px; font-size: 16px;" onclick="signIn()">Sign In</button>' +
-      '<div style="display: flex; justify-content: space-between; font-size: 14px; color: #8b95ab;">' +
-        '<span style="cursor: pointer;">Forgot password</span><span style="cursor: pointer;">Request access</span>' +
+  '<main class="portal-login-shell" style="max-width: 1180px; margin: 0 auto; padding: 56px 24px; display: flex; align-items: center; justify-content: center; min-height: 76vh;">' +
+    '<div class="portal-login-card" style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; background: rgba(10,16,30,0.85); border: 1px solid rgba(124,174,255,0.2); border-radius: 22px; box-shadow: 0 34px 90px rgba(0,0,0,0.45); overflow: hidden;">' +
+      '<div class="portal-login-visual" style="position: relative; min-width: 0; padding: 52px 48px; background: linear-gradient(160deg, #0d1526, #0a1120 75%); border-right: 1px solid rgba(124,174,255,0.15); display: flex; flex-direction: column; justify-content: space-between; gap: 32px;">' +
+        '<div>' +
+          '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">AxisForce Client Portal</div>' +
+          '<p style="font-size: 16.5px; line-height: 1.55; color: #aeb8cd; margin: 0; max-width: 32ch;">Secure access to your services, support, invoices, and business systems.</p>' +
+        '</div>' +
+        '<div style="position: relative; display: flex; align-items: center; justify-content: center;">' +
+          '<div style="position: absolute; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(47,123,255,0.24), transparent 70%); pointer-events: none;"></div>' +
+          '<img src="/assets/images/axisforce-portal-hero.webp" alt="AxisForce client portal security preview" width="1672" height="941" style="position: relative; width: 100%; max-width: 460px; height: auto; display: block;">' +
+        '</div>' +
+        '<div style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: #8b95ab;">' +
+          icon(I.lock, 14, "#4d8dff") + '<span>Secure Client Access</span>' +
+        '</div>' +
       '</div>' +
-      '<div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12.5px; color: #62708a; text-align: center; border-top: 1px solid rgba(124,174,255,0.15); padding-top: 14px; line-height: 1.45;">' +
-        icon(I.lock, 13, "#62708a") + '<span>Your data is protected with enterprise-grade security and encryption.</span>' +
+      '<div style="min-width: 0; padding: 56px 52px; display: flex; flex-direction: column; justify-content: center;">' +
+        '<h1 style="font-size: 36px; font-weight: 800; line-height: 1.1; margin: 0 0 10px;">Welcome back</h1>' +
+        '<p style="font-size: 16.5px; color: #8b95ab; margin: 0 0 30px;">Sign in to your AxisForce account</p>' +
+        '<div style="display: grid; gap: 18px;">' +
+          '<div class="field field-dark"><label for="pf-email">Work email</label><input id="pf-email" placeholder="you@business.com"></div>' +
+          '<div class="field field-dark"><label for="pf-pw">Password</label><input id="pf-pw" type="password" placeholder="••••••••••"></div>' +
+          '<button class="btn btn-primary" style="padding: 16px; font-size: 17px;" onclick="signIn()">Sign In</button>' +
+          '<div style="display: flex; justify-content: space-between; font-size: 14.5px; color: #8b95ab;">' +
+            '<span style="cursor: pointer;">Forgot password</span><span style="cursor: pointer;">Request access</span>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
     '</div>' +
   '</main>';
@@ -2979,9 +3001,10 @@ function render() {
   else { state.page = "home"; body = homePage(); }
 
   const showCta = state.page !== "portal" && state.page !== "contact" && state.page !== "privacy" && state.page !== "terms" && state.page !== "medical-billing-software" && state.page !== "security-cameras" && state.page !== "network-wifi" && state.page !== "websites-marketing" && state.page !== "custom-software" && state.page !== "crm-business-intelligence" && state.page !== "industries";
+  const isLoginScreen = state.page === "portal" && !state.signedIn;
   document.getElementById("app").innerHTML =
     '<div style="min-height: 100vh; background: #060a14; color: #eef2fa;">' +
-    header() + body + (showCta ? ctaSection() : "") + footer() +
+    (isLoginScreen ? portalHeader() : header()) + body + (showCta ? ctaSection() : "") + (isLoginScreen ? portalFooter() : footer()) +
     "</div>";
   updateMeta();
 }
