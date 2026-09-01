@@ -114,7 +114,9 @@ const I = {
   link: "M9 17H7a5 5 0 0 1 0-10h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8",
   search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35",
   device: "M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 19h2",
-  cloud: "M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A4.5 4.5 0 0 1 17 18H7z"
+  cloud: "M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A4.5 4.5 0 0 1 17 18H7z",
+  lock: "M5 11h14v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9zM8 11V7a4 4 0 0 1 8 0v4M12 15v3",
+  doc: "M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM14 2v5h5M9 13h6M9 17h6"
 };
 
 function icon(path, size, color, extra) {
@@ -344,7 +346,12 @@ const contactRows = [
   { k: "Existing client?", v: "Use the client portal for tickets" }
 ];
 
-const portalBadges = ["MFA required", "Session timeout 15 min", "Audit-logged", "BAA covered"];
+const portalSecurityFeatures = [
+  { label: "MFA required", detail: "Enterprise-grade security", icon: I.lock },
+  { label: "Session timeout 15 min", detail: "Automatic logout for your safety", icon: I.clock },
+  { label: "Audit-logged", detail: "All access is recorded", icon: I.doc },
+  { label: "BAA covered", detail: "HIPAA & compliance ready", icon: I.shield }
+];
 
 const kpis = [
   { label: "Balance due", value: "$4,850", note: "Invoice 2026-041 · due Aug 20" },
@@ -2674,18 +2681,26 @@ function termsPage() {
 }
 
 function portalLoginPage() {
+  const featureRows = portalSecurityFeatures.map(f =>
+    '<div style="display: flex; gap: 14px; align-items: flex-start;">' +
+      '<div style="width: 40px; height: 40px; border-radius: 11px; background: rgba(30,95,224,0.15); border: 1px solid rgba(77,141,255,0.35); display: grid; place-items: center; flex-shrink: 0;">' +
+        icon(f.icon, 19, "#4d8dff") + '</div>' +
+      '<div>' +
+        '<div style="font-size: 15.5px; font-weight: 700; color: #eef2fa;">' + f.label + '</div>' +
+        '<div style="font-size: 13.5px; color: #8b95ab; margin-top: 2px;">' + f.detail + '</div>' +
+      '</div>' +
+    '</div>').join("");
+
   return '' +
-  '<main class="grid-2 portal-login-grid" style="max-width: 1400px; margin: 0 auto; padding: 96px 32px; display: grid; grid-template-columns: 0.85fr 1.5fr 420px; gap: 40px; align-items: center; min-height: 62vh;">' +
+  '<main class="grid-2 portal-login-grid" style="max-width: 1560px; margin: 0 auto; padding: 96px 32px; display: grid; grid-template-columns: 0.75fr 1.6fr 420px; gap: 40px; align-items: center; min-height: 62vh;">' +
     '<div style="min-width: 0;">' +
       '<div style="font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4d8dff; margin-bottom: 12px;">Client Portal</div>' +
-      '<h1 style="font-size: 52px; font-weight: 800; line-height: 1; margin: 0 0 18px;">Welcome back.</h1>' +
-      '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; max-width: 34ch; margin: 0 0 28px;">Access your AxisForce services, support requests, billing information, and account resources — all in one secure place.</p>' +
-      '<div style="display: flex; flex-wrap: wrap; gap: 8px;">' +
-        portalBadges.map(b => '<span style="padding: 5px 13px; border-radius: 999px; font-size: 13px; font-weight: 700; border: 1px solid rgba(124,174,255,0.35); color: #cfd8ea;">' + b + "</span>").join("") +
-      '</div>' +
+      '<h1 style="font-size: 52px; font-weight: 800; line-height: 1; margin: 0 0 18px;">Sign in.</h1>' +
+      '<p style="font-size: 18px; line-height: 1.6; color: #aeb8cd; margin: 0 0 32px;">Invoices, claim status, remittances and open tickets — one place, updated nightly from Availity and our ticketing system.</p>' +
+      '<div style="display: grid; gap: 20px;">' + featureRows + '</div>' +
     '</div>' +
     '<div class="portal-login-media" style="min-width: 0; display: flex; align-items: center; justify-content: center;">' +
-      '<img src="/assets/images/axisforce-portal-hero.webp" alt="AxisForce client portal security and dashboard preview" width="1672" height="941" style="width: 100%; max-width: 560px; height: auto; display: block;">' +
+      '<img src="/assets/images/axisforce-portal-hero.webp" alt="AxisForce client portal security and dashboard preview" width="1672" height="941" style="width: 100%; height: auto; display: block;">' +
     '</div>' +
     '<div style="background: rgba(10,16,30,0.85); border: 1px solid rgba(124,174,255,0.25); border-radius: 14px; padding: 34px; display: grid; gap: 18px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);">' +
       '<div class="field field-dark"><label for="pf-email">Work email</label><input id="pf-email" placeholder="you@business.com"></div>' +
@@ -2694,7 +2709,9 @@ function portalLoginPage() {
       '<div style="display: flex; justify-content: space-between; font-size: 14px; color: #8b95ab;">' +
         '<span style="cursor: pointer;">Forgot password</span><span style="cursor: pointer;">Request access</span>' +
       '</div>' +
-      '<div style="font-size: 12.5px; color: #62708a; text-align: center; border-top: 1px solid rgba(124,174,255,0.15); padding-top: 14px; line-height: 1.45;">Your information is protected with secure, encrypted access.</div>' +
+      '<div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12.5px; color: #62708a; text-align: center; border-top: 1px solid rgba(124,174,255,0.15); padding-top: 14px; line-height: 1.45;">' +
+        icon(I.lock, 13, "#62708a") + '<span>Your data is protected with enterprise-grade security and encryption.</span>' +
+      '</div>' +
     '</div>' +
   '</main>';
 }
