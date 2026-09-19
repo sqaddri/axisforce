@@ -4,6 +4,9 @@
 const PHONE = "(346) 218-1253";
 const HERO_VARIANT = "itdept";       // itdept | running | buildsecure | protected
 const SHOW_PARTNERS = true;
+// Security Camera / CCTV installation is temporarily unavailable while licensing is finalized.
+// Flip back to true to fully restore the dedicated page, pricing, nav/footer links and homepage promo — no other code needs to change.
+const SHOW_SECURITY_CAMERAS = false;
 
 /* ---------- state + router ---------- */
 const state = { page: "home", signedIn: false, tab: "billing" };
@@ -215,6 +218,11 @@ services.forEach(s => {
   s.img = src; s.imgCredit = credit; s.imgCreditHref = creditHref; s.imgFallback = fallback;
 });
 
+// Customer-facing service list with Security Cameras (no "05") excluded while SHOW_SECURITY_CAMERAS is false.
+function visibleServices() {
+  return SHOW_SECURITY_CAMERAS ? services : services.filter(s => s.no !== "05");
+}
+
 const S = {
   blue: { sbg: "rgba(30,95,224,0.1)", sc: "#1e5fe0" },
   gray: { sbg: "#e8edf6", sc: "#62708a" },
@@ -263,7 +271,7 @@ const industryRow = [
 ];
 
 const steps = [
-  { no: "01", when: "Systems Review", name: "Discovery", body: "We review what you run today, what's unsupported, and what would hurt most if it failed tomorrow — whether that's IT, cameras, networking, billing or marketing." },
+  { no: "01", when: "Systems Review", name: "Discovery", body: "We review what you run today, what's unsupported, and what would hurt most if it failed tomorrow — whether that's IT, " + (SHOW_SECURITY_CAMERAS ? "cameras, networking" : "networking") + ", billing or marketing." },
   { no: "02", when: "Clear Recommendations", name: "Plan", body: "A short, written plan: what we'd fix first, what it costs, and what can safely wait. Yours to keep either way." },
   { no: "03", when: "Stabilize & Improve", name: "Execute", body: "We handle the highest-risk items first, then move on to the improvements that help your business grow." }
 ];
@@ -284,6 +292,26 @@ const cases = [
   { tag: "Coming Soon", name: "AI Receptionist & Business Automation", challenge: "Practices and small businesses lose hours a week to intake, scheduling and follow-up.", solution: "An AI receptionist and workflow automation platform — call handling, appointment workflows, lead follow-up and custom agents.", result: "In development — not yet available to clients.", tech: ["AI Agents", "Voice AI", "Automation"] },
   { tag: "Field work", name: "IT, Security & Networking", challenge: "Sites with dead zones, unrecorded incidents and undocumented networks.", solution: "Camera systems, structured cabling and segmented Wi-Fi — installed, documented and maintained.", result: "Ongoing installs and managed support across Houston-area sites.", tech: ["Cameras & NVR", "Cabling", "Firewalls"] }
 ];
+
+// The four helpers below swap out camera-specific entries for a layout-safe
+// replacement while SHOW_SECURITY_CAMERAS is false, without touching the
+// source arrays above (flip the flag to restore the originals verbatim).
+function visibleHeroCards() {
+  return SHOW_SECURITY_CAMERAS ? heroCards : heroCards.map(hc =>
+    hc.icon === I.camera ? { name: "Network & Connectivity", body: "Reliable business networks, Wi-Fi and connectivity that keep your operations running.", icon: I.wifi } : hc);
+}
+function visibleHomeServices() {
+  return SHOW_SECURITY_CAMERAS ? homeServices : homeServices.filter(s => s.no !== "05");
+}
+function visiblePriceCards() {
+  return SHOW_SECURITY_CAMERAS ? priceCards : priceCards.filter(t => t.no !== "05");
+}
+function visibleCases() {
+  return SHOW_SECURITY_CAMERAS ? cases : cases.map(cs =>
+    cs.name === "IT, Security & Networking" ?
+      { tag: "Field work", name: "Networking & Connectivity", challenge: "Sites with dead zones and undocumented networks.", solution: "Structured cabling, segmented Wi-Fi and firewall configuration — installed, documented and maintained.", result: "Ongoing installs and managed support across Houston-area sites.", tech: ["Cabling", "Firewalls", "Wi-Fi"] } :
+      cs);
+}
 
 const faqs = [
   { q: "Do you require long-term contracts?", a: "No. Everything is month to month — cancel anytime. If you prepay and cancel mid-period, the unused portion is refunded pro-rata." },
@@ -330,6 +358,16 @@ const industries = [
       { name: "Digital Growth & Staff Support", detail: "Websites, local presence and digital marketing when needed, plus setup and training for technology we implement for your team.", icon: I.growth }
     ] }
 ];
+
+// Swaps the camera-icon cell in an industry's 2x2 grid for a non-camera cell
+// while SHOW_SECURITY_CAMERAS is false, keeping the industries array above untouched.
+const CAMERA_CELL_REPLACEMENT = {
+  "Gas Stations & Retail": { name: "Backups & Data Protection", detail: "Backups, access management and monitoring designed to protect the systems and data behind daily store operations.", icon: I.shield },
+  "Restaurants": { name: "Backups & Data Protection", detail: "Backups, access management and monitoring designed to help protect the systems your restaurant depends on every service.", icon: I.shield }
+};
+function visibleCells(ind) {
+  return SHOW_SECURITY_CAMERAS ? ind.cells : ind.cells.map(c => c.icon === I.camera ? CAMERA_CELL_REPLACEMENT[ind.name] : c);
+}
 
 const facts = [
   { k: "Company", v: "AxisForce Inc." },
@@ -388,7 +426,9 @@ const tickets = [
   Object.assign({ id: "T-2291", subject: "Check-in tablet won't hold WiFi", site: "Main clinic", priority: "High", updated: "2 hrs ago" }, S.blue),
   Object.assign({ id: "T-2288", subject: "New provider onboarding — 3 accounts", site: "Main clinic", priority: "Normal", updated: "Yesterday" }, S.gray),
   Object.assign({ id: "T-2280", subject: "Back-office printer replacement quote", site: "Katy office", priority: "Normal", updated: "2 days ago" }, S.gray),
-  Object.assign({ id: "T-2274", subject: "Camera 4 recording gap review", site: "Katy office", priority: "Low", updated: "4 days ago" }, S.gray)
+  Object.assign(SHOW_SECURITY_CAMERAS ?
+    { id: "T-2274", subject: "Camera 4 recording gap review", site: "Katy office", priority: "Low", updated: "4 days ago" } :
+    { id: "T-2274", subject: "Guest WiFi password reset request", site: "Katy office", priority: "Low", updated: "4 days ago" }, S.gray)
 ];
 
 const docs = [
@@ -414,6 +454,7 @@ const footerCols = [
     { label: "Google Reviews", href: "https://g.page/r/CRhtDtmr4_jyEBM/review" },
     { label: "LinkedIn", href: "https://www.linkedin.com/company/axisforce-it-marketing-solutions/" } ] }
 ];
+if (!SHOW_SECURITY_CAMERAS) footerCols[0].links = footerCols[0].links.filter(l => l.go !== "security-cameras");
 
 /* ---------- shared fragments ---------- */
 const div = i => (i === 0 ? "transparent" : "rgba(255,255,255,0.1)");
@@ -586,7 +627,7 @@ function homePage() {
     '<div style="display: flex; align-items: center; gap: 9px; font-size: 14.5px; font-weight: 600; color: #cfd8ea; padding: 0 18px; border-left: 1px solid ' +
     (i === 0 ? "transparent" : "rgba(255,255,255,0.12)") + ';">' + icon(c.icon, 18, "#2f7bff") + c.label + "</div>").join("");
 
-  const hCards = heroCards.map((hc, i) =>
+  const hCards = visibleHeroCards().map((hc, i) =>
     '<div style="padding: 16px 14px; border-left: 1px solid ' + div(i) + ';">' +
       '<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">' + icon(hc.icon, 19, "#2f7bff") +
         '<span style="font-size: 14.5px; font-weight: 700;">' + hc.name + '</span></div>' +
@@ -601,7 +642,7 @@ function homePage() {
       partners.map(pt => '<span style="font-size: 16px; font-weight: 700; letter-spacing: 0.02em; color: #5c6579;">' + pt + "</span>").join("") +
       '</div></div></section>' : "";
 
-  const svcCards = homeServices.map(s =>
+  const svcCards = visibleHomeServices().map(s =>
     '<div class="card-hover" style="position: relative; background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 28px 24px; cursor: pointer; box-shadow: 0 2px 10px rgba(19,26,40,0.05);" onclick="nav(\'svc:' + s.no + '\')">' +
       (s.status ? '<span style="position: absolute; top: 20px; right: 20px; padding: 4px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; background: rgba(30,95,224,0.09); color: #1e5fe0; border: 1px solid rgba(30,95,224,0.25);">' + s.status + '</span>' : "") +
       '<div style="width: 52px; height: 52px; border-radius: 12px; background: rgba(30,95,224,0.08); border: 1px solid rgba(30,95,224,0.25); display: grid; place-items: center; margin-bottom: 18px;">' +
@@ -624,7 +665,7 @@ function homePage() {
       '<div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1e5fe0;">' + (ind.badge || "") + '</div>' +
     '</div>').join("");
 
-  const caseCards = cases.map(cs =>
+  const caseCards = visibleCases().map(cs =>
     '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 30px; box-shadow: 0 2px 10px rgba(19,26,40,0.05); display: flex; flex-direction: column; gap: 14px;">' +
       '<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">' +
         '<h3 style="font-size: 22px; font-weight: 800; line-height: 1.15; margin: 0; color: #0c1220;">' + cs.name + '</h3>' +
@@ -688,7 +729,7 @@ function homePage() {
         '<h2 style="font-size: 42px; font-weight: 800; margin: 0 0 14px; letter-spacing: -0.01em; color: #0c1220;">Complete Technology Solutions</h2>' +
         '<p style="font-size: 17px; color: #46536b; max-width: 62ch; margin: 0 auto; line-height: 1.6;">From IT support to security, billing systems and digital marketing — end-to-end solutions to keep your business running smoothly.</p>' +
       '</div>' +
-      '<div class="grid-services">' + svcCards + '</div>' +
+      '<div class="home-services-grid">' + svcCards + '</div>' +
       '<div style="text-align: center; margin-top: 40px;">' +
         '<span class="go-link" style="font-size: 15.5px; font-weight: 700; color: #1e5fe0;" onclick="nav(\'services\')">View All Services &nbsp;→</span>' +
       '</div>' +
@@ -730,7 +771,7 @@ function homePage() {
 }
 
 function servicesPage() {
-  const rows = services.map(s =>
+  const rows = visibleServices().map(s =>
     '<div class="svc-row" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; padding: 44px 0; border-bottom: 1px solid #dbe3f0; align-items: start;">' +
       '<div>' +
         '<h2 style="font-size: 28px; font-weight: 800; margin: 0 0 10px; line-height: 1.1; color: #0c1220;">' + s.name + '</h2>' +
@@ -752,7 +793,7 @@ function servicesPage() {
 
   return '<main>' +
   pageHero("Services",
-    "Technology That Runs Your Business.<br>Nine Services. One Partner.",
+    "Technology That Runs Your Business.<br>" + (SHOW_SECURITY_CAMERAS ? "Nine" : "Eight") + " Services. One Partner.",
     "From managed IT and security to AI automation, medical billing, software and digital growth, AxisForce brings the technology your business depends on under one team.",
     heroMedia(320, slot("/assets/images/axisforce-services-hero.webp", "AxisForce technology professional monitoring systems on a multi-monitor workstation with AxisForce branding on the wall", "", "", "", "services-hero-img"))) +
   '<section style="background: #f2f5fa; color: #131a28; padding: 40px 32px 72px;">' +
@@ -767,7 +808,7 @@ function servicesPage() {
 }
 
 function pricingPage() {
-  const cards = priceCards.map(t =>
+  const cards = visiblePriceCards().map(t =>
     '<div class="card-hover" style="background: #fff; border: 1px solid ' + t.border + '; border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; box-shadow: 0 2px 10px rgba(19,26,40,0.05); position: relative; cursor: pointer;" onclick="nav(\'svc:' + t.no + '\')">' +
       (t.featured ? '<div style="position: absolute; top: -12px; left: 26px; background: linear-gradient(180deg, #3f87ff, #1e5fe0); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px;">Most Common</div>' : "") +
       '<div style="font-size: 13.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #1e5fe0;">' + t.name + '</div>' +
@@ -777,7 +818,7 @@ function pricingPage() {
       '<div style="margin-top: auto; font-size: 14px; font-weight: 700; color: #1e5fe0;">View service →</div>' +
     '</div>').join("");
 
-  const tableRows = services.map(s =>
+  const tableRows = visibleServices().map(s =>
     '<div class="pt-row" style="display: grid; grid-template-columns: 2fr 1.2fr 1.4fr; padding: 14px 24px; border-bottom: 1px solid #e9eef7; font-size: 15px; align-items: baseline;">' +
       '<span style="font-weight: 600; color: #0c1220;">' + s.name + '</span>' +
       '<span style="color: #62708a;">' + s.group + '</span>' +
@@ -791,7 +832,7 @@ function pricingPage() {
     heroMedia(300, slot("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80", "Planning session", "Photo by Helloquence on Unsplash", "https://unsplash.com/@helloquence", ""))) +
   '<section style="background: #f2f5fa; color: #131a28; padding: 56px 32px 72px;">' +
     '<div style="max-width: 1280px; margin: 0 auto;">' +
-      '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 28px;">' + cards + '</div>' +
+      '<div class="pricing-cards-grid" style="margin-bottom: 28px;">' + cards + '</div>' +
       '<div style="background: #fff; border: 1px solid #1e5fe0; border-radius: 14px; padding: 26px 30px; margin-bottom: 56px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center;">' +
         icon("M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6zM9 12l2 2 4-4", 34, "#1e5fe0") +
         '<div>' +
@@ -815,7 +856,7 @@ function industriesPage() {
   const sections = industries.map((ind, i) => {
     const dark = i % 2 === 1;
     const imgLeft = i % 2 === 0;
-    const cards = ind.cells.map(c =>
+    const cards = visibleCells(ind).map(c =>
       '<div class="mbs-feature-card" style="background: ' + (dark ? "rgba(255,255,255,0.03)" : "#fff") + '; border: 1px solid ' + (dark ? "rgba(124,174,255,0.2)" : "#dbe3f0") + '; border-radius: 14px; padding: 24px;">' +
         '<div style="width: 42px; height: 42px; border-radius: 11px; background: rgba(30,95,224,' + (dark ? "0.12" : "0.08") + '); border: 1px solid rgba(' + (dark ? "77,141,255,0.3" : "30,95,224,0.25") + '); display: grid; place-items: center; margin-bottom: 14px;">' +
           icon(c.icon, 20, dark ? "#4d8dff" : "#1e5fe0") + '</div>' +
@@ -888,7 +929,7 @@ function aboutPage() {
           '<p style="font-size: 17px; line-height: 1.65; color: #34415c; margin: 0 0 18px;">AxisForce is a Houston-based technology company helping businesses simplify the systems behind their operations. We bring IT support, security, automation, software, business intelligence and digital solutions together under one technology partner.</p>' +
           '<p style="font-size: 17px; line-height: 1.65; color: #34415c; margin: 0 0 28px;">Our approach is practical: understand how the business operates, identify what is slowing it down or creating risk, and build the right solution around it. Whether that means supporting an existing environment or developing something new, our focus is technology that produces measurable business value.</p>' +
           '<div style="border: 1px solid #dbe3f0; border-radius: 12px; overflow: hidden; height: 280px; position: relative; background: #fff;">' +
-            slot("/assets/images/axisforce-about-secondary.webp", "Laptop, tablet and AxisForce-branded notebook alongside network equipment and a security camera", "", "", "", "about-secondary-img") +
+            slot("/assets/images/axisforce-about-secondary.webp", "Laptop, tablet and AxisForce-branded notebook alongside network equipment" + (SHOW_SECURITY_CAMERAS ? " and a security camera" : ""), "", "", "", "about-secondary-img") +
           '</div>' +
         '</div>' +
         '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 14px; padding: 32px; align-self: start; box-shadow: 0 2px 10px rgba(19,26,40,0.05);">' +
@@ -2611,7 +2652,7 @@ function contactPage() {
         '</div>' +
         '<div class="field"><label for="cf-need">What do you need?</label>' +
           '<select id="cf-need" name="service" required>' +
-            '<option>Managed IT &amp; helpdesk</option><option>Security cameras &amp; access control</option>' +
+            '<option>Managed IT &amp; helpdesk</option>' + (SHOW_SECURITY_CAMERAS ? '<option>Security cameras &amp; access control</option>' : "") +
             '<option>Network or WiFi buildout</option><option>Medical billing &amp; billing systems</option>' +
             '<option>Website, SEO or ads</option><option>AI automation</option><option>Not sure yet</option>' +
           '</select>' +
@@ -2689,7 +2730,7 @@ function termsPage() {
   legalHero("Terms of Service") +
   legalSection(
     legalP('These Terms of Service ("Terms") govern your use of the website axisforce.net (the "Site"), operated by AxisForce Inc. ("AxisForce," "we," "us," or "our"). By accessing or using the Site, you agree to these Terms.') +
-    legalP("These Terms apply only to your use of this website. They do not constitute a service agreement, contract, or statement of work for any AxisForce service — including managed IT, medical billing, security camera installation, marketing, Salesforce, or custom software engagements. Those services are governed by separate agreements entered into directly with AxisForce.") +
+    legalP("These Terms apply only to your use of this website. They do not constitute a service agreement, contract, or statement of work for any AxisForce service — including managed IT, medical billing" + (SHOW_SECURITY_CAMERAS ? ", security camera installation" : "") + ", marketing, Salesforce, or custom software engagements. Those services are governed by separate agreements entered into directly with AxisForce.") +
     legalH2("Use of the Site") +
     legalP("The Site is provided for general informational purposes about AxisForce and its services. You may browse the Site and submit inquiries through our contact and consultation forms for legitimate business purposes.") +
     legalH2("Prohibited Use") +
@@ -2880,8 +2921,9 @@ function portalAppPage() {
 }
 
 function svcPage(svc) {
-  const related = services.filter(s => s.no !== svc.no && s.group === svc.group)
-    .concat(services.filter(s => s.no !== svc.no && s.group !== svc.group)).slice(0, 3);
+  const relatedPool = visibleServices();
+  const related = relatedPool.filter(s => s.no !== svc.no && s.group === svc.group)
+    .concat(relatedPool.filter(s => s.no !== svc.no && s.group !== svc.group)).slice(0, 3);
 
   const items = svc.items.map(it =>
     '<div style="background: #fff; border: 1px solid #dbe3f0; border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; gap: 12px;">' +
@@ -2950,9 +2992,9 @@ function svcPage(svc) {
 
 /* ---------- SEO metadata ---------- */
 const PAGE_META = {
-  home: { title: "AxisForce — Managed IT, Security & Business Automation | Houston, TX", desc: "AxisForce is a Houston-based technology partner providing managed IT, security camera systems, networking, medical billing technology, CRM & business intelligence and digital marketing for growing businesses." },
+  home: { title: "AxisForce — Managed IT, Security & Business Automation | Houston, TX", desc: "AxisForce is a Houston-based technology partner providing managed IT" + (SHOW_SECURITY_CAMERAS ? ", security camera systems" : "") + ", networking, medical billing technology, CRM & business intelligence and digital marketing for growing businesses." },
   about: { title: "About AxisForce | Houston, TX Technology Company", desc: "AxisForce is a Houston-based technology company helping businesses simplify the systems behind their operations — IT support, security, automation, software and digital growth under one technology partner." },
-  services: { title: "Services | AxisForce Managed IT, Security & Automation", desc: "Explore AxisForce's technology services: managed IT support, AI & business automation, medical billing, security cameras, networking, CRM & business intelligence, custom software and digital marketing." },
+  services: { title: "Services | AxisForce Managed IT, Security & Automation", desc: "Explore AxisForce's technology services: managed IT support, AI & business automation, medical billing" + (SHOW_SECURITY_CAMERAS ? ", security cameras" : "") + ", networking, CRM & business intelligence, custom software and digital marketing." },
   industries: { title: "Industries We Serve | AxisForce", desc: "AxisForce supports healthcare, professional services, retail & gas stations, restaurants and construction businesses with technology built for environments that can't go down." },
   pricing: { title: "Pricing | AxisForce Technology Services", desc: "Starting prices for AxisForce's managed IT, security, networking, billing and marketing services — published so you know what to expect before you call." },
   contact: { title: "Contact AxisForce | Houston, TX", desc: "Get in touch with AxisForce for a free consultation on managed IT, security, networking, billing or marketing services in the Houston area." },
@@ -2986,7 +3028,7 @@ function updateMeta() {
 function render() {
   const p = state.page;
   const svcNo = p.startsWith("svc:") ? p.slice(4) : null;
-  const svc = svcNo ? services.find(s => s.no === svcNo) : null;
+  const svc = svcNo ? visibleServices().find(s => s.no === svcNo) : null;
 
   let body;
   if (svc) body = svcPage(svc);
@@ -2994,7 +3036,7 @@ function render() {
   else if (p === "ai-automation") body = aiAutomationPage();
   else if (p === "medical-billing") body = medicalBillingPage();
   else if (p === "medical-billing-software") body = medicalBillingSoftwarePage();
-  else if (p === "security-cameras") body = securityCamerasPage();
+  else if (p === "security-cameras" && SHOW_SECURITY_CAMERAS) body = securityCamerasPage();
   else if (p === "network-wifi") body = networkWifiPage();
   else if (p === "websites-marketing") body = websitesMarketingPage();
   else if (p === "custom-software") body = customSoftwarePage();
